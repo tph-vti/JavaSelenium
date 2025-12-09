@@ -16,7 +16,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <version.dotenv>3.2.0</version.dotenv>
         <version.csv>5.12.0</version.csv>
-        <version.selenium>4.38.0</version.selenium>
+        <version.selenium>4.27.0</version.selenium>
         <version.junit>6.0.1</version.junit>
         <version.surefire>3.5.4</version.surefire>
         <version.log4j>2.24.3</version.log4j>
