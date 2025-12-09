@@ -195,7 +195,7 @@ Browser settings in `DriverManager`:
 - **Screen Resolution**: `1920x1080`
 - **Headless Mode**: `false` (configurable via `TestSettings.HEADLESS`)
   - To enable headless mode: Modify `TestSettings.HEADLESS = true` in `TestSettings.java`
-  - Useful for CI/CD pipelines and background test execution
+  - Useful for automated test execution
 
 ### Adding New Environments
 
@@ -380,8 +380,7 @@ After test execution, comprehensive reports are automatically generated:
   - Shows pass/fail status, execution time, and error details
 
 - **XML Reports**: `target/surefire-reports/*.xml`
-  - Machine-readable format for CI/CD integration
-  - Compatible with Jenkins, GitLab CI, GitHub Actions
+  - Machine-readable format for integration
   - Files: `TEST-{TestClassName}.xml`
 
 - **Text Reports**: `target/surefire-reports/*.txt`
@@ -403,21 +402,6 @@ cat target/surefire-reports/guru.GuruTest.txt
 
 # Check logs
 tail -f target/logs/*.log
-```
-
-### CI/CD Integration
-
-Reports can be published in CI/CD pipelines:
-
-```yaml
-# Example: GitHub Actions
-- name: Publish Test Report
-  uses: dorny/test-reporter@v1
-  if: always()
-  with:
-    name: Test Results
-    path: target/surefire-reports/*.xml
-    reporter: java-junit
 ```
 
 ## 📝 Creating Tests
@@ -725,6 +709,10 @@ Contributions are welcome! Please follow these guidelines:
 For issues, questions, or contributions:
 - **Issues**: [GitHub Issues](https://github.com/mxstudios-dn/at_2503/issues)
 - **Repository**: [GitHub Repository](https://github.com/mxstudios-dn/at_2503)
+
+## 👤 Author
+
+**Minh Pham**
 
 ## 📝 License
 
