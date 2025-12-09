@@ -15,7 +15,6 @@ import static org.junit.jupiter.api.Assertions.*;
 public class BasePage extends Helper {
     protected WebDriver webDriver;
 
-    @SuppressWarnings("null")
     public void openSite() {
         logger.info("Navigating to URL: {}", TestSettings.BASE_URL);
         DriverManager.getDriver().get(TestSettings.BASE_URL);
@@ -26,7 +25,6 @@ public class BasePage extends Helper {
         return new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(waitTime));
     }
 
-    @SuppressWarnings("null")
     private WebElement findElement(By selector) {
         return getWait(TestSettings.WAIT_ELEMENT).until(ExpectedConditions.visibilityOfElementLocated(selector));
     }
@@ -36,10 +34,9 @@ public class BasePage extends Helper {
         findElement(selector).sendKeys(text);
     }
 
-    @SuppressWarnings("null")
     protected String getElementAttribute(By selector, String attributeName) {
         logger.info("Getting attribute {} from element {}", attributeName, selector);
-        return findElement(selector).getAttribute(attributeName);
+        return findElement(selector).getDomAttribute(attributeName);
     }
 
     protected void clickButton(By selector) {
@@ -73,7 +70,6 @@ public class BasePage extends Helper {
         assertEquals(expected, actual, message);
     }
 
-    @SuppressWarnings("null")
     protected void verifyElementVisible(By selector, String errorMessage) {
         logger.info("Verifying visibility of element {}", selector);
         try {
@@ -84,5 +80,4 @@ public class BasePage extends Helper {
             throw new AssertionError(errorMessage);
         }
     }
-
 }
