@@ -53,7 +53,9 @@ public class DriverManager extends Helper {
 
         try {
             WebDriver driver = createDriver(browserType.toLowerCase());
-            driver.manage().timeouts().implicitlyWait(java.time.Duration.ofSeconds(TestSettings.IMPLICIT_WAIT));
+            
+            // driver.manage().timeouts().implicitlyWait(java.time.Duration.ofSeconds(TestSettings.IMPLICIT_WAIT));
+
             webDriver.set(driver);
             logger.info("WebDriver initialized successfully for browser: {}", browserType);
         } catch (Exception e) {

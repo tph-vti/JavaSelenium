@@ -31,12 +31,20 @@ public class BasePage extends Helper {
         logger.info("Navigation to URL: {} completed", url);
     }
 
+    private WebElement findElement(By selector) {
+        return getWait(TestSettings.WAIT_ELEMENT).until(ExpectedConditions.visibilityOfElementLocated(selector));
+    }
+
     public WebDriverWait getWait(long waitTime) {
         return new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(waitTime));
     }
 
-    private WebElement findElement(By selector) {
-        return getWait(TestSettings.WAIT_ELEMENT).until(ExpectedConditions.visibilityOfElementLocated(selector));
+    protected void waitForElementInvisible(By selector) {
+        getWait(TestSettings.WAIT_ELEMENT).until(ExpectedConditions.invisibilityOfElementLocated(selector));
+    }
+
+    private WebElement waitForElementClickable(By selector) {
+        return getWait(TestSettings.WAIT_ELEMENT).until(ExpectedConditions.elementToBeClickable(selector));
     }
 
     protected void enterText(By selector, String text) {
@@ -49,14 +57,15 @@ public class BasePage extends Helper {
         return findElement(selector).getDomAttribute(attributeName);
     }
 
+   protected String getElementValue(By selector) {
+       logger.info("Getting value from element {}", selector);
+       WebElement element = findElement(selector);
+       return element.getText().isEmpty() ? element.getDomProperty("value") : element.getText();
+   }
+
     protected void clickButton(By selector) {
         logger.info("Clicking button {}", selector);
-        findElement(selector).click();
-        try {
-            TimeUnit.SECONDS.sleep(1);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        waitForElementClickable(selector).click();
     }
 
     protected String getElementText(By selector) {

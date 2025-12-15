@@ -7,6 +7,9 @@ import org.json.JSONObject;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 public class Helper {
     protected final static Logger logger = LogManager.getLogger("at_2503");
@@ -30,6 +33,26 @@ public class Helper {
         } catch (Exception e) {
             logger.error("Failed to load JSON file: {}", filePath, e);
             return null;
+        }
+    }
+    public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("MM/dd/yyyy", Locale.US);
+
+    public static LocalDate convertStringToDate(String dateStr) {
+        try {
+            return LocalDate.parse(dateStr, DATE_FORMATTER);
+        } catch (Exception e) {
+            logger.error("Failed to parse date string: {}", dateStr, e);
+            throw new IllegalArgumentException("Invalid date format: " + dateStr, e);
+        }
+    }
+
+    public int convertMonthNameToNumber(String monthName) {
+        try {
+            DateTimeFormatter monthFormatter = DateTimeFormatter.ofPattern("MMMM", Locale.ENGLISH);
+            return monthFormatter.parse(monthName).get(java.time.temporal.ChronoField.MONTH_OF_YEAR);
+        } catch (Exception e) {
+            logger.error("Failed to convert month name '{}' to number", monthName, e);
+            throw new IllegalArgumentException("Invalid month name: " + monthName, e);
         }
     }
 }

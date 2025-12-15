@@ -30,4 +30,5 @@ public final class Constants {
 
     // Automation Demo Site Constants
     public static final String AUTOMATION_DEMO_ALERTS_URL = "https://demo.automationtesting.in/Alerts.html";
+    public static final String AUTOMATION_DEMO_DATE_PICKER_URL = "https://demo.automationtesting.in/Datepicker.html";
 }
