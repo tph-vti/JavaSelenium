@@ -17,7 +17,6 @@ public class BaseTest extends Helper {
 
         try {
             driverManager = new DriverManager();
-            driverManager.navigateTo(TestSettings.BASE_URL);
             logger.debug("SeleniumDriverBase instance created");
         } catch (Exception e) {
             logger.error("Failed to initialize test setup", e);

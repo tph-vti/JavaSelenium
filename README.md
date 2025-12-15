@@ -241,8 +241,8 @@ at_2503/
 │   │   │   │   │   └── DashBoardPage.java
 │   │   │   │   └── guru/
 │   │   │   │       ├── LoginPage.java
+│   │   │   │       ├── GuruToolTipsPage.java
 │   │   │   │       └── ManagerPage.java
-│   │   │   ├── modals/              # Data models (POJOs)
 │   │   │   └── utils/               # Utilities
 │   │   │       ├── Helper.java
 │   │   │       └── Constants.java

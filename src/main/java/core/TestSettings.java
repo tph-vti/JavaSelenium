@@ -16,10 +16,12 @@ public class TestSettings {
     public static final String BASE_URL = ENV_CONFIG.getString("base_url");
     public static final int DEFAULT_TIMEOUT = 30; // in seconds
     public static final String BROWSER_TYPE = System.getProperty("browser", DOTENV.get("BROWSER","chrome")); // default browser type
-    public static final String SCREEN_RESOLUTION = "1920,1080";
-    public static final boolean HEADLESS = false;
+    public static final String SCREEN_RESOLUTION = System.getProperty("resolution", DOTENV.get("SCREEN_RESOLUTION", "1920,1080"));
+    public static final boolean HEADLESS = Boolean.parseBoolean(System.getProperty("headless", DOTENV.get("HEADLESS", "false")));
 
     // WAIT SETTINGS
-    public static final int WAIT_ELEMENT = 10; // in seconds
+    public static final int WAIT_ELEMENT = 5; // in seconds
+    public static final int IMPLICIT_WAIT = 2; // in seconds
+    public static final int PAGE_LOAD_TIMEOUT = 15; // in seconds
 
 }

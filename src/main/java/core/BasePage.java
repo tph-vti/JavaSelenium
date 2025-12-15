@@ -1,24 +1,34 @@
 package core;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 import utils.Helper;
 
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class BasePage extends Helper {
     protected WebDriver webDriver;
+    private String crrWindow;
 
     public void openSite() {
         logger.info("Navigating to URL: {}", TestSettings.BASE_URL);
         DriverManager.getDriver().get(TestSettings.BASE_URL);
         logger.info("Navigation to URL: {} completed", TestSettings.BASE_URL);
+    }
+
+    public void openSite(String url) {
+        logger.info("Navigating to URL: {}", url);
+        DriverManager.getDriver().get(url);
+        logger.info("Navigation to URL: {} completed", url);
     }
 
     public WebDriverWait getWait(long waitTime) {
@@ -80,4 +90,76 @@ public class BasePage extends Helper {
             throw new AssertionError(errorMessage);
         }
     }
+
+    protected void hoverElement(By selector) {
+        logger.info("Hovering over element {}", selector);
+        WebElement element = findElement(selector);
+        // Init action object
+        Actions actions = new Actions(DriverManager.getDriver());
+
+        // Perform hover action
+        actions.moveToElement(element).perform();
+    }
+
+    protected void dragAndDrop(By sourceEleBy, By targetEleBy) {
+        logger.info("Dragging element from {} to {}", sourceEleBy, targetEleBy);
+        WebElement sourceElement = findElement(sourceEleBy);
+        WebElement targetElement = findElement(targetEleBy);
+
+        // Init action object
+        Actions actions = new Actions(DriverManager.getDriver());
+
+        // Perform drag and drop action
+        actions.dragAndDrop(sourceElement, targetElement).perform();
+    }
+
+    protected Alert switchToAlert() {
+        logger.info("Switching to alert");
+        return DriverManager.getDriver().switchTo().alert();
+    }
+
+    protected void acceptAlertAction(Alert alert) {
+        logger.info("Accepting alert");
+        alert.accept();
+    }
+    protected void dismissAlertAction(Alert alert) {
+        logger.info("Dismissing alert");
+        alert.dismiss();
+    }
+
+    protected WebDriver swithToNewWindow(){
+        logger.info("Switching to new window");
+        this.crrWindow = DriverManager.getDriver().getWindowHandle();
+        logger.info("Current window: {}", this.crrWindow);
+        for (String windowHandle : DriverManager.getDriver().getWindowHandles()) {
+            if (!windowHandle.equals(this.crrWindow)) {
+                DriverManager.getDriver().switchTo().window(windowHandle);
+                logger.info("Switched to new window: {}", windowHandle);
+                DriverManager.getDriver();
+                return null;
+            }
+        }
+        logger.warn("No new window found to switch to");
+        return DriverManager.getDriver();
+    }
+
+    public void verifyTitle(String expectedTitle) {
+        logger.info("Verifying page title is: {}", expectedTitle);
+        String actualTitle = DriverManager.getDriver().getTitle();
+        verifyEquals(expectedTitle, actualTitle, String.format("Expected title '%s' but found '%s'", expectedTitle, actualTitle));
+    }
+
+    public void switchBackToOriginalWindow() {
+        logger.info("Switching back to original window: {}", this.crrWindow);
+        Set<String> arrString = DriverManager.getDriver().getWindowHandles();
+        for (String windowHandle : arrString) {
+            if (!windowHandle.equals(this.crrWindow)) {
+                DriverManager.getDriver().switchTo().window(windowHandle);
+                logger.info("Switched to new window: {}", windowHandle);
+                DriverManager.getDriver().close();
+            }
+        }
+        DriverManager.getDriver().switchTo().window(this.crrWindow);
+    }
 }
+
