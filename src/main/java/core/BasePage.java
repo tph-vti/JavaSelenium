@@ -2,6 +2,7 @@ package core;
 
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -72,6 +73,12 @@ public class BasePage extends Helper {
     protected void clickButton(By selector) {
         logger.info("Clicking button {}", selector);
         waitForElementClickable(selector).click();
+    }
+
+    protected void executeJavaScript(String script) {
+        logger.info("Executing JavaScript: {}", script);
+        JavascriptExecutor js = (JavascriptExecutor) this.driver;
+        js.executeScript(script);
     }
 
     protected String getElementText(By selector) {
