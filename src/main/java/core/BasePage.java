@@ -11,23 +11,29 @@ import java.time.Duration;
 import utils.Helper;
 
 import java.util.Set;
-import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * BasePage provides common web interaction methods for all Page Objects.
+ * All page classes should extend this class to inherit WebDriver access and utility methods.
+ */
 public class BasePage extends Helper {
-    protected WebDriver webDriver;
     private String crrWindow;
+    protected WebDriver driver;
+    public BasePage(){
+        driver = DriverManager.getDriver();
+    }
 
     public void openSite() {
         logger.info("Navigating to URL: {}", TestSettings.BASE_URL);
-        DriverManager.getDriver().get(TestSettings.BASE_URL);
+        this.driver.get(TestSettings.BASE_URL);
         logger.info("Navigation to URL: {} completed", TestSettings.BASE_URL);
     }
 
     public void openSite(String url) {
         logger.info("Navigating to URL: {}", url);
-        DriverManager.getDriver().get(url);
+        this.driver.get(url);
         logger.info("Navigation to URL: {} completed", url);
     }
 
@@ -36,7 +42,7 @@ public class BasePage extends Helper {
     }
 
     public WebDriverWait getWait(long waitTime) {
-        return new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(waitTime));
+        return new WebDriverWait(this.driver, Duration.ofSeconds(waitTime));
     }
 
     protected void waitForElementInvisible(By selector) {
@@ -92,7 +98,7 @@ public class BasePage extends Helper {
     protected void verifyElementVisible(By selector, String errorMessage) {
         logger.info("Verifying visibility of element {}", selector);
         try {
-            getWait(0).until(ExpectedConditions.visibilityOfElementLocated(selector));
+            getWait(TestSettings.WAIT_ELEMENT).until(ExpectedConditions.visibilityOfElementLocated(selector));
             logger.info("Element {} is visible", selector);
         } catch (Exception e) {
             logger.error("Element {} is not visible: {}", selector, errorMessage);
@@ -104,7 +110,7 @@ public class BasePage extends Helper {
         logger.info("Hovering over element {}", selector);
         WebElement element = findElement(selector);
         // Init action object
-        Actions actions = new Actions(DriverManager.getDriver());
+        Actions actions = new Actions(this.driver);
 
         // Perform hover action
         actions.moveToElement(element).perform();
@@ -116,7 +122,7 @@ public class BasePage extends Helper {
         WebElement targetElement = findElement(targetEleBy);
 
         // Init action object
-        Actions actions = new Actions(DriverManager.getDriver());
+        Actions actions = new Actions(this.driver);
 
         // Perform drag and drop action
         actions.dragAndDrop(sourceElement, targetElement).perform();
@@ -124,7 +130,7 @@ public class BasePage extends Helper {
 
     protected Alert switchToAlert() {
         logger.info("Switching to alert");
-        return DriverManager.getDriver().switchTo().alert();
+        return this.driver.switchTo().alert();
     }
 
     protected void acceptAlertAction(Alert alert) {
@@ -138,37 +144,36 @@ public class BasePage extends Helper {
 
     protected WebDriver swithToNewWindow(){
         logger.info("Switching to new window");
-        this.crrWindow = DriverManager.getDriver().getWindowHandle();
+        this.crrWindow = this.driver.getWindowHandle();
         logger.info("Current window: {}", this.crrWindow);
-        for (String windowHandle : DriverManager.getDriver().getWindowHandles()) {
+        for (String windowHandle : this.driver.getWindowHandles()) {
             if (!windowHandle.equals(this.crrWindow)) {
-                DriverManager.getDriver().switchTo().window(windowHandle);
+                this.driver.switchTo().window(windowHandle);
                 logger.info("Switched to new window: {}", windowHandle);
-                DriverManager.getDriver();
-                return null;
+                return this.driver;
             }
         }
         logger.warn("No new window found to switch to");
-        return DriverManager.getDriver();
+        return this.driver;
     }
 
     public void verifyTitle(String expectedTitle) {
         logger.info("Verifying page title is: {}", expectedTitle);
-        String actualTitle = DriverManager.getDriver().getTitle();
+        String actualTitle = this.driver.getTitle();
         verifyEquals(expectedTitle, actualTitle, String.format("Expected title '%s' but found '%s'", expectedTitle, actualTitle));
     }
 
     public void switchBackToOriginalWindow() {
         logger.info("Switching back to original window: {}", this.crrWindow);
-        Set<String> arrString = DriverManager.getDriver().getWindowHandles();
+        Set<String> arrString = this.driver.getWindowHandles();
         for (String windowHandle : arrString) {
             if (!windowHandle.equals(this.crrWindow)) {
-                DriverManager.getDriver().switchTo().window(windowHandle);
+                this.driver.switchTo().window(windowHandle);
                 logger.info("Switched to new window: {}", windowHandle);
-                DriverManager.getDriver().close();
+                this.driver.close();
             }
         }
-        DriverManager.getDriver().switchTo().window(this.crrWindow);
+        this.driver.switchTo().window(this.crrWindow);
     }
 }
 

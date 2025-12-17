@@ -1,5 +1,6 @@
 package core;
 
+import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -7,7 +8,15 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import utils.Helper;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.Objects;
+
+import static core.TestSettings.GRID_HUB_URL;
 
 /**
  * DriverManager handles WebDriver lifecycle management following POM best practices.
@@ -15,16 +24,10 @@ import utils.Helper;
  * Implements browser factory pattern for Chrome, Firefox, and Edge browsers.
  */
 public class DriverManager extends Helper {
-    
+    private boolean isRemote = false;
+    private URL hubUrl;
     private static final ThreadLocal<WebDriver> webDriver = new ThreadLocal<>();
 
-    /**
-     * Default constructor - initializes WebDriver with browser type from TestSettings
-     */
-    public DriverManager() {
-        super();
-        initializeDriver(TestSettings.BROWSER_TYPE);
-    }
 
     /**
      * Parameterized constructor - allows custom browser type
@@ -33,6 +36,20 @@ public class DriverManager extends Helper {
     public DriverManager(String browserType) {
         super();
         initializeDriver(browserType);
+    }
+
+    public DriverManager() throws MalformedURLException {
+        super();
+        if(Objects.equals(TestSettings.HUB_TYPE, "NONE")) {
+            initializeDriver(TestSettings.BROWSER_TYPE);
+
+        }else{
+            if(Objects.equals(TestSettings.HUB_TYPE, "GRID")) {
+                isRemote = true;
+                this.hubUrl = java.net.URI.create(GRID_HUB_URL).toURL();
+                initializeDriver(TestSettings.BROWSER_TYPE);
+            }
+        }
     }
 
     /**
@@ -64,44 +81,54 @@ public class DriverManager extends Helper {
         }
     }
 
+
     /**
      * Factory method to create WebDriver instance based on browser type
      * @param browserType Browser type (chrome, firefox, edge)
      * @return WebDriver instance
+     * @throws MalformedURLException if remote hub URL is malformed
      */
-    private WebDriver createDriver(String browserType) {
-        switch (browserType) {
-            case "chrome":
-                return createChromeDriver();
-            case "firefox":
-                return createFirefoxDriver();
-            case "edge":
-                return createEdgeDriver();
-            default:
+    private WebDriver createDriver(String browserType) throws MalformedURLException {
+        return switch (browserType) {
+            case "chrome" -> createChromeDriver();
+            case "firefox" -> createFirefoxDriver();
+            case "edge" -> createEdgeDriver();
+            default -> {
                 logger.error("Unsupported browser type: {}", browserType);
                 throw new IllegalArgumentException("Unsupported browser type: " + browserType + 
                     ". Supported types: chrome, firefox, edge");
-        }
+            }
+        };
     }
 
     /**
      * Creates and configures Chrome WebDriver
      * @return Configured ChromeDriver instance
+     * @throws MalformedURLException if remote hub URL is malformed (for RemoteWebDriver)
      */
-    private WebDriver createChromeDriver() {
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--start-maximized");
-        options.addArguments(String.format("--window-size=%s", TestSettings.SCREEN_RESOLUTION));
-        options.addArguments("--disable-notifications");
-        options.addArguments("--disable-popup-blocking");
-        
-        if (TestSettings.HEADLESS) {
-            options.addArguments("--headless=new");
-            logger.debug("Chrome browser initialized in headless mode");
+    private WebDriver createChromeDriver() throws MalformedURLException {
+        if(!isRemote) {
+            ChromeOptions options = new ChromeOptions();
+            options.addArguments("--start-maximized");
+            options.addArguments(String.format("--window-size=%s", TestSettings.SCREEN_RESOLUTION));
+            options.addArguments("--disable-notifications");
+            options.addArguments("--disable-popup-blocking");
+
+            if (TestSettings.HEADLESS) {
+                options.addArguments("--headless=new");
+                logger.debug("Chrome browser initialized in headless mode");
+            }
+
+            logger.debug("Chrome browser initialized with options: {}", options.asMap());
+            return new ChromeDriver(options);
+        }else {
+            // Remote WebDriver initialization can be implemented here
+            DesiredCapabilities capabilities = new DesiredCapabilities();
+            capabilities.setPlatform(Platform.MAC);
+            capabilities.setBrowserName("chrome");
+            // Use RemoteWebDriver to connect to the hub
+            return new RemoteWebDriver(this.hubUrl, capabilities);
         }
-        
-        logger.debug("Chrome browser initialized with options: {}", options.asMap());
-        return new ChromeDriver(options);
     }
 
     /**
