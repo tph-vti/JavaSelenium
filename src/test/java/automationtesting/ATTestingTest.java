@@ -1,5 +1,9 @@
 package automationtesting;
 
+import static utils.Constants.SAMPLE_FILE_PATH;
+
+import java.sql.DriverManager;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -61,8 +65,7 @@ public class ATTestingTest extends BaseTest {
 
          alertPage.clickNewTabWindowButton();
          alertPage.verifyTitle("Selenium");
-
-
+        
          alertPage.switchBackToOriginalWindow();
          alertPage.verifyTitle("Frames & windows");
      }
@@ -79,5 +82,44 @@ public class ATTestingTest extends BaseTest {
 
         logger.info("Step 2: Verify the date '{}' is disabled and cannot be selected", dateToSelect);
         datePickerPage.verifySelectedDateDisable(dateToSelect);
+    }
+
+    @Test
+    @Tag("automationtesting")
+    public void testUploadFile() {
+        logger.info("Automation Testing - File Upload Test");
+        alertPage.openSite("https://demo.automationtesting.in/FileUpload.html");
+
+        String filePath = utils.Constants.SAMPLE_FILE_PATH;
+        logger.info("Step 1: Upload file from path: {}", filePath);
+        alertPage.uploadFile(SAMPLE_FILE_PATH);
+
+        logger.info("Step 2: Verify the file was uploaded successfully");
+        alertPage.verifyFileUploaded("sample.jpg");
+    }
+
+
+    @Test
+    @Tag("automationtesting")
+    public void testDownloadFile() {
+         String expectedContent = "This is a sample text file for download testing.";
+
+        logger.info("Automation Testing - File Upload Test");
+        alertPage.openSite("https://demo.automationtesting.in/FileDownload.html");
+
+        logger.info("Step 1: Enter text to generate the downloadable file");
+        alertPage.enterTextForDownload(expectedContent);
+
+        logger.info("Step 2: Click 'Generate File' button");
+        alertPage.clickGenerateFileButton();
+
+        logger.info("Step 2: Click 'Download File' button");
+        alertPage.clickDownloadButton();
+        alertPage.waitForFileDownload("info.txt", 15);
+
+        logger.info("VP: Verify the downloaded file content");
+        alertPage.verifyDownloadedFileContent("info.txt", expectedContent);
+
+
     }
 }

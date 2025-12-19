@@ -18,7 +18,6 @@ class DatePickerPageSelector {
 
 public class DatePickerPage extends BasePage {
 
-
     public DatePickerPage() {
         super();
         openSite(AUTOMATION_DEMO_DATE_PICKER_URL);

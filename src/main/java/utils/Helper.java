@@ -11,6 +11,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
+import static utils.Constants.DOWNLOAD_FOLDER_PATH;
+
 public class Helper {
     protected final static Logger logger = LogManager.getLogger("at_2503");
 
@@ -54,5 +56,40 @@ public class Helper {
             logger.error("Failed to convert month name '{}' to number", monthName, e);
             throw new IllegalArgumentException("Invalid month name: " + monthName, e);
         }
+    }
+
+    public String readFileContent(String filePath) {
+        try {
+            return Files.readString(Paths.get(filePath), StandardCharsets.UTF_8);
+        } catch (Exception e) {
+            logger.error("Failed to read file content from: {}", filePath, e);
+            return null;
+        }
+    }
+
+    private void waitForFileExists(String filePath, int timeoutInSeconds) {
+        logger.info("Waiting for file to exist: {} with timeout: {} seconds", filePath, timeoutInSeconds);
+        int waited = 0;
+        while (waited < timeoutInSeconds) {
+            if (Files.exists(Paths.get(filePath))) {
+                logger.info("File found: {}", filePath);
+                return;
+            }
+            try {
+//                Sleep 1 second before next check
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                logger.error("Thread interrupted while waiting for file: {}", filePath, e);
+            }
+            waited++;
+        }
+        logger.warn("Timeout reached. File not found: {}", filePath);
+        throw new RuntimeException("File not found within timeout: " + filePath);
+    }
+
+    public void waitForFileDownload(String fileName, int timeoutInSeconds) {
+        logger.info("Waiting for file download: {} with timeout: {} seconds", fileName, timeoutInSeconds);
+        String downloadedFilePath = Paths.get(DOWNLOAD_FOLDER_PATH, fileName).toString();
+        waitForFileExists(downloadedFilePath, timeoutInSeconds);
     }
 }

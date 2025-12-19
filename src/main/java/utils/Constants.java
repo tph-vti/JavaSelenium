@@ -31,4 +31,9 @@ public final class Constants {
     // Automation Demo Site Constants
     public static final String AUTOMATION_DEMO_ALERTS_URL = "https://demo.automationtesting.in/Alerts.html";
     public static final String AUTOMATION_DEMO_DATE_PICKER_URL = "https://demo.automationtesting.in/Datepicker.html";
+
+    // Upload File Constants
+    public static final String SAMPLE_FILE_PATH = Paths.get(RESOURCES_PATH, "sample.jpg").toString();
+    public static final String CURRENT_USERNAME = System.getProperty("user.name");
+    public static final String DOWNLOAD_FOLDER_PATH = "/"+Paths.get("","Users", CURRENT_USERNAME,"Downloads").toString();
 }

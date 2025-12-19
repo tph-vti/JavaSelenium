@@ -59,6 +59,11 @@ public class BasePage extends Helper {
         findElement(selector).sendKeys(text);
     }
 
+    protected void enterTextWithoutWait(By selector, String text) {
+        logger.info("Entering text {}", text);
+        this.driver.findElement(selector).sendKeys(text);
+    }
+
     protected String getElementAttribute(By selector, String attributeName) {
         logger.info("Getting attribute {} from element {}", attributeName, selector);
         return findElement(selector).getDomAttribute(attributeName);
