@@ -124,7 +124,7 @@ public class DriverManager extends Helper {
         }else {
             // Remote WebDriver initialization can be implemented here
             DesiredCapabilities capabilities = new DesiredCapabilities();
-            capabilities.setPlatform(Platform.MAC);
+            capabilities.setPlatform(Platform.WINDOWS);
             capabilities.setBrowserName("chrome");
             // Use RemoteWebDriver to connect to the hub
             return new RemoteWebDriver(this.hubUrl, capabilities);

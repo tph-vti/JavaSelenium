@@ -1,5 +1,4 @@
 package pages.automation_demo;
-import org.checkerframework.checker.units.qual.A;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import core.BasePage;

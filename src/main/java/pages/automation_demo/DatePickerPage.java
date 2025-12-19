@@ -2,7 +2,6 @@ package pages.automation_demo;
 import org.openqa.selenium.By;
 import core.BasePage;
 import java.time.LocalDate;
-import static utils.Constants.AUTOMATION_DEMO_ALERTS_URL;
 import static utils.Constants.AUTOMATION_DEMO_DATE_PICKER_URL;
 
 class DatePickerPageSelector {
@@ -15,7 +14,6 @@ class DatePickerPageSelector {
     public static final By itmDatePickerDay(int day) {
         return By.xpath("//table[@class='ui-datepicker-calendar']//a[text()='" + day + "']");
     }
-
 }
 
 public class DatePickerPage extends BasePage {
