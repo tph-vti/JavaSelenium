@@ -14,7 +14,7 @@ import java.util.Locale;
 import static utils.Constants.DOWNLOAD_FOLDER_PATH;
 
 public class Helper {
-    protected final static Logger logger = LogManager.getLogger("at_2503");
+    protected final static Logger logger = LogManager.getLogger("Java Selenium");
 
     public Helper(){
         try {

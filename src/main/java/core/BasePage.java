@@ -38,8 +38,14 @@ public class BasePage extends Helper {
         logger.info("Navigation to URL: {} completed", url);
     }
 
-    private WebElement findElement(By selector) {
-        return getWait(TestSettings.WAIT_ELEMENT).until(ExpectedConditions.visibilityOfElementLocated(selector));
+    protected WebElement findVisibleElement(By selector) {
+        return getWait(TestSettings.WAIT_ELEMENT)
+                .until(ExpectedConditions.visibilityOfElementLocated(selector));
+    }
+
+    protected WebElement findPresentElement(By selector) {
+        return getWait(TestSettings.WAIT_ELEMENT)
+                .until(ExpectedConditions.presenceOfElementLocated(selector));
     }
 
     public WebDriverWait getWait(long waitTime) {
@@ -56,7 +62,7 @@ public class BasePage extends Helper {
 
     protected void enterText(By selector, String text) {
         logger.info("Entering text {}", text);
-        findElement(selector).sendKeys(text);
+        findVisibleElement(selector).sendKeys(text);
     }
 
     protected void enterTextWithoutWait(By selector, String text) {
@@ -66,12 +72,12 @@ public class BasePage extends Helper {
 
     protected String getElementAttribute(By selector, String attributeName) {
         logger.info("Getting attribute {} from element {}", attributeName, selector);
-        return findElement(selector).getDomAttribute(attributeName);
+        return findPresentElement(selector).getDomAttribute(attributeName);
     }
 
    protected String getElementValue(By selector) {
        logger.info("Getting value from element {}", selector);
-       WebElement element = findElement(selector);
+       WebElement element = findPresentElement(selector);
        return element.getText().isEmpty() ? element.getDomProperty("value") : element.getText();
    }
 
@@ -87,9 +93,18 @@ public class BasePage extends Helper {
     }
 
     protected String getElementText(By selector) {
-        String text = findElement(selector).getText();
+        String text = findPresentElement(selector).getText();
         logger.info("Retrieved text '{}' from element {}", text, selector);
         return text;
+    }
+
+    protected boolean isElementSelected(By selector) {
+        return findPresentElement(selector).isSelected();
+    }
+
+    public void scrollToElement(WebDriver driver, WebElement element) {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].scrollIntoView(true);", element);
     }
 
     protected void verifyTrue(boolean condition, String message) {
@@ -120,7 +135,7 @@ public class BasePage extends Helper {
 
     protected void hoverElement(By selector) {
         logger.info("Hovering over element {}", selector);
-        WebElement element = findElement(selector);
+        WebElement element = findPresentElement(selector);
         // Init action object
         Actions actions = new Actions(this.driver);
 
@@ -130,8 +145,8 @@ public class BasePage extends Helper {
 
     protected void dragAndDrop(By sourceEleBy, By targetEleBy) {
         logger.info("Dragging element from {} to {}", sourceEleBy, targetEleBy);
-        WebElement sourceElement = findElement(sourceEleBy);
-        WebElement targetElement = findElement(targetEleBy);
+        WebElement sourceElement = findVisibleElement(sourceEleBy);
+        WebElement targetElement = findVisibleElement(targetEleBy);
 
         // Init action object
         Actions actions = new Actions(this.driver);
