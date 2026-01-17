@@ -33,7 +33,7 @@ public class DatePickerPage extends BasePage {
         LocalDate localDate = convertStringToDate(date);
         
         // Open the date picker by clicking on the textbox
-        clickButton(DatePickerPageSelector.txtDateDisable);
+        click(DatePickerPageSelector.txtDateDisable);
 
         // Navigate to the correct month and year
         while (true) {
@@ -43,15 +43,15 @@ public class DatePickerPage extends BasePage {
 
             if (displayedYear > localDate.getYear() || 
                 (displayedYear == localDate.getYear() && displayedMonth > localDate.getMonthValue())) {
-                clickButton(DatePickerPageSelector.btnPrevMonth);
+                click(DatePickerPageSelector.btnPrevMonth);
             } else if (displayedYear < localDate.getYear() || displayedMonth < localDate.getMonthValue()) {
-                clickButton(DatePickerPageSelector.btnNextMonth);
+                click(DatePickerPageSelector.btnNextMonth);
             } else {
                 break;
             }
         }
         // Select the day
-        clickButton(DatePickerPageSelector.itmDatePickerDay(localDate.getDayOfMonth()));
+        click(DatePickerPageSelector.itmDatePickerDay(localDate.getDayOfMonth()));
         waitForElementInvisible(DatePickerPageSelector.tblDatePicker);
         logger.info("Date selected: {}", date);
     }

@@ -47,12 +47,12 @@ public class AlertPage extends BasePage {
 
     public void clickAlertWithOKButton() {
         logger.info("Clicking 'Alert with OK' button");
-        clickButton(AlertPageSelector.btnAlertWithOK);
+        click(AlertPageSelector.btnAlertWithOK);
     }
 
     public void clickAlertWithOKCancelButton() {
         logger.info("Clicking 'Alert with OK & Cancel' button");
-        clickButton(AlertPageSelector.btnAlertWithOKCancel);
+        click(AlertPageSelector.btnAlertWithOKCancel);
     }
 
     public void verifyAlertDismissedMessage(String expectedMessage) {
@@ -65,16 +65,16 @@ public class AlertPage extends BasePage {
     public void selectAlertTab(String tabName) {
         logger.info("Selecting alert tab: {}", tabName);
         if (tabName.equals("Alert with OK & Cancel")) {
-            clickButton(AlertPageSelector.tabAlertWithOKCancel);
+            click(AlertPageSelector.tabAlertWithOKCancel);
         } else if (tabName.equals("Alert with Textbox")) {
-            clickButton(AlertPageSelector.tabAlertWithTextbox);
+            click(AlertPageSelector.tabAlertWithTextbox);
         }
     }
 
     // NEW WINDOW METHODS
     public void clickNewTabWindowButton() {
         logger.info("Clicking 'New Tab / Window' button");
-        clickButton(AlertPageSelector.btnNewTabWindow);
+        click(AlertPageSelector.btnNewTabWindow);
         swithToNewWindow();
     }
 
@@ -97,12 +97,12 @@ public class AlertPage extends BasePage {
 
     public void clickGenerateFileButton() {
         logger.info("Clicking 'Generate File' button");
-        clickButton(AlertPageSelector.btnGenerateFile);
+        click(AlertPageSelector.btnGenerateFile);
     }
 
     public void clickDownloadButton() {
         logger.info("Clicking 'Download' button");
-        clickButton(AlertPageSelector.btnDownloadFile);
+        click(AlertPageSelector.btnDownloadFile);
     }
 
 
