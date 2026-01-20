@@ -81,9 +81,28 @@ public class BasePage extends Helper {
        return element.getText().isEmpty() ? element.getDomProperty("value") : element.getText();
    }
 
-    protected void clickButton(By selector) {
-        logger.info("Clicking button {}", selector);
+    protected void click(By selector) {
+        logger.info("Clicking {}", selector);
         waitForElementClickable(selector).click();
+    }
+
+    protected void clearText(By selector) {
+        logger.info("Clearing text of element {}", selector);
+        WebElement element = findVisibleElement(selector);
+        element.clear();
+    }
+
+    protected void pressEnter(By selector) {
+        logger.info("Pressing ENTER on element {}", selector);
+        WebElement element = findVisibleElement(selector);
+        element.sendKeys(org.openqa.selenium.Keys.ENTER);
+    }
+
+    protected void clearAndEnterText(By selector, String text) {
+        logger.info("Clearing and entering text {} into {}", text, selector);
+        WebElement element = findVisibleElement(selector);
+        element.clear();
+        element.sendKeys(text);
     }
 
     protected void executeJavaScript(String script) {

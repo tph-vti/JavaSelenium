@@ -28,7 +28,7 @@ public class LoginPage extends BasePage {
         logger.info("Logging in with email: {} and password: {}", email, password);
         enterText(LoginPageSelector.txtUsername, email);
         enterText(LoginPageSelector.txtPassword, password);
-        clickButton(LoginPageSelector.btnSignIn);
+        click(LoginPageSelector.btnSignIn);
         return new DashBoardPage();
     }
 }

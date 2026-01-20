@@ -19,7 +19,7 @@ public class LoginPage extends BasePage {
 
     public void submitEmailID() {
         logger.info("Login Page: Submitting email ID");
-        clickButton(LoginPageSelector.btnSubmit);
+        click(LoginPageSelector.btnSubmit);
     }
 
     public void verifyLoginErrorMessage(String msg){

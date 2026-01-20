@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 import core.BaseTest;
 import pages.demoqa.PracticeFormsPage;
 
+import java.util.List;
+
 /**
  * Test class for QA Auto demo site.
  */
@@ -21,13 +23,19 @@ public class PracticeFormsTest extends BaseTest {
     @Tag("demoqa")
     public void testGender() {
         practiceFormsPage.openSite("https://demoqa.com/automation-practice-form");
-        practiceFormsPage.selectGender("Male");
-        practiceFormsPage.verifyGenderSelected("Male");
-
-        practiceFormsPage.selectGender("Female");
-        practiceFormsPage.verifyGenderSelected("Female");
-
-        practiceFormsPage.selectGender("Other");
-        practiceFormsPage.verifyGenderSelected("Other");
+        practiceFormsPage.verifyPracticeFormsDisplays();
+        practiceFormsPage.enterPracticeForm(
+                "John",
+                "Doe",
+                "john@gmail.com",
+                "Male",
+                "0123456789",
+                "10 Oct 1990",
+                List.of("Maths", "Physics"),
+                List.of("Sports", "Music"),
+                "123 Le Duan, Da Nang",
+                "NCR",
+                "Delhi"
+        );
     }
 }
