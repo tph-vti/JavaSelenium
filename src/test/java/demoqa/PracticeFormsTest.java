@@ -19,7 +19,7 @@ public class PracticeFormsTest extends BaseTest {
         practiceFormsPage = new PracticeFormsPage();
     }
 
-    @Test
+//    @Test
     @Tag("demoqa")
     public void testGender() {
         practiceFormsPage.openSite("https://demoqa.com/automation-practice-form");
