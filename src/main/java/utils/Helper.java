@@ -9,7 +9,10 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Collections;
+import java.util.List;
 import java.util.Locale;
+import java.util.ArrayList;
 
 import static utils.Constants.DOWNLOAD_FOLDER_PATH;
 
@@ -92,4 +95,21 @@ public class Helper {
         String downloadedFilePath = Paths.get(DOWNLOAD_FOLDER_PATH, fileName).toString();
         waitForFileExists(downloadedFilePath, timeoutInSeconds);
     }
+
+    private enum SortOrder {
+        ASC, DESC
+    }
+    private boolean isListSorted(List<String> values, SortOrder order) {
+
+        List<String> sorted = new ArrayList<>(values);
+
+        sorted.sort(String::compareToIgnoreCase);
+
+        if (order == SortOrder.DESC) {
+            Collections.reverse(sorted);
+        }
+
+        return values.equals(sorted);
+    }
+
 }

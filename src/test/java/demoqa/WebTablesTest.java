@@ -91,5 +91,21 @@ public class WebTablesTest extends BaseTest {
         List<String> emails =
                 webTablesPage.getAllValuesByHeader("Email");
         System.out.println("Emails: " + emails);
+
+
+        // ================= SORT =================
+        webTablesPage.sortByHeader("First Name", "ASC");
+        webTablesPage.verifySorted("First Name", "ASC");
+
+        webTablesPage.sortByHeader("Last Name", "DESC");
+        webTablesPage.verifySorted("Last Name", "DESC");
+
+        webTablesPage.sortByHeader("Age", "ASC");
+        webTablesPage.verifySorted("Age", "ASC");
+
+        webTablesPage.sortByHeader("Salary", "DESC");
+        webTablesPage.verifySorted("Salary", "DESC");
+
+
     }
 }
