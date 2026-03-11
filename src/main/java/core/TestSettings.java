@@ -35,7 +35,7 @@ public class TestSettings {
     public static final String SCREEN_RESOLUTION = System.getProperty("resolution", DOTENV.get("SCREEN_RESOLUTION", "1920,1080"));
 
     /** Headless mode flag - Usage: mvn clean test -Dheadless=true */
-    public static final boolean HEADLESS = Boolean.parseBoolean(System.getProperty("headless", DOTENV.get("HEADLESS", "false")));
+    public static final boolean HEADLESS = Boolean.parseBoolean(System.getProperty("headless", DOTENV.get("HEADLESS", "true")));
 
     // WAIT SETTINGS
     /** Element visibility wait timeout in seconds */
