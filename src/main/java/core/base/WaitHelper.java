@@ -31,6 +31,16 @@ public class WaitHelper extends ElementFinder {
     }
 
     // ───────────────────── ELEMENT VISIBILITY / CLICKABILITY ─────────────────────
+ 
+    protected WebElement waitForElementVisible(By selector) {
+        return getWait(TestSettings.WAIT_ELEMENT)
+                .until(ExpectedConditions.visibilityOfElementLocated(selector));
+    }
+
+    protected WebElement waitForElementVisible(By selector, long timeoutSeconds) {
+        return getWait(timeoutSeconds)
+                .until(ExpectedConditions.visibilityOfElementLocated(selector));
+    }
 
     protected void waitForElementInvisible(By selector) {
         getWait(TestSettings.WAIT_ELEMENT)

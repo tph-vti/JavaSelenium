@@ -69,6 +69,13 @@ public class RegisterPage extends BasePage {
         clickButton(RegisterLocators.CREATE_ACCOUNT_BUTTON);
     }
 
+    public void clickContinueButton(){
+        logger.info("Waiting for Account Created message");
+        waitForElementVisible(RegisterLocators.ACCOUNT_CREATED_MESSAGE);
+        logger.info("Clicking continue button on account created page");
+        clickButton(RegisterLocators.CONTINUE_BUTTON);
+    }
+
     public void register(String title, String username, String email, String password, String day, String month, String year, String firstName, String lastName, String company, String address1, String address2, String country, String state, String city, String zipCode, String mobileNumber){
         clickSignupLoginLink();
         fillRegisterForm(username, email);
@@ -78,5 +85,6 @@ public class RegisterPage extends BasePage {
         clickCheckBoxes();
         fillAddressInformationForm(firstName, lastName, company, address1, address2, country, state, city, zipCode, mobileNumber);
         clickCreateAccountButton();
+        clickContinueButton();
     }
 }

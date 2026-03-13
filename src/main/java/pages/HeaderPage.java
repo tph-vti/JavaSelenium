@@ -53,4 +53,10 @@ public class HeaderPage extends BasePage {
         logger.info("Clicking Delete Account link");
         clickButton(HeaderLocators.DELETE_ACCOUNT_LINK);
     }
+
+    public void clickLogout() {
+        logger.info("Clicking Logout link");
+        scrollToElement(HeaderLocators.LOGOUT_LINK);
+        clickButton(HeaderLocators.LOGOUT_LINK);
+    }
 }

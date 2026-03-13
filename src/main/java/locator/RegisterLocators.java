@@ -30,4 +30,5 @@ public class RegisterLocators {
     public static final By MOBILE_NUMBER_INPUT = By.id("mobile_number");
     public static final By CREATE_ACCOUNT_BUTTON = By.xpath("//button[@data-qa='create-account']");
     public static final By ACCOUNT_CREATED_MESSAGE = By.xpath("//h2[@data-qa='account-created']");
+    public static final By CONTINUE_BUTTON = By.xpath("//a[@data-qa='continue-button']");
 }
