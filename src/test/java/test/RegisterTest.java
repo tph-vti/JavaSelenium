@@ -1,14 +1,17 @@
 package test;
 
 import core.BaseTest;
+import org.testng.Assert;
 import org.testng.annotations.Test;
+import pages.HeaderPage;
 import pages.RegisterPage;
 
 public class RegisterTest extends BaseTest {
 
-    @Test
+    @Test(description = "TC1: Register User with valid details")
     public void testRegister(){
         RegisterPage registerPage = new RegisterPage();
+        HeaderPage headerPage = new HeaderPage();
 
         String username = getRandomUserName();
         String email = getRandomEmail();
@@ -30,9 +33,13 @@ public class RegisterTest extends BaseTest {
         String zipCode = getRandomZipCode();
         String mobileNumber = getRandomPhoneNumber();
 
-        // Calling register with correct arguments
         registerPage.register("Mr.", username, email, password, day, month, year, firstName, lastName, company, address1, address2, country, state, city, zipCode, mobileNumber);
+        
+        Assert.assertTrue(headerPage.isLoggedInAsVisible(username), "Logged in as " + username + " should be visible");
 
-        // Verification can be added here
+        headerPage.clickDeleteAccount();
+
+        Assert.assertTrue(registerPage.isAccountDeletedVisible(), "ACCOUNT DELETED! message should be visible");
+        registerPage.clickContinueButton();
     }
 }

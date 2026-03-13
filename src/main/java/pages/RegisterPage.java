@@ -9,11 +9,14 @@ public class RegisterPage extends BasePage {
     public RegisterPage() {
         super();
         openSite(AUTOMATION_EXERCISE_BASE_URL);
+        removeAds();
     }
 
     public void clickSignupLoginLink() {
         logger.info("Clicking Signup / Login link on home page");
+        handleVignette();
         clickButton(locator.HeaderLocators.SIGNUP_LOGIN_LINK);
+        removeAds();
     }
 
     public void fillRegisterForm(String username, String email){
@@ -25,6 +28,7 @@ public class RegisterPage extends BasePage {
     public void clickSignUpButton(){
         logger.info("Clicking sign up button");
         clickButton(RegisterLocators.SIGNUP_BUTTON);
+        removeAds();
     }
 
     public void fillAccountInformationForm(String title, String password){
@@ -67,13 +71,19 @@ public class RegisterPage extends BasePage {
     public void clickCreateAccountButton(){
         logger.info("Clicking create account button");
         clickButton(RegisterLocators.CREATE_ACCOUNT_BUTTON);
+        removeAds();
     }
 
     public void clickContinueButton(){
+        logger.info("Clicking continue button");
+        handleVignette();
+        clickButton(RegisterLocators.CONTINUE_BUTTON);
+        removeAds();
+    }
+
+    public void waitForAccountCreatedVisible() {
         logger.info("Waiting for Account Created message");
         waitForElementVisible(RegisterLocators.ACCOUNT_CREATED_MESSAGE);
-        logger.info("Clicking continue button on account created page");
-        clickButton(RegisterLocators.CONTINUE_BUTTON);
     }
 
     public void register(String title, String username, String email, String password, String day, String month, String year, String firstName, String lastName, String company, String address1, String address2, String country, String state, String city, String zipCode, String mobileNumber){
@@ -85,6 +95,19 @@ public class RegisterPage extends BasePage {
         clickCheckBoxes();
         fillAddressInformationForm(firstName, lastName, company, address1, address2, country, state, city, zipCode, mobileNumber);
         clickCreateAccountButton();
+        waitForAccountCreatedVisible();
         clickContinueButton();
+    }
+
+    public boolean isAccountDeletedVisible() {
+        logger.info("Verifying 'ACCOUNT DELETED!' message is visible");
+        try {
+            waitForElementVisible(RegisterLocators.ACCOUNT_DELETED_MESSAGE, 15);
+            logger.info("'ACCOUNT DELETED!' message is visible");
+            return true;
+        } catch (Exception e) {
+            logger.error("'ACCOUNT DELETED!' message NOT visible after waiting");
+            return false;
+        }
     }
 }

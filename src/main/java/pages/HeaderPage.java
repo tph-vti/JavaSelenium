@@ -2,61 +2,76 @@ package pages;
 
 import core.BasePage;
 import locator.HeaderLocators;
+import org.openqa.selenium.By;
 
 public class HeaderPage extends BasePage {
 
     public HeaderPage() {
         super();
+        removeAds();
+    }
+
+    /**
+     * Generic method to click any menu item by its text.
+     * Makes the header navigation extremely flexible for any new features.
+     * @param menuText The visible text of the menu item (e.g., "Home", "Products", "Logout")
+     */
+    public void clickMenu(String menuText) {
+        logger.info("Clicking menu item: {}", menuText);
+        handleVignette();
+        By locator = getDynamicXpath(HeaderLocators.MENU_ITEM_FORMAT, menuText);
+        scrollToElement(locator);
+        clickButtonJS(locator);
+        removeAds();
+    }
+
+    public boolean isMenuVisible(String menuText) {
+        logger.info("Checking if menu item '{}' is visible", menuText);
+        return isElementDisplayed(getDynamicXpath(HeaderLocators.MENU_ITEM_FORMAT, menuText));
     }
 
     public void clickHome() {
-        logger.info("Clicking Home link");
-        clickButton(HeaderLocators.HOME_LINK);
+        clickMenu("Home");
     }
 
     public void clickProducts() {
-        logger.info("Clicking Products link");
-        clickButton(HeaderLocators.PRODUCTS_LINK);
+        clickMenu("Products");
     }
 
     public void clickCart() {
-        logger.info("Clicking Cart link");
-        clickButton(HeaderLocators.CART_LINK);
+        clickMenu("Cart");
     }
 
     public void clickSignupLogin() {
-        logger.info("Clicking Signup / Login link");
-        clickButton(HeaderLocators.SIGNUP_LOGIN_LINK);
+        clickMenu("Signup / Login");
     }
 
     public void clickTestCases() {
-        logger.info("Clicking Test Cases link");
-        clickButton(HeaderLocators.TEST_CASES_LINK);
+        clickMenu("Test Cases");
     }
 
     public void clickApiTesting() {
-        logger.info("Clicking API Testing link");
-        clickButton(HeaderLocators.API_TESTING_LINK);
+        clickMenu("API Testing");
     }
 
     public void clickVideoTutorials() {
-        logger.info("Clicking Video Tutorials link");
-        clickButton(HeaderLocators.VIDEO_TUTORIALS_LINK);
+        clickMenu("Video Tutorials");
     }
 
     public void clickContactUs() {
-        logger.info("Clicking Contact us link");
-        clickButton(HeaderLocators.CONTACT_US_LINK);
+        clickMenu("Contact us");
     }
 
     public void clickDeleteAccount() {
-        logger.info("Clicking Delete Account link");
-        clickButton(HeaderLocators.DELETE_ACCOUNT_LINK);
+        clickMenu("Delete Account");
     }
 
     public void clickLogout() {
-        logger.info("Clicking Logout link");
-        scrollToElement(HeaderLocators.LOGOUT_LINK);
-        clickButton(HeaderLocators.LOGOUT_LINK);
+        clickMenu("Logout");
+    }
+
+    public boolean isLoggedInAsVisible(String username) {
+        logger.info("Verifying 'Logged in as {}' is visible", username);
+        return isElementDisplayed(getDynamicXpath(HeaderLocators.LOGGED_IN_USER_FORMAT, username));
     }
 }

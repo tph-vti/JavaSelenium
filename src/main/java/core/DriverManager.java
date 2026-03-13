@@ -107,26 +107,36 @@ public class DriverManager extends Helper {
      * @throws MalformedURLException if remote hub URL is malformed (for RemoteWebDriver)
      */
     private WebDriver createChromeDriver() throws MalformedURLException {
-        if(!isRemote) {
+        if (!isRemote) {
             ChromeOptions options = new ChromeOptions();
             options.addArguments("--start-maximized");
             options.addArguments(String.format("--window-size=%s", TestSettings.SCREEN_RESOLUTION));
             options.addArguments("--disable-notifications");
             options.addArguments("--disable-popup-blocking");
+            options.addArguments("--disable-extensions");
+            options.addArguments("--disable-infobars");
+            options.addArguments("--disable-autofill");
+
+            // Disable Save Password, Address, and Autofill popups
+            java.util.Map<String, Object> prefs = new java.util.HashMap<>();
+            prefs.put("credentials_enable_service", false);
+            prefs.put("profile.password_manager_enabled", false);
+            prefs.put("autofill.profile_enabled", false);
+            prefs.put("autofill.address_enabled", false);
+            prefs.put("autofill.credit_card_enabled", false);
+            options.setExperimentalOption("prefs", prefs);
 
             if (TestSettings.HEADLESS) {
                 options.addArguments("--headless=new");
                 logger.debug("Chrome browser initialized in headless mode");
             }
 
-            logger.debug("Chrome browser initialized with options: {}", options.asMap());
+            logger.debug("Chrome browser initialized with options and preferences");
             return new ChromeDriver(options);
-        }else {
-            // Remote WebDriver initialization can be implemented here
+        } else {
             DesiredCapabilities capabilities = new DesiredCapabilities();
             capabilities.setPlatform(Platform.WINDOWS);
             capabilities.setBrowserName("chrome");
-            // Use RemoteWebDriver to connect to the hub
             return new RemoteWebDriver(this.hubUrl, capabilities);
         }
     }

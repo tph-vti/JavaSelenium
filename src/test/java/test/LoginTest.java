@@ -7,14 +7,25 @@ import pages.HeaderPage;
 
 public class LoginTest extends BaseTest {
 
-    @Test
+    @Test(description = "TC2: Login User with correct email and password")
     public void testLogin(){
-        // 1. Register a new user as pre-condition (returns to home and logged in)
         String[] credentials = registerAndGetCredentials();
         String email = credentials[1];
         String password = credentials[2];
+        HeaderPage header = new HeaderPage();
+        header.clickLogout();
 
-        // 2. Logout so we can test the Login functionality
+        // 3. Perform login
+        LoginPage loginPage = new LoginPage();
+        loginPage.clickSignupLogin();
+        loginPage.login(email, password);
+    }
+
+    @Test(description = "TC3: Login User with incorrect email and password")
+    public void testLoginWithInvalidCredentials(){
+        String[] credentials = registerAndGetCredentials();
+        String email = credentials[1];
+        String password = credentials[2];
         HeaderPage header = new HeaderPage();
         header.clickLogout();
 

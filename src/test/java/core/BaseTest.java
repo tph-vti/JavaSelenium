@@ -34,8 +34,6 @@ public class BaseTest extends DataGenerator {
             getRandomAddress(), getRandomAddress(), getRandomCountry(), 
             getRandomState(), getRandomCity(), getRandomZipCode(), getRandomPhoneNumber());
             
-        // The register() method now includes clickContinueButton(), so we are back on home page.
-        
         return new String[]{username, email, password};
     }
 

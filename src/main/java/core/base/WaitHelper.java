@@ -276,6 +276,16 @@ public class WaitHelper extends ElementFinder {
     }
 
     /**
+     * Comprehensive wait that ensures document is ready, AJAX is finished, and animations are settled.
+     */
+    protected void waitForPageStable() {
+        logger.info("Waiting for page stability");
+        waitForPageLoadComplete();
+        waitForAjaxComplete();
+        sleep(500); // Brief pause for dynamic content settlement
+    }
+
+    /**
      * Waits until jQuery AJAX requests are complete.
      * Silently returns if jQuery is not present on the page.
      */
