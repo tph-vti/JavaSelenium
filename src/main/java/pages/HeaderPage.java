@@ -48,4 +48,9 @@ public class HeaderPage extends BasePage {
         logger.info("Clicking Contact us link");
         clickButton(HeaderLocators.CONTACT_US_LINK);
     }
+
+    public void clickDeleteAccount() {
+        logger.info("Clicking Delete Account link");
+        clickButton(HeaderLocators.DELETE_ACCOUNT_LINK);
+    }
 }

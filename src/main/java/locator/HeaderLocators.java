@@ -11,4 +11,5 @@ public class HeaderLocators {
     public static final By API_TESTING_LINK = By.xpath("//ul[contains(@class, 'navbar-nav')]//a[contains(., 'API Testing')]");
     public static final By VIDEO_TUTORIALS_LINK = By.xpath("//ul[contains(@class, 'navbar-nav')]//a[contains(., 'Video Tutorials')]");
     public static final By CONTACT_US_LINK = By.xpath("//ul[contains(@class, 'navbar-nav')]//a[contains(., 'Contact us')]");
+    public static final By DELETE_ACCOUNT_LINK = By.xpath("//div[contains(@class, 'shop-menu')]//a[contains (text(), 'Delete Account')]");
 }
