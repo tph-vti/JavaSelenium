@@ -1,12 +1,13 @@
 package pages;
 
+import core.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class HomePage {
+class HomePageSelector {
     WebDriver driver;
 
-    public HomePage(WebDriver driver){
+    public HomePageSelector(WebDriver driver){
         this.driver = driver;
     }
 
@@ -14,7 +15,7 @@ public class HomePage {
         return By.xpath("//div[contains(@class,'shop-menu')]//a[contains(text(),'" + menuName + "')]");
     }
 
-    public void clickMenu(String menuName){
+    public void clickMenu(String menuName) {
         driver.findElement(menuItem(menuName)).click();
     }
 }
