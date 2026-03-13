@@ -1,4 +1,4 @@
-package utils;
+package common;
 
 import java.nio.file.Paths;
 
@@ -22,18 +22,10 @@ public final class Constants {
     public static final String AUTOMATION_LOG = Paths.get(LOG_DIR, "automation.log").toString();
     public static final String ERROR_LOG = Paths.get(LOG_DIR, "errors.log").toString();
     public static final String TEST_LOG = Paths.get(LOG_DIR, "test-execution.log").toString();
+    public static final String DOWNLOAD_FOLDER_PATH = Paths.get(PROJECT_ROOT_PATH, "target", "downloads").toString();
+    // Automation Exercise Constants
+    public static final String AUTOMATION_EXERCISE_BASE_URL = "https://automationexercise.com";
+    public static final String AUTOMATION_EXERCISE_LOGIN_URL = AUTOMATION_EXERCISE_BASE_URL + "/login";
+    public static final String AUTOMATION_EXERCISE_REGISTER_URL = AUTOMATION_EXERCISE_BASE_URL + "/signup";
 
-    // GURU99 Site Constants
-    public static final String GURU99_BASE_URL = "https://demo.guru99.com";
-    public static final String GURU99_TOOLTIPS_URL = GURU99_BASE_URL + "/test/tooltip.html";
-    public static final String GURU99_DRAG_DROP_URL = GURU99_BASE_URL + "/test/drag_drop.html";
-
-    // Automation Demo Site Constants
-    public static final String AUTOMATION_DEMO_ALERTS_URL = "https://demo.automationtesting.in/Alerts.html";
-    public static final String AUTOMATION_DEMO_DATE_PICKER_URL = "https://demo.automationtesting.in/Datepicker.html";
-
-    // Upload File Constants
-    public static final String SAMPLE_FILE_PATH = Paths.get(RESOURCES_PATH, "sample.jpg").toString();
-    public static final String CURRENT_USERNAME = System.getProperty("user.name");
-    public static final String DOWNLOAD_FOLDER_PATH = "/"+Paths.get("","Users", CURRENT_USERNAME,"Downloads").toString();
 }

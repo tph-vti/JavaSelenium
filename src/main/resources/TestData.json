@@ -1,8 +1,6 @@
 {
-  "GURU": {
-    "base_url": "https://demo.guru99.com/"
-  },
-  "Applitools": {
-    "base_url": "https://demo.applitools.com/"
+  "AUTOMATION_EXERCISE": {
+    "base_url": "https://automationexercise.com",
+    "register_url": "https://automationexercise.com/signup"
   }
 }

@@ -2,8 +2,8 @@ package core;
 
 import io.github.cdimascio.dotenv.Dotenv;
 import org.json.JSONObject;
-import utils.Helper;
-import static utils.Constants.*;
+import common.Helper;
+import static common.Constants.*;
 import java.util.Objects;
 
 /**
@@ -18,8 +18,8 @@ public class TestSettings {
     private static final Dotenv DOTENV = Dotenv.configure().ignoreIfMissing().load();
 
     // ENVIRONMENT SETTINGS
-    /** Test environment (GURU, APPLITOOLS, etc.) - Usage: mvn clean test -Denv=GURU */
-    public static final String TEST_ENV = System.getProperty("env", DOTENV.get("TEST_ENV","GURU"));
+    /** Test environment - Usage: mvn clean test -Denv=AUTOMATION_EXERCISE */
+    public static final String TEST_ENV = System.getProperty("env", DOTENV.get("TEST_ENV","AUTOMATION_EXERCISE"));
 
     /** Environment configuration loaded from TestData.json */
     public static final JSONObject ENV_CONFIG = Objects.requireNonNull(Helper.loadJsonFile(JSON_DATA_PATH)).getJSONObject(TEST_ENV);
@@ -35,7 +35,7 @@ public class TestSettings {
     public static final String SCREEN_RESOLUTION = System.getProperty("resolution", DOTENV.get("SCREEN_RESOLUTION", "1920,1080"));
 
     /** Headless mode flag - Usage: mvn clean test -Dheadless=true */
-    public static final boolean HEADLESS = Boolean.parseBoolean(System.getProperty("headless", DOTENV.get("HEADLESS", "true")));
+    public static final boolean HEADLESS = Boolean.parseBoolean(System.getProperty("headless", DOTENV.get("HEADLESS", "false")));
 
     // WAIT SETTINGS
     /** Element visibility wait timeout in seconds */
