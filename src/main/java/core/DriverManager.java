@@ -4,6 +4,8 @@ import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.devtools.DevTools;
+import org.openqa.selenium.devtools.v129.page.Page;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -14,6 +16,8 @@ import utils.Helper;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 import static core.TestSettings.GRID_HUB_URL;
@@ -109,10 +113,16 @@ public class DriverManager extends Helper {
     private WebDriver createChromeDriver() throws MalformedURLException {
         if(!isRemote) {
             ChromeOptions options = new ChromeOptions();
+            options.addArguments("--incognito");
             options.addArguments("--start-maximized");
             options.addArguments(String.format("--window-size=%s", TestSettings.SCREEN_RESOLUTION));
-            options.addArguments("--disable-notifications");
-            options.addArguments("--disable-popup-blocking");
+
+            Map<String, Object> prefs = new HashMap<>();
+            prefs.put("autofill.profile_enabled", false);           // tắt Save Address
+            prefs.put("autofill.credit_card_enabled", false);       // tắt Save Card
+            prefs.put("credentials_enable_service", false);        // tắt password manager
+            prefs.put("profile.password_manager_enabled", false);  // tắt popup save password
+            options.setExperimentalOption("prefs", prefs);
 
             if (TestSettings.HEADLESS) {
                 options.addArguments("--headless=new");

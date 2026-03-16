@@ -28,4 +28,11 @@ public final class Constants {
     public static final String SAMPLE_FILE_PATH = Paths.get(RESOURCES_PATH, "sample.jpg").toString();
     public static final String CURRENT_USERNAME = System.getProperty("user.name");
     public static final String DOWNLOAD_FOLDER_PATH = "/"+Paths.get("","Users", CURRENT_USERNAME,"Downloads").toString();
+
+    // Login Test Data
+    public static final String VALID_EMAIL = "bichanh@gmail.com";
+    public static final String VALID_PASSWORD = "12345";
+
+    public static final String INVALID_EMAIL = "wronguser@gmail.com";
+    public static final String INVALID_PASSWORD = "wrong123";
 }

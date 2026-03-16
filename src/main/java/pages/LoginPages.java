@@ -13,10 +13,6 @@ public class LoginPages {
         this.driver = driver;
     }
 
-    public void clickMenu(String menuName){
-        driver.findElement(By.xpath(String.format(HomeLocator.MENU, menuName))).click();
-    }
-
     public boolean verifyLoginTitle(){
         return driver.findElement(LoginLocator.loginTitle).isDisplayed();
     }
@@ -37,9 +33,25 @@ public class LoginPages {
         return driver.findElement(LoginLocator.loginError).isDisplayed();
     }
 
-    public static boolean verifyMenu(String menuName){
-        return driver.findElement(
-                By.xpath(String.format(HomeLocator.MENU, menuName))
-        ).isDisplayed();
+
+
+    // ===== SIGNUP SECTION =====
+    public boolean verifySignupTitle(){
+        return driver.findElement(LoginLocator.signupTitle).isDisplayed();
     }
+
+    public void enterSignupName(String password){
+        driver.findElement(LoginLocator.signupName).sendKeys(password);
+    }
+
+    public void enterSignupEmail(String email){
+        driver.findElement(LoginLocator.signupEmail).sendKeys(email);
+    }
+
+    public void clickSignup(){
+        driver.findElement(LoginLocator.signupButton).click();
+    }
+
+
+
 }

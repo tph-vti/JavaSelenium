@@ -4,8 +4,7 @@ import org.openqa.selenium.By;
 
 public class LoginLocator {
 
-    // ===== LOGIN SECTION =====
-    public static By signupLoginButton = By.xpath("//a[contains(text(),'Signup / Login')]");
+    // ===== LOGIN SECTION =====;
 
     public static By loginTitle = By.xpath("//h2[contains(text(),'Login to your account')]");
 
@@ -19,6 +18,7 @@ public class LoginLocator {
             By.xpath("//form[@action='/login']//p");
 
     // ===== SIGNUP SECTION =====
+    public static By signupTitle = By.xpath("//h2[contains(text(),'New User Signup!')]");
 
     public static By signupName = By.xpath("//input[@data-qa='signup-name']");
 

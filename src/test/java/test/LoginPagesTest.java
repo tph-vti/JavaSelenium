@@ -6,6 +6,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.HomePages;
 import pages.LoginPages;
+import utils.Constants;
 
 public class LoginPagesTest {
 
@@ -30,16 +31,16 @@ public class LoginPagesTest {
         Assert.assertTrue(loginPage.verifyLoginTitle());
 
         System.out.println("STEP 4: Enter correct email address");
-        loginPage.enterEmail("bichanh@gmail.com");
+        loginPage.enterEmail(Constants.VALID_EMAIL);
 
         System.out.println("STEP 5: Enter correct password");
-        loginPage.enterPassword("12345");
+        loginPage.enterPassword(Constants.VALID_PASSWORD);
 
         System.out.println("STEP 6: Click 'Login' button");
         loginPage.clickLogin();
 
         System.out.println("STEP 7: Verify 'Logged in as' appears on menu");
-        Assert.assertTrue(LoginPages.verifyMenu("Logged in as"));
+        Assert.assertTrue(HomePages.verifyMenu("Logged in as"));
 
     }
 
@@ -63,8 +64,8 @@ public class LoginPagesTest {
         Assert.assertTrue(loginPage.verifyLoginTitle());
 
         System.out.println("STEP 4: Enter incorrect email address and password");
-        loginPage.enterEmail("wrong@gmail.com");
-        loginPage.enterPassword("wrong123");
+        loginPage.enterEmail(Constants.INVALID_EMAIL);
+        loginPage.enterPassword(Constants.INVALID_PASSWORD);
 
         System.out.println("STEP 6: Click 'Login' button");
         loginPage.clickLogin();

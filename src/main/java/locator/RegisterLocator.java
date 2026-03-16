@@ -2,7 +2,8 @@ package locator;
 
 import org.openqa.selenium.By;
 
-public class SignupLocator {
+public class RegisterLocator {
+    public static By registerTitle = By.xpath("//b[contains(text(),'Enter Account Information')]");
 
     public static By titleMr = By.id("id_gender1");
     public static By titleMrs = By.id("id_gender2");
@@ -35,4 +36,9 @@ public class SignupLocator {
     public static By mobileNumber = By.id("mobile_number");
 
     public static By createAccountButton = By.xpath("//button[@data-qa='create-account']");
+
+    public static By accountCreatedTitle = By.xpath("//b[contains(text(),'Account Created!')]");
+
+    public static By btnContinue = By.xpath("//a[@data-qa='continue-button']");
+
 }
