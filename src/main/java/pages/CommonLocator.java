@@ -4,11 +4,15 @@ import core.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-class HomePageSelector {
+public class HomePageSelector {
     WebDriver driver;
 
     public HomePageSelector(WebDriver driver){
         this.driver = driver;
+    }
+
+    public void openHomePage(){
+        driver.get("https://automationexercise.com/");
     }
 
     public By menuItem(String menuName){

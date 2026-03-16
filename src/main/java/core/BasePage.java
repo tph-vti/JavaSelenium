@@ -60,7 +60,7 @@ public class BasePage extends Helper {
         return getWait(TestSettings.WAIT_ELEMENT).until(ExpectedConditions.elementToBeClickable(selector));
     }
 
-    protected void enterText(By selector, String text) {
+    public void enterText(By selector, String text) {
         logger.info("Entering text {}", text);
         findVisibleElement(selector).sendKeys(text);
     }

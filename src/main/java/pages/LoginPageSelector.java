@@ -3,7 +3,7 @@ package pages;
 import core.BasePage;
 import org.openqa.selenium.By;
 
-class LoginPageSelector {
+public class LoginPageSelector {
     public static final By loginEmail = By.xpath("//input[@data-qa='login-email']");
     public static final By loginPassword = By.xpath("//input[@data-qa='login-password']");
     public static final By loginBtn = By.xpath("//input[@data-qa='login-button']");
@@ -11,20 +11,27 @@ class LoginPageSelector {
     public static final By signupEmail = By.xpath("///input[@data-qa='signup-email']");
     public static final By signupBtn = By.xpath("//button[@data-qa='signup-button']");
 
-public class LoginPage extends BasePage {
-    public LoginPage login(String email, String password){
-        enterText(LoginPageSelector.loginEmail,email);
-        enterText(LoginPageSelector.loginPassword,password);
-        click(LoginPageSelector.loginBtn);
-        return this;
-    }
-}
-    public class SignUp extends BasePage {
-        public SignUp signup(String name, String email) {
-            enterText(LoginPageSelector.signupName, name);
-            enterText(LoginPageSelector.signupEmail, email);
-            click(LoginPageSelector.signupBtn);
+    public static class LoginPage extends BasePage {
+
+        public void enterEmail(String email) {
+            enterText(LoginPageSelector.loginEmail, email);
+        }
+
+        public void enterPassword(String password) {
+            enterText(LoginPageSelector.loginPassword, password);
+        }
+
+        public void clickLogin() {
+            click(LoginPageSelector.loginBtn);
+        }
+
+        // Action: Login
+        public LoginPage login(String email, String password) {
+            enterEmail(email);
+            enterPassword(password);
+            clickLogin();
             return this;
         }
+
     }
 }

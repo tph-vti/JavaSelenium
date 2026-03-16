@@ -11,14 +11,13 @@ import java.util.Objects;
  * Priority order: System Properties > .env file > Hardcoded defaults
  *
  * Usage:
- * - mvn clean test -Denv=GURU -Dbrowser=chrome -DhubType=NONE
  */
 public class TestSettings {
 
     private static final Dotenv DOTENV = Dotenv.configure().ignoreIfMissing().load();
 
     // ENVIRONMENT SETTINGS
-    /** Test environment (GURU, APPLITOOLS, etc.) - Usage: mvn clean test -Denv=GURU */
+    /** Test environment (AUTOMATION EXERCISE, APPLITOOLS, etc.) - Usage: mvn clean test -Denv=AUTOMATION EXERCISE */
     public static final String TEST_ENV = System.getProperty("env", DOTENV.get("TEST_ENV","GURU"));
 
     /** Environment configuration loaded from TestData.json */
