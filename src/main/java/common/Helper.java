@@ -23,6 +23,9 @@ public class Helper {
             throw new RuntimeException("Environment configuration failed", e);
         }
     }
+    public static void logStep(String step){
+        logger.info("[Step] " + step);
+    }
 
     /**
      * Load JSON file and store as JSONObject or JSONArray

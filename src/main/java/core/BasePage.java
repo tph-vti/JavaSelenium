@@ -71,9 +71,10 @@ public class BasePage extends NetworkHelper {
     public void handleVignette() {
         try {
             // Check if the URL contains #google_vignette which indicates a blocking ad
-            if (driver.getCurrentUrl().contains("#google_vignette")) {
-                logger.info("Google Vignette detected via URL, refreshing page");
-                driver.navigate().refresh();
+            String currentUrl = driver.getCurrentUrl();
+            if (currentUrl.contains("#google_vignette")) {
+                logger.info("Google Vignette detected via URL, redirecting to bypass");
+                driver.get(currentUrl.replace("#google_vignette", ""));
                 waitForPageStable();
             }
             // Also check for common vignette close buttons or overlays
