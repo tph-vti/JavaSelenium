@@ -1,6 +1,8 @@
 package test;
 
 import core.BaseTest;
+
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.LoginPage;
 import pages.CommonPage;
@@ -10,56 +12,116 @@ public class LoginTest extends BaseTest {
     public String[] registerAndGetCredentials() {
         RegisterPage registerPage = new RegisterPage();
         LoginPage loginPage = new LoginPage();
-        
+        CommonPage commonPage = new CommonPage();
+
         String username = getRandomUserName();
         String email = getRandomEmail();
         String password = getRandomPassword();
-        
+
         java.time.LocalDate randomDate = getRandomBirthDate();
         String day = getDayFromDate(randomDate);
         String month = getMonthFromDate(randomDate);
         String year = getYearFromDate(randomDate);
 
-        loginPage.clickSignupLogin();
+        commonPage.clickSignupLogin();
         loginPage.enterRegisterNameAndEmail(username, email);
         loginPage.clickSignupButton();
         registerPage.fillAccountInformationForm("Mr.", password);
         registerPage.fillDateOfBirth(day, month, year);
         registerPage.clickNewsletterCheckbox();
         registerPage.clickSpecialOffersCheckbox();
-        registerPage.fillAddressInformation(getRandomFirstName(), getRandomLastName(), getRandomCompanyName(), getRandomAddress(), getRandomAddress(), getRandomCountry(), getRandomState(), getRandomCity(), getRandomZipCode(), getRandomPhoneNumber());
+        registerPage.fillAddressInformation(getRandomFirstName(), getRandomLastName(), getRandomCompanyName(),
+                getRandomAddress(), getRandomAddress(), getRandomCountry(), getRandomState(), getRandomCity(),
+                getRandomZipCode(), getRandomPhoneNumber());
         registerPage.clickCreateAccountButton();
         registerPage.waitForAccountCreatedVisible();
-        registerPage.clickContinueButton();
-            
-        return new String[]{username, email, password};
+        commonPage.clickContinueButton();
+
+        return new String[] { username, email, password };
     }
 
     @Test(description = "TC2: Login User with correct email and password")
-    public void testLogin(){
+    public void testLoginUserWithCorrectEmailAndPassword() {
+        // ---Preconditions---
         String[] credentials = registerAndGetCredentials();
+        String username = credentials[0];
         String email = credentials[1];
         String password = credentials[2];
         CommonPage header = new CommonPage();
         header.clickLogout();
 
-        // 3. Perform login
+        // ---Test Data---
         LoginPage loginPage = new LoginPage();
-        loginPage.clickSignupLogin();
+        CommonPage commonPage = new CommonPage();
+        String expectedTitle;
+        String actualTitle;
+
+        // ---Test Steps---
+
+        logStep("3. Verify that home page is visible successfully");
+        // commonPage.waitForHomePageVisible();
+
+        logStep("4. Click on 'Signup / Login' button");
+        commonPage.clickSignupLogin();
+
+        logStep("5. Verify 'Login to your account' is visible");
+        expectedTitle = "Login to your account";
+        actualTitle = loginPage.getLoginToYourAccountTitle();
+        Assert.assertEquals(actualTitle, expectedTitle);
+
+        logStep("6. Enter correct email address and password");
         loginPage.login(email, password);
+
+        logStep("7. Verify that 'Logged in as username' is visible");
+        expectedTitle = "Logged in as " + username;
+        actualTitle = commonPage.getLoggedInAsTitle(username);
+        Assert.assertEquals(actualTitle, expectedTitle);
+
+        logStep("8. Click 'Delete Account' button");
+        commonPage.clickDeleteAccount();
+
+        logStep("9. Verify that 'ACCOUNT DELETED!' is visible");
+        expectedTitle = "ACCOUNT DELETED!";
+        actualTitle = commonPage.getAccountDeletedTitle();
+        Assert.assertEquals(actualTitle, expectedTitle);
+
+        logStep("10. Click 'Continue' button");
+        commonPage.clickContinueButton();
     }
 
     @Test(description = "TC3: Login User with incorrect email and password")
-    public void testLoginWithInvalidCredentials(){
+    public void testLoginUserWithIncorrectEmailAndPassword() {
         String[] credentials = registerAndGetCredentials();
         String email = credentials[1];
-        String password = "@" + credentials[2];
+        String password = "@" + credentials[2]; //Incorrect password
         CommonPage header = new CommonPage();
         header.clickLogout();
 
-        // 3. Perform login
+        // ---Test Data---
         LoginPage loginPage = new LoginPage();
-        loginPage.clickSignupLogin();
+        CommonPage commonPage = new CommonPage();
+        String expectedTitle;
+        String actualTitle;
+
+        // ---Test Steps---
+
+        logStep("4. Click on 'Signup / Login' button");
+        commonPage.clickSignupLogin();
+
+        logStep("5. Verify 'Login to your account' is visible");
+        expectedTitle = "Login to your account";
+        actualTitle = loginPage.getLoginToYourAccountTitle();
+        Assert.assertEquals(actualTitle, expectedTitle);
+
+        logStep("6. Enter correct email address and password");
         loginPage.login(email, password);
+
+        logStep("7. Click 'login' button");
+        loginPage.clickLoginButton();
+
+        logStep("8. Verify error 'Your email or password is incorrect!' is visible");
+        expectedTitle = "Your email or password is incorrect!";
+        actualTitle = loginPage.getErrorLoginMessage();
+        Assert.assertEquals(actualTitle, expectedTitle);
     }
 }

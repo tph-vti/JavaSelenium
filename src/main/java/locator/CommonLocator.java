@@ -6,16 +6,16 @@ public class CommonLocator {
     public static final String MENU_ITEM_FORMAT = "//div[contains(@class, 'shop-menu')]//a[contains(., '%s')]";
     public static final String LOGGED_IN_USER_FORMAT = "//a[contains(text(), 'Logged in as')]//b[text()='%s']";
     
-    public static final By HOME_LINK = By.xpath(String.format(MENU_ITEM_FORMAT, "Home"));
-    public static final By PRODUCTS_LINK = By.xpath(String.format(MENU_ITEM_FORMAT, "Products"));
-    public static final By CART_LINK = By.xpath(String.format(MENU_ITEM_FORMAT, "Cart"));
-    public static final By SIGNUP_LOGIN_LINK = By.xpath(String.format(MENU_ITEM_FORMAT, "Signup / Login"));
-    public static final By TEST_CASES_LINK = By.xpath(String.format(MENU_ITEM_FORMAT, "Test Cases"));
-    public static final By API_TESTING_LINK = By.xpath(String.format(MENU_ITEM_FORMAT, "API Testing"));
-    public static final By VIDEO_TUTORIALS_LINK = By.xpath(String.format(MENU_ITEM_FORMAT, "Video Tutorials"));
-    public static final By CONTACT_US_LINK = By.xpath(String.format(MENU_ITEM_FORMAT, "Contact us"));
-    public static final By DELETE_ACCOUNT_LINK = By.xpath(String.format(MENU_ITEM_FORMAT, "Delete Account"));
-    public static final By LOGOUT_LINK = By.xpath(String.format(MENU_ITEM_FORMAT, "Logout"));
-    public static final By LOGGED_IN_AS_TEXT = By.xpath("//a[contains(text(), 'Logged in as')]");
-   
+
+    public static By getMenuItem(String menuName) {
+        return By.xpath(String.format(MENU_ITEM_FORMAT, menuName));
+    }
+
+    public static By getLoggedInUser(String userName) {
+        return By.xpath(String.format(LOGGED_IN_USER_FORMAT, userName));
+    }
+
+    public static final By ACCOUNT_CREATED_MESSAGE = By.xpath("//h2[contains(@class, 'title text-center')]//b");
+    public static final By ACCOUNT_DELETED_MESSAGE = By.xpath("//h2[contains(@class, 'title text-center')]//b");
+    public static final By CONTINUE_BUTTON = By.xpath("//a[@data-qa='continue-button']");
 }

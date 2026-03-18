@@ -28,4 +28,9 @@ public final class Constants {
     public static final String AUTOMATION_EXERCISE_LOGIN_URL = AUTOMATION_EXERCISE_BASE_URL + "/login";
     public static final String AUTOMATION_EXERCISE_REGISTER_URL = AUTOMATION_EXERCISE_BASE_URL + "/signup";
 
+    //Login Page Constants
+    public static final String ERROR_SIGNUP_MESSAGE = "";
+    public static final String ERROR_LOGIN_MESSAGE = "";
+    public static final String GENDER_MALE = "Mr.";
+    public static final String GENDER_FEMALE = "Mrs.";
 }

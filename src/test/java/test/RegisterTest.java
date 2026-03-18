@@ -1,23 +1,23 @@
 package test;
 
 import core.BaseTest;
+
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import pages.CreatedPage;
-import pages.DeletePage;
 import pages.CommonPage;
 import pages.LoginPage;
 import pages.RegisterPage;
 
 public class RegisterTest extends BaseTest {
 
-    @Test(description = "TC_REG_1: Register Valid User")
-    public void testRegisterValidUser() {
+    @Test(description = "TC_1: Register User")
+    public void testRegisterUser() {
         RegisterPage registerPage = new RegisterPage();
         LoginPage loginPage = new LoginPage();
         CommonPage commonPage = new CommonPage();
-        CreatedPage createdPage = new CreatedPage();
-        DeletePage deletePage = new DeletePage();
+        String expectedTitle;
+        String actualTitle;
 
         String username = getRandomUserName();
         String email = getRandomEmail();
@@ -39,17 +39,16 @@ public class RegisterTest extends BaseTest {
         String zipCode = getRandomZipCode();
         String mobileNumber = getRandomPhoneNumber();
 
-        logStep("1. Launch browser");
-
-        logStep("2. Navigate to url 'http://automationexercise.com'");
-
         logStep("3. Verify that home page is visible successfully");
 
         logStep("4. Click on 'Signup / Login' button");
         commonPage.clickSignupLogin();
 
         logStep("5. Verify 'New User Signup!' is visible");
-        loginPage.verifyNewUserSignupVisible();
+
+        expectedTitle = "New User Signup!";
+        actualTitle = loginPage.getNewUserSignupTitle();
+        Assert.assertEquals(actualTitle, expectedTitle);
 
         logStep("6. Enter name and email address");
         loginPage.enterRegisterNameAndEmail(username, email);
@@ -58,7 +57,9 @@ public class RegisterTest extends BaseTest {
         loginPage.clickSignupButton();
 
         logStep("8. Verify that 'ENTER ACCOUNT INFORMATION' is visible");
-        registerPage.verifyEnterAccountInformationVisible();
+        expectedTitle = "ENTER ACCOUNT INFORMATION";
+        actualTitle = registerPage.getEnterAccountInformationTitle();
+        Assert.assertEquals(actualTitle, expectedTitle);
 
         logStep("9. Fill details: Title, Name, Email, Password, Date of birth");
         registerPage.fillAccountInformationForm("Mr.", password);
@@ -78,20 +79,27 @@ public class RegisterTest extends BaseTest {
         registerPage.clickCreateAccountButton();
 
         logStep("14. Verify that 'ACCOUNT CREATED!' is visible");
-        createdPage.verifyAccountCreatedVisible();
+        expectedTitle = "ACCOUNT CREATED!";
+        actualTitle = commonPage.getAccountCreatedTitle();
+        Assert.assertEquals(actualTitle, expectedTitle);
 
         logStep("15. Click 'Continue' button");
-        createdPage.clickContinueButton();
+        commonPage.clickContinueButton();
 
         logStep("16. Verify that 'Logged in as username' is visible");
-        commonPage.verifyLoggedInAsVisible(username);
+        expectedTitle = "Logged in as " + username;
+        actualTitle = commonPage.getLoggedInAsTitle(username);
+        Assert.assertEquals(actualTitle, expectedTitle);
 
         logStep("17. Click 'Delete Account' button");
         commonPage.clickDeleteAccount();
 
-        logStep("18. Verify that 'ACCOUNT DELETED!' is visible and click 'Continue' button");
-        deletePage.verifyAccountDeletedVisible();
+        logStep("18. Verify that 'ACCOUNT DELETED!' is visible");
+        expectedTitle = "ACCOUNT DELETED!";
+        actualTitle = commonPage.getAccountDeletedTitle();
+        Assert.assertEquals(actualTitle, expectedTitle);
 
-        deletePage.clickContinueButton();
+        logStep("19. Click 'Continue' button");
+        commonPage.clickContinueButton();
     }
 }
