@@ -4,14 +4,14 @@ import core.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class HomePageSelector {
-    WebDriver driver;
+public class CommonLocator {
+    static WebDriver driver;
 
-    public HomePageSelector(WebDriver driver){
-        this.driver = driver;
+    public CommonLocator(WebDriver driver){
+        CommonLocator.driver = driver;
     }
 
-    public void openHomePage(){
+    public static void openHomePage(){
         driver.get("https://automationexercise.com/");
     }
 
