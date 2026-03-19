@@ -2,12 +2,14 @@ package test;
 
 import core.BaseTest;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.HomePages;
 import pages.LoginPages;
 import utils.Constants;
 
 public class LoginPagesTest extends BaseTest {
+
 
     @Test
     public void TC02_LoginWithCorrectEmailPassword() {

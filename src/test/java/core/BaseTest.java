@@ -12,6 +12,7 @@ import java.net.MalformedURLException;
 public class BaseTest extends Helper {
     protected DriverManager driverManager;
 
+
     @BeforeMethod
     public void setup(Method method) throws MalformedURLException {
         logger.info("========================================");
