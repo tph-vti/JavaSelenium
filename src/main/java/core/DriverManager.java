@@ -132,12 +132,11 @@ public class DriverManager extends Helper {
             logger.debug("Chrome browser initialized with options: {}", options.asMap());
             return new ChromeDriver(options);
         }else {
-            // Remote WebDriver initialization can be implemented here
-            DesiredCapabilities capabilities = new DesiredCapabilities();
-            capabilities.setPlatform(Platform.WINDOWS);
-            capabilities.setBrowserName("chrome");
-            // Use RemoteWebDriver to connect to the hub
-            return new RemoteWebDriver(this.hubUrl, capabilities);
+            ChromeOptions options = new ChromeOptions();
+            options.setPlatformName("Windows");
+
+            return new RemoteWebDriver(this.hubUrl, options);
+
         }
     }
 

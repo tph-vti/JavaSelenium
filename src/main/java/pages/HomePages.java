@@ -1,23 +1,21 @@
 package pages;
 
+import core.BasePage;
 import locator.HomeLocator;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.By;
 
-public class HomePages {
+public class HomePages extends BasePage {
 
-    static WebDriver driver;
-
-    public HomePages(WebDriver driver){
-        this.driver = driver;
+    public HomePages() {
+        super(); // lấy driver từ DriverManager
     }
 
     public void clickMenu(String menuName){
-        driver.findElement(By.xpath(String.format(HomeLocator.MENU, menuName))).click();
+        click(By.xpath(String.format(HomeLocator.MENU, menuName)));
     }
 
-    public static boolean verifyMenu(String menuName){
-        return driver.findElement(
+    public boolean verifyMenu(String menuName){
+        return findVisibleElement(
                 By.xpath(String.format(HomeLocator.MENU, menuName))
         ).isDisplayed();
     }

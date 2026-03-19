@@ -1,77 +1,65 @@
 package test;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import core.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.HomePages;
 import pages.LoginPages;
 import utils.Constants;
 
-public class LoginPagesTest {
-
-    WebDriver driver;
+public class LoginPagesTest extends BaseTest {
 
     @Test
-    public void TC02_LoginWithCorrectEmailPassword(){
+    public void TC02_LoginWithCorrectEmailPassword() {
 
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
+        HomePages homePage = new HomePages();
+        LoginPages loginPage = new LoginPages();
 
-        HomePages homePage = new HomePages(driver);
-        LoginPages loginPage = new LoginPages(driver);
+        homePage.openSite();
 
-        System.out.println("STEP 1: Navigate to url 'http://automationexercise.com'");
-        driver.get("http://automationexercise.com");
-
-        System.out.println("STEP 2: Click 'Signup / Login' menu");
+        logger.info("STEP 1: Click 'Signup / Login' menu");
         homePage.clickMenu("Signup / Login");
 
-        System.out.println("STEP 3: Verify 'Login to your account' is visible");
+        logger.info("STEP 2: Verify 'Login to your account' is visible");
         Assert.assertTrue(loginPage.verifyLoginTitle());
 
-        System.out.println("STEP 4: Enter correct email address");
+        logger.info("STEP 3: Enter correct email address");
         loginPage.enterEmail(Constants.VALID_EMAIL);
 
-        System.out.println("STEP 5: Enter correct password");
+        logger.info("STEP 4: Enter correct password");
         loginPage.enterPassword(Constants.VALID_PASSWORD);
 
-        System.out.println("STEP 6: Click 'Login' button");
+        logger.info("STEP 5: Click 'Login' button");
         loginPage.clickLogin();
 
-        System.out.println("STEP 7: Verify 'Logged in as' appears on menu");
-        Assert.assertTrue(HomePages.verifyMenu("Logged in as"));
-
+        logger.info("STEP 6: Verify 'Logged in as' appears on menu");
+        Assert.assertTrue(homePage.verifyMenu("Logged in as"));
     }
 
     @Test
-    public void TC03_LoginWithIncorrectEmailPassword(){
+    public void TC03_LoginWithIncorrectEmailPassword() {
 
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
+        HomePages homePage = new HomePages();
+        LoginPages loginPage = new LoginPages();
 
-        HomePages homePage = new HomePages(driver);
-        LoginPages loginPage = new LoginPages(driver);
+        homePage.openSite();
 
-        System.out.println("STEP 1: Navigate to url 'http://automationexercise.com'");
-        driver.get("http://automationexercise.com");
-
-
-        System.out.println("STEP 2: Click on 'Signup / Login' button");
+        logger.info("STEP 1: Click on 'Signup / Login' button");
         homePage.clickMenu("Signup / Login");
 
-        System.out.println("STEP 3: Verify 'Login to your account' is visible");
+        logger.info("STEP 2: Verify 'Login to your account' is visible");
         Assert.assertTrue(loginPage.verifyLoginTitle());
 
-        System.out.println("STEP 4: Enter incorrect email address and password");
+        logger.info("STEP 3: Enter incorrect email address and password");
         loginPage.enterEmail(Constants.INVALID_EMAIL);
         loginPage.enterPassword(Constants.INVALID_PASSWORD);
 
-        System.out.println("STEP 6: Click 'Login' button");
+        logger.info("STEP 4: Click 'Login' button");
         loginPage.clickLogin();
 
-        System.out.println("STEP 7: Verify error 'Your email or password is incorrect!' is visible");
-        Assert.assertTrue(loginPage.verifyLoginError());
-
+        logger.info("STEP 5: Verify error message 'Your email or password is incorrect!' is visible");
+        String actualError = loginPage.getLoginErrorText();
+        String expectedError = "Your email or password is incorrect!";
+        Assert.assertEquals(actualError, expectedError);
     }
 }

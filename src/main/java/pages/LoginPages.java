@@ -1,57 +1,54 @@
 package pages;
 
+import core.BasePage;
 import locator.LoginLocator;
-import locator.HomeLocator;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
-public class LoginPages {
+public class LoginPages extends BasePage {
 
-    static WebDriver driver;
-
-    public LoginPages(WebDriver driver){
-        this.driver = driver;
+    public LoginPages() {
+        super(); // lấy driver từ DriverManager
     }
 
-    public boolean verifyLoginTitle(){
-        return driver.findElement(LoginLocator.loginTitle).isDisplayed();
+    // ===== LOGIN SECTION =====
+    public boolean verifyLoginTitle() {
+        verifyElementVisible(LoginLocator.lblLoginTitle, "Login to your account");
+        return true;
     }
 
-    public void enterEmail(String email){
-        driver.findElement(LoginLocator.loginEmail).sendKeys(email);
+    public void enterEmail(String email) {
+        enterText(LoginLocator.txtLoginEmail, email);
     }
 
-    public void enterPassword(String password){
-        driver.findElement(LoginLocator.loginPassword).sendKeys(password);
+    public void enterPassword(String password) {
+        enterText(LoginLocator.txtLoginPassword, password);
     }
 
-    public void clickLogin(){
-        driver.findElement(LoginLocator.loginButton).click();
+    public void clickLogin() {
+        click(LoginLocator.btnLogin);
     }
 
-    public boolean verifyLoginError(){
-        return driver.findElement(LoginLocator.loginError).isDisplayed();
+    public String getLoginErrorText() {
+        return getElementText(LoginLocator.lblLoginError);
     }
-
 
 
     // ===== SIGNUP SECTION =====
-    public boolean verifySignupTitle(){
-        return driver.findElement(LoginLocator.signupTitle).isDisplayed();
+    public boolean verifySignupTitle() {
+        verifyElementVisible(LoginLocator.lblSignupTitle, "New User Signup!");
+        return true;
     }
 
-    public void enterSignupName(String password){
-        driver.findElement(LoginLocator.signupName).sendKeys(password);
+    public void enterSignupName(String name) {
+        enterText(LoginLocator.txtSignupName, name);
     }
 
-    public void enterSignupEmail(String email){
-        driver.findElement(LoginLocator.signupEmail).sendKeys(email);
+    public void enterSignupEmail(String email) {
+        enterText(LoginLocator.txtSignupEmail, email);
     }
 
-    public void clickSignup(){
-        driver.findElement(LoginLocator.signupButton).click();
+    public void clickSignup() {
+        click(LoginLocator.btnSignup);
     }
-
 
 
 }
