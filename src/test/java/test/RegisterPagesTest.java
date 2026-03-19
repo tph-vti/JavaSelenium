@@ -1,6 +1,7 @@
 package test;
 
 import core.BaseTest;
+import data.TestData;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.HomePages;
@@ -28,8 +29,8 @@ public class RegisterPagesTest extends BaseTest {
 
         logger.info("STEP 4: Enter name and email address");
         String randomName = "user" + System.currentTimeMillis() ;
-        loginPage.enterSignupEmail(randomName);
         String randomEmail = "user" + System.currentTimeMillis() + "@gmail.com";
+        loginPage.enterSignupName(randomName);
         loginPage.enterSignupEmail(randomEmail);
 
 
@@ -40,7 +41,7 @@ public class RegisterPagesTest extends BaseTest {
         Assert.assertTrue(registerPage.verifyRegisterTitle());
 
         logger.info("STEP 7: Fill account information");
-        registerPage.fillAccountInformation("123456", "10", "May", "1995");
+        registerPage.fillAccountInformation(TestData.accountData);
 
         logger.info("STEP 8: Select newsletter checkbox");
         registerPage.clickNewsletterCheckbox();
@@ -49,18 +50,7 @@ public class RegisterPagesTest extends BaseTest {
         registerPage.clickOffersCheckbox();
 
         logger.info("STEP 10: Fill address information");
-        registerPage.fillAddressInformation(
-                "John",
-                "Doe",
-                "ABC Company",
-                "123 Street",
-                "Apartment 456",
-                "United States",
-                "California",
-                "Los Angeles",
-                "90001",
-                "0123456789"
-        );
+        registerPage.fillAddressInformation(TestData.addressData);
 
         logger.info("STEP 11: Click Create Account button");
         registerPage.clickCreateAccountButton();

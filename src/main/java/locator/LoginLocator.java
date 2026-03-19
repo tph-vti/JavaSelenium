@@ -25,4 +25,6 @@ public class LoginLocator {
 
     public static By btnSignup = By.xpath("//button[@data-qa='signup-button']");
 
+    public static By lblSignupError = By.xpath("//form[@action='/signup']//p");
+
 }

@@ -50,5 +50,9 @@ public class LoginPages extends BasePage {
         click(LoginLocator.btnSignup);
     }
 
+    public String getSignupErrorText() {
+        return getElementText(LoginLocator.lblSignupError);
+    }
+
 
 }

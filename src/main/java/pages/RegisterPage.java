@@ -4,7 +4,8 @@ import core.BasePage;
 import locator.LoginLocator;
 import locator.RegisterLocator;
 import org.openqa.selenium.support.ui.Select;
-
+//import org.testng.annotations.Test;
+import java.util.Map;
 public class RegisterPage extends BasePage {
 
     public RegisterPage() {
@@ -53,12 +54,30 @@ public class RegisterPage extends BasePage {
         click(RegisterLocator.chkOffers);
     }
 
-    public void fillAccountInformation(String password, String day, String month, String year) {
-        selectTitleMr();
-        enterPassword(password);
-        selectDay(day);
-        selectMonth(month);
-        selectYear(year);
+
+    public void fillAccountInformation(Map<String, String> data) {
+        if(data.containsKey("title") && !data.get("title").isBlank()) {
+            switch(data.get("title")) {
+                case "Mr" -> selectTitleMr();
+                case "Mrs" -> selectTitleMrs();
+            }
+        }
+
+        if(data.containsKey("password") && !data.get("password").isBlank()) {
+            enterPassword(data.get("password"));
+        }
+
+        if(data.containsKey("day") && !data.get("day").isBlank()) {
+            selectDay(data.get("day"));
+        }
+
+        if(data.containsKey("month") && !data.get("month").isBlank()) {
+            selectMonth(data.get("month"));
+        }
+
+        if(data.containsKey("year") && !data.get("year").isBlank()) {
+            selectYear(data.get("year"));
+        }
     }
 
     // ===== ADDRESS INFORMATION =====
@@ -103,28 +122,37 @@ public class RegisterPage extends BasePage {
         enterText(RegisterLocator.txtMobileNumber, mobile);
     }
 
-    public void fillAddressInformation(
-            String firstName,
-            String lastName,
-            String company,
-            String address1,
-            String address2,
-            String country,
-            String state,
-            String city,
-            String zipcode,
-            String mobile
-    ) {
-        enterFirstName(firstName);
-        enterLastName(lastName);
-        enterCompany(company);
-        enterAddress1(address1);
-        enterAddress2(address2);
-        selectCountry(country);
-        enterState(state);
-        enterCity(city);
-        enterZipcode(zipcode);
-        enterMobileNumber(mobile);
+    public void fillAddressInformation(Map<String, String> data) {
+        if(data.containsKey("firstName") && !data.get("firstName").isBlank()) {
+            enterFirstName(data.get("firstName"));
+        }
+        if(data.containsKey("lastName") && !data.get("lastName").isBlank()) {
+            enterLastName(data.get("lastName"));
+        }
+        if(data.containsKey("company") && !data.get("company").isBlank()) {
+            enterCompany(data.get("company"));
+        }
+        if(data.containsKey("address1") && !data.get("address1").isBlank()) {
+            enterAddress1(data.get("address1"));
+        }
+        if(data.containsKey("address2") && !data.get("address2").isBlank()) {
+            enterAddress2(data.get("address2"));
+        }
+        if(data.containsKey("country") && !data.get("country").isBlank()) {
+            selectCountry(data.get("country"));
+        }
+        if(data.containsKey("state") && !data.get("state").isBlank()) {
+            enterState(data.get("state"));
+        }
+        if(data.containsKey("city") && !data.get("city").isBlank()) {
+            enterCity(data.get("city"));
+        }
+        if(data.containsKey("zipcode") && !data.get("zipcode").isBlank()) {
+            enterZipcode(data.get("zipcode"));
+        }
+        if(data.containsKey("mobile") && !data.get("mobile").isBlank()) {
+            enterMobileNumber(data.get("mobile"));
+        }
     }
 
     // ===== ACTION BUTTONS =====
@@ -132,9 +160,6 @@ public class RegisterPage extends BasePage {
         click(RegisterLocator.btnCreateAccount);
     }
 
-    public String getAccountCreatedTitle() {
-        return getElementText(RegisterLocator.lblAccountCreatedTitle);
-    }
     public boolean verifyAccountCreatedTitle() {
         verifyElementVisible(RegisterLocator.lblAccountCreatedTitle, "Account Created!");
         return true;

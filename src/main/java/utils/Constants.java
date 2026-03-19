@@ -32,10 +32,13 @@ public final class Constants {
     // Login Test Data
     public static final String VALID_EMAIL = "bichanh@gmail.com";
     public static final String VALID_PASSWORD = "12345";
+    public static final String VALID_NAME = "12345";
 
     public static final String INVALID_EMAIL = "wronguser@gmail.com";
     public static final String INVALID_PASSWORD = "wrong123";
 
+    public static final String ERROR_SIGNUP = "Email Address already exist!";
+    public static final String ERROR_LOGIN = "Your email or password is incorrect!";
 
 
 }
