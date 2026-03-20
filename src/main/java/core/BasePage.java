@@ -21,21 +21,19 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public class BasePage extends Helper {
     private String crrWindow;
-    protected WebDriver driver;
+    protected static WebDriver driver;
     public BasePage(){
         driver = DriverManager.getDriver();
     }
 
-    public void openSite() {
+    public static void openSite() {
         logger.info("Navigating to URL: {}", TestSettings.BASE_URL);
-        this.driver.get(TestSettings.BASE_URL);
+        driver.get(TestSettings.BASE_URL);
         logger.info("Navigation to URL: {} completed", TestSettings.BASE_URL);
     }
 
-    public void openSite(String url) {
-        logger.info("Navigating to URL: {}", url);
-        this.driver.get(url);
-        logger.info("Navigation to URL: {} completed", url);
+    public static void setDriver(WebDriver driverInstance) {
+        driver = driverInstance;
     }
 
     protected WebElement findVisibleElement(By selector) {
@@ -60,7 +58,7 @@ public class BasePage extends Helper {
         return getWait(TestSettings.WAIT_ELEMENT).until(ExpectedConditions.elementToBeClickable(selector));
     }
 
-    protected void enterText(By selector, String text) {
+    public void enterText(By selector, String text) {
         logger.info("Entering text {}", text);
         findVisibleElement(selector).sendKeys(text);
     }
