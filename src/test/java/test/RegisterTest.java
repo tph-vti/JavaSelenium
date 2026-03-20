@@ -8,8 +8,49 @@ import org.testng.annotations.Test;
 import pages.CommonPage;
 import pages.LoginPage;
 import pages.RegisterPage;
+import static core.Constants.*;
 
 public class RegisterTest extends BaseTest {
+    public String[] registerAndGetCredentials() {
+        RegisterPage registerPage = new RegisterPage();
+        LoginPage loginPage = new LoginPage();
+        CommonPage commonPage = new CommonPage();
+
+        String username = getRandomUserName();
+        String email = getRandomEmail();
+        String password = getRandomPassword();
+
+        java.time.LocalDate randomDate = getRandomBirthDate();
+        String day = getDayFromDate(randomDate);
+        String month = getMonthFromDate(randomDate);
+        String year = getYearFromDate(randomDate);
+
+        String firstName = getRandomFirstName();
+        String lastName = getRandomLastName();
+        String company = getRandomCompanyName();
+        String address1 = getRandomAddress();
+        String address2 = getRandomAddress();
+        String country = getRandomCountry();
+        String state = getRandomState();
+        String city = getRandomCity();
+        String zipCode = getRandomZipCode();
+        String mobileNumber = getRandomPhoneNumber();
+
+        commonPage.clickSignupLogin();
+        loginPage.enterRegisterNameAndEmail(username, email);
+        loginPage.clickSignupButton();
+        registerPage.fillAccountInformationForm(GENDER_MALE, password);
+        registerPage.fillDateOfBirth(day, month, year);
+        registerPage.clickNewsletterCheckbox();
+        registerPage.clickSpecialOffersCheckbox();
+        registerPage.fillAddressInformation(firstName, lastName, company, address1, address2, country, state, city,
+                zipCode, mobileNumber);
+        registerPage.clickCreateAccountButton();
+        registerPage.waitForAccountCreatedVisible();
+        commonPage.clickContinueButton();
+
+        return new String[] { username, email, password };
+    }
 
     @Test(description = "TC_1: Register User")
     public void testRegisterUser() {
@@ -102,4 +143,42 @@ public class RegisterTest extends BaseTest {
         logStep("19. Click 'Continue' button");
         commonPage.clickContinueButton();
     }
+
+    @Test(description = "TC_5: Register User With Existing Email")
+    public void testRegisterUserWithExistingEmail() {
+        // ---Preconditions---
+        String[] credentials = registerAndGetCredentials();
+        String username = credentials[0];
+        String email = credentials[1];
+        CommonPage header = new CommonPage();
+        header.clickLogout();
+
+        // ---Test Data---
+        LoginPage loginPage = new LoginPage();
+        CommonPage commonPage = new CommonPage();
+        String expectedTitle;
+        String actualTitle;
+
+        // ---Test Steps---
+
+        logStep("4. Click on 'Signup / Login' button");
+        commonPage.clickSignupLogin();
+
+        logStep("5. Verify 'New User Signup!' is visible");
+        expectedTitle = "New User Signup!";
+        actualTitle = loginPage.getNewUserSignupTitle();
+        Assert.assertEquals(actualTitle, expectedTitle);
+
+        logStep("6. Enter name and already registered email address");
+        loginPage.enterRegisterNameAndEmail(username, email);
+
+        logStep("7. Click 'Signup' button");
+        loginPage.clickSignupButton();
+
+        logStep("8. Verify that 'Email Address already exist!' is visible");
+        expectedTitle = ERROR_EXIST_EMAIL_SIGNUP_MESSAGE;
+        actualTitle = loginPage.getErrorExistEmailMessage();
+        Assert.assertEquals(actualTitle, expectedTitle);
+    }
+    
 }

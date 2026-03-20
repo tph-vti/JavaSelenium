@@ -76,4 +76,12 @@ public class LoginPage extends BasePage {
         }
         return "";
     }
+
+    public String getErrorExistEmailMessage() {
+        logger.info("Getting Error Exist Email Message");
+        if (isElementDisplayed(LoginLocator.ERROR_SIGNUP_MESSAGE)) {
+            return getElementText(LoginLocator.ERROR_SIGNUP_MESSAGE);
+        }
+        return "";
+    }
 }
