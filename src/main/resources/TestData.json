@@ -1,8 +1,5 @@
 {
-  "AUTOMATION EXERCISE": {
+  "AUTOMATION_EXERCISE": {
     "base_url": "https://automationexercise.com/"
-  },
-  "Applitools": {
-    "base_url": "https://demo.applitools.com/"
   }
 }

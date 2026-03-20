@@ -18,7 +18,7 @@ public class TestSettings {
 
     // ENVIRONMENT SETTINGS
     /** Test environment (AUTOMATION EXERCISE, APPLITOOLS, etc.) - Usage: mvn clean test -Denv=AUTOMATION EXERCISE */
-    public static final String TEST_ENV = System.getProperty("env", DOTENV.get("TEST_ENV","GURU"));
+    public static final String TEST_ENV = System.getProperty("env", DOTENV.get("TEST_ENV","AUTOMATION_EXERCISE"));
 
     /** Environment configuration loaded from TestData.json */
     public static final JSONObject ENV_CONFIG = Objects.requireNonNull(Helper.loadJsonFile(JSON_DATA_PATH)).getJSONObject(TEST_ENV);
