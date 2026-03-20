@@ -36,11 +36,8 @@ public class LoginPage extends BasePage {
     }
 
     public String getErrorLoginMessage() {
-        logger.info("Getting Error Login Message");
-        if (isElementDisplayed(LoginLocator.ERROR_LOGIN_MESSAGE)) {
-            return getElementText(LoginLocator.ERROR_LOGIN_MESSAGE);
-        }
-        return "";
+        logger.info("Getting Error Login Message"); 
+        return getElementText(LoginLocator.ERROR_LOGIN_MESSAGE);
     }
 
     public String getLoginToYourAccountTitle() {
@@ -71,17 +68,11 @@ public class LoginPage extends BasePage {
 
     public String getErrorSignupMessage() {
         logger.info("Getting Error Signup Message");
-        if (isElementDisplayed(LoginLocator.ERROR_SIGNUP_MESSAGE)) {
-            return getElementText(LoginLocator.ERROR_SIGNUP_MESSAGE);
-        }
-        return "";
+        return getElementText(LoginLocator.ERROR_SIGNUP_MESSAGE);
     }
 
     public String getErrorExistEmailMessage() {
         logger.info("Getting Error Exist Email Message");
-        if (isElementDisplayed(LoginLocator.ERROR_SIGNUP_MESSAGE)) {
-            return getElementText(LoginLocator.ERROR_SIGNUP_MESSAGE);
-        }
-        return "";
+        return getElementText(LoginLocator.ERROR_SIGNUP_MESSAGE);
     }
 }

@@ -87,11 +87,4 @@ public class RegisterPage extends BasePage {
         logger.info("Getting 'ENTER ACCOUNT INFORMATION' title");
         return getElementText(RegisterLocators.ENTER_ACCOUNT_INFORMATION_TITLE);
     }
-
-
-    // ───────────────────── HELPER ─────────────────────
-    public void waitForAccountCreatedVisible() {
-        logger.info("Waiting for Account Created message to be visible");
-        waitForElementVisible(RegisterLocators.ACCOUNT_CREATED_MESSAGE);
-    }
 }

@@ -72,6 +72,14 @@ public class DataGenerator extends Helper {
         return String.valueOf(date.getYear());
     }
 
+    public static String getRandomSubject() {
+        return "Subject" + generateRandomString(10);
+    }
+
+    public static String getRandomMessage() {
+        return "Message" + generateRandomString(20);
+    }
+
     public static String generateRandomString(int length) {
         String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
         StringBuilder sb = new StringBuilder();

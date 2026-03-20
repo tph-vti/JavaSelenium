@@ -15,7 +15,7 @@ public class CommonLocator {
         return By.xpath(String.format(LOGGED_IN_USER_FORMAT, userName));
     }
 
-    public static final By ACCOUNT_CREATED_MESSAGE = By.xpath("//h2[contains(@class, 'title text-center')]//b");
-    public static final By ACCOUNT_DELETED_MESSAGE = By.xpath("//h2[contains(@class, 'title text-center')]//b");
+    public static final By ACCOUNT_CREATED_TITLE = By.xpath("//h2[contains(@class, 'title text-center')]//b[text()='Account Created!']");
+    public static final By ACCOUNT_DELETED_TITLE = By.xpath("//h2[contains(@class, 'title text-center')]//b[text()='Account Deleted!']");
     public static final By CONTINUE_BUTTON = By.xpath("//a[@data-qa='continue-button']");
 }

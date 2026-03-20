@@ -35,7 +35,6 @@ public class LogoutTest extends BaseTest {
                 getRandomAddress(), getRandomAddress(), getRandomCountry(), getRandomState(), getRandomCity(),
                 getRandomZipCode(), getRandomPhoneNumber());
         registerPage.clickCreateAccountButton();
-        registerPage.waitForAccountCreatedVisible();
         commonPage.clickContinueButton();
 
         return new String[] { username, email, password };

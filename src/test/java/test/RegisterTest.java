@@ -46,7 +46,6 @@ public class RegisterTest extends BaseTest {
         registerPage.fillAddressInformation(firstName, lastName, company, address1, address2, country, state, city,
                 zipCode, mobileNumber);
         registerPage.clickCreateAccountButton();
-        registerPage.waitForAccountCreatedVisible();
         commonPage.clickContinueButton();
 
         return new String[] { username, email, password };
@@ -98,7 +97,7 @@ public class RegisterTest extends BaseTest {
         loginPage.clickSignupButton();
 
         logStep("8. Verify that 'ENTER ACCOUNT INFORMATION' is visible");
-        expectedTitle = "ENTER ACCOUNT INFORMATION";
+        expectedTitle = ENTER_ACCOUNT_INFORMATION_TITLE;
         actualTitle = registerPage.getEnterAccountInformationTitle();
         Assert.assertEquals(actualTitle, expectedTitle);
 
@@ -120,7 +119,7 @@ public class RegisterTest extends BaseTest {
         registerPage.clickCreateAccountButton();
 
         logStep("14. Verify that 'ACCOUNT CREATED!' is visible");
-        expectedTitle = "ACCOUNT CREATED!";
+        expectedTitle = ACCOUNT_CREATED_TITLE;
         actualTitle = commonPage.getAccountCreatedTitle();
         Assert.assertEquals(actualTitle, expectedTitle);
 
@@ -136,7 +135,7 @@ public class RegisterTest extends BaseTest {
         commonPage.clickDeleteAccount();
 
         logStep("18. Verify that 'ACCOUNT DELETED!' is visible");
-        expectedTitle = "ACCOUNT DELETED!";
+        expectedTitle = ACCOUNT_DELETED_TITLE;
         actualTitle = commonPage.getAccountDeletedTitle();
         Assert.assertEquals(actualTitle, expectedTitle);
 
@@ -165,7 +164,7 @@ public class RegisterTest extends BaseTest {
         commonPage.clickSignupLogin();
 
         logStep("5. Verify 'New User Signup!' is visible");
-        expectedTitle = "New User Signup!";
+        expectedTitle = NEW_USER_SIGNUP_TITLE;
         actualTitle = loginPage.getNewUserSignupTitle();
         Assert.assertEquals(actualTitle, expectedTitle);
 

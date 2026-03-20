@@ -27,6 +27,7 @@ public final class Constants {
     public static final String AUTOMATION_EXERCISE_BASE_URL = "https://automationexercise.com";
     public static final String AUTOMATION_EXERCISE_LOGIN_URL = AUTOMATION_EXERCISE_BASE_URL + "/login";
     public static final String AUTOMATION_EXERCISE_REGISTER_URL = AUTOMATION_EXERCISE_BASE_URL + "/signup";
+    public static final String AUTOMATION_EXERCISE_CONTACT_URL = AUTOMATION_EXERCISE_BASE_URL + "/contact";
 
     //Login Page Constants
     public static final String GENDER_MALE = "Mr.";

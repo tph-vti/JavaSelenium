@@ -26,6 +26,12 @@ public class CommonPage extends BasePage {
         return isElementDisplayed(getDynamicXpath(CommonLocator.MENU_ITEM_FORMAT, menuText));
     }
 
+    // ───────────────────── HOME ─────────────────────
+    public void clickHomeButton() {
+        logger.info("Clicking Home button");
+        clickMenu("Home");
+    }
+
     // ───────────────────── SIGNUP / LOGIN ─────────────────────
     public void clickSignupLogin() {
         logger.info("Clicking Signup / Login link");
@@ -36,6 +42,12 @@ public class CommonPage extends BasePage {
     public void clickDeleteAccount() {
         logger.info("Clicking Delete Account link");
         clickMenu("Delete Account");
+    }
+
+    // ───────────────────── CONTACT US ─────────────────────
+    public void clickContactUs() {
+        logger.info("Clicking Contact us link");
+        clickMenu("Contact us");
     }
 
     // ───────────────────── LOGOUT ─────────────────────
@@ -50,17 +62,23 @@ public class CommonPage extends BasePage {
         return getElementText(getDynamicXpath(CommonLocator.LOGGED_IN_USER_FORMAT, username));
     }
 
-    // ───────────────────── ACCOUNT CREATED ─────────────────────
+    // ───────────────────── GET TITLE ─────────────────────
     public String getAccountCreatedTitle() {
         logger.info("Getting 'ACCOUNT CREATED!' title");
-        return getElementText(CommonLocator.ACCOUNT_CREATED_MESSAGE);
+        if(isElementDisplayed(CommonLocator.ACCOUNT_CREATED_TITLE)) {
+            return getElementText(CommonLocator.ACCOUNT_CREATED_TITLE);
+        }
+        return "";
     }
 
-    // ───────────────────── ACCOUNT DELETED ─────────────────────
     public String getAccountDeletedTitle() {
         logger.info("Getting 'ACCOUNT DELETED!' title");
-        return getElementText(CommonLocator.ACCOUNT_DELETED_MESSAGE);
+        if(isElementDisplayed(CommonLocator.ACCOUNT_DELETED_TITLE)) {
+            return getElementText(CommonLocator.ACCOUNT_DELETED_TITLE);
+        }
+        return "";
     }
+
 
     // ───────────────────── BUTTON ─────────────────────
     public void clickContinueButton() {
@@ -72,7 +90,4 @@ public class CommonPage extends BasePage {
             handleVignette();
         }
     }
-
-    // ───────────────────── HELPER ─────────────────────
-
 }
