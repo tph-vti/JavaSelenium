@@ -23,17 +23,22 @@ public final class Constants {
     public static final String ERROR_LOG = Paths.get(LOG_DIR, "errors.log").toString();
     public static final String TEST_LOG = Paths.get(LOG_DIR, "test-execution.log").toString();
 
-    // GURU99 Site Constants
-    public static final String GURU99_BASE_URL = "https://demo.guru99.com";
-    public static final String GURU99_TOOLTIPS_URL = GURU99_BASE_URL + "/test/tooltip.html";
-    public static final String GURU99_DRAG_DROP_URL = GURU99_BASE_URL + "/test/drag_drop.html";
-
-    // Automation Demo Site Constants
-    public static final String AUTOMATION_DEMO_ALERTS_URL = "https://demo.automationtesting.in/Alerts.html";
-    public static final String AUTOMATION_DEMO_DATE_PICKER_URL = "https://demo.automationtesting.in/Datepicker.html";
 
     // Upload File Constants
     public static final String SAMPLE_FILE_PATH = Paths.get(RESOURCES_PATH, "sample.jpg").toString();
     public static final String CURRENT_USERNAME = System.getProperty("user.name");
     public static final String DOWNLOAD_FOLDER_PATH = "/"+Paths.get("","Users", CURRENT_USERNAME,"Downloads").toString();
+
+    // Login Test Data
+    public static final String VALID_EMAIL = "bichanh@gmail.com";
+    public static final String VALID_PASSWORD = "12345";
+    public static final String VALID_NAME = "12345";
+
+    public static final String INVALID_EMAIL = "wronguser@gmail.com";
+    public static final String INVALID_PASSWORD = "wrong123";
+
+    public static final String ERROR_SIGNUP = "Email Address already exist!";
+    public static final String ERROR_LOGIN = "Your email or password is incorrect!";
+
+
 }

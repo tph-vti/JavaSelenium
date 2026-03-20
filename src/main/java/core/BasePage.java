@@ -13,7 +13,6 @@ import utils.Helper;
 
 import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * BasePage provides common web interaction methods for all Page Objects.
@@ -126,20 +125,20 @@ public class BasePage extends Helper {
         js.executeScript("arguments[0].scrollIntoView(true);", element);
     }
 
-    protected void verifyTrue(boolean condition, String message) {
-        logger.info("Verifying condition is true");
-        assertTrue(condition, message);
-    }
-
-    protected void verifyFalse(boolean condition, String message) {
-        logger.info("Verifying condition is false");
-        assertFalse(condition, message);
-    }
-
-    protected void verifyEquals(Object expected, Object actual, String message) {
-        logger.info("Verifying equality of expected and actual values");
-        assertEquals(expected, actual, message);
-    }
+//    protected void verifyTrue(boolean condition, String message) {
+//        logger.info("Verifying condition is true");
+//        assertTrue(condition, message);
+//    }
+//
+//    protected void verifyFalse(boolean condition, String message) {
+//        logger.info("Verifying condition is false");
+//        assertFalse(condition, message);
+//    }
+//
+//    protected void verifyEquals(Object expected, Object actual, String message) {
+//        logger.info("Verifying equality of expected and actual values");
+//        assertEquals(expected, actual, message);
+//    }
 
     protected void verifyElementVisible(By selector, String errorMessage) {
         logger.info("Verifying visibility of element {}", selector);
@@ -203,11 +202,11 @@ public class BasePage extends Helper {
         return this.driver;
     }
 
-    public void verifyTitle(String expectedTitle) {
-        logger.info("Verifying page title is: {}", expectedTitle);
-        String actualTitle = this.driver.getTitle();
-        verifyEquals(expectedTitle, actualTitle, String.format("Expected title '%s' but found '%s'", expectedTitle, actualTitle));
-    }
+//    public void verifyTitle(String expectedTitle) {
+//        logger.info("Verifying page title is: {}", expectedTitle);
+//        String actualTitle = this.driver.getTitle();
+//        verifyEquals(expectedTitle, actualTitle, String.format("Expected title '%s' but found '%s'", expectedTitle, actualTitle));
+//    }
 
     public void switchBackToOriginalWindow() {
         logger.info("Switching back to original window: {}", this.crrWindow);
@@ -220,6 +219,14 @@ public class BasePage extends Helper {
             }
         }
         this.driver.switchTo().window(this.crrWindow);
+    }
+
+    public boolean isElementDisplayed(By locator){
+        return driver.findElement(locator).isDisplayed();
+    }
+
+    public void sendKeys(By locator, String text){
+        driver.findElement(locator).sendKeys(text);
     }
 }
 
