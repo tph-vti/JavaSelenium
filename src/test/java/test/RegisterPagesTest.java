@@ -6,8 +6,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.HomePages;
 import pages.LoginPages;
-import pages.RegisterPage;
-import utils.Constants;
+import pages.RegisterPages;
 
 public class RegisterPagesTest extends BaseTest {
 
@@ -16,7 +15,7 @@ public class RegisterPagesTest extends BaseTest {
 
         HomePages homePage = new HomePages();
         LoginPages loginPage = new LoginPages();
-        RegisterPage registerPage = new RegisterPage();
+        RegisterPages registerPages = new RegisterPages();
 
         logger.info("STEP 1: Open site");
         homePage.openSite();
@@ -38,28 +37,28 @@ public class RegisterPagesTest extends BaseTest {
         loginPage.clickSignup();
 
         logger.info("STEP 6: Verify that 'ENTER ACCOUNT INFORMATION' is visible");
-        Assert.assertTrue(registerPage.verifyRegisterTitle());
+        Assert.assertTrue(registerPages.verifyRegisterTitle());
 
         logger.info("STEP 7: Fill account information");
-        registerPage.fillAccountInformation(TestData.accountData);
+        registerPages.fillAccountInformation(TestData.accountData);
 
         logger.info("STEP 8: Select newsletter checkbox");
-        registerPage.clickNewsletterCheckbox();
+        registerPages.clickNewsletterCheckbox();
 
         logger.info("STEP 9: Select offers checkbox");
-        registerPage.clickOffersCheckbox();
+        registerPages.clickOffersCheckbox();
 
         logger.info("STEP 10: Fill address information");
-        registerPage.fillAddressInformation(TestData.addressData);
+        registerPages.fillAddressInformation(TestData.addressData);
 
         logger.info("STEP 11: Click Create Account button");
-        registerPage.clickCreateAccountButton();
+        registerPages.clickCreateAccountButton();
 
         logger.info("STEP 12: Verify that 'ACCOUNT CREATED!' is visible");
-        Assert.assertTrue(registerPage.verifyAccountCreatedTitle());
+        Assert.assertTrue(registerPages.verifyAccountCreatedTitle());
 
         logger.info("STEP 13: Click Continue button");
-        registerPage.clickContinue();
+        registerPages.clickContinue();
 
         logger.info("STEP 14: Verify 'Logged in as' appears on menu");
         Assert.assertTrue(homePage.verifyMenu("Logged in as"));
