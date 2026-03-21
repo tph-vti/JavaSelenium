@@ -11,9 +11,10 @@ public final class Constants {
     public static final String ERROR_INCORRECT_LOGIN_MESSAGE = "Your email or password is incorrect!";
     public static final String ERROR_EXIST_EMAIL_SIGNUP_MESSAGE = "Email Address already exist!";
     public static final String FILE_PATH = "D:\\JavaSelenium\\src\\test\\resources\\sampleFile.jpeg";
-    public static final String RECOMMENDED_ITEMS_TITLE = "Recommended Items";
+    public static final String RECOMMENDED_ITEMS_TITLE = "RECOMMENDED ITEMS";
     public static final String SUCCESS_MESSAGE = "Success! Your details have been submitted successfully.";
     public static final String GET_IN_TOUCH_TITLE = "GET IN TOUCH";
     public static final String HOME_TITLE = "Full-Fledged practice website for Automation Engineers";
     public static final String TEST_CASE_TITLE = "TEST CASES";
+    public static final String ALL_PRODUCTS_TITLE = "ALL PRODUCTS";
 }
