@@ -31,4 +31,13 @@ public class TestData {
         addressData.put("zipcode", "90001");
         addressData.put("mobile", "0123456789");
     }
+
+    public static Map<String, String> contactData = new HashMap<>();
+
+    static {
+        contactData.put("name", "John Doe");
+        contactData.put("email", "john" + System.currentTimeMillis() + "@gmail.com");
+        contactData.put("subject", "Test Subject");
+        contactData.put("message", "This is a test message");
+    }
 }
