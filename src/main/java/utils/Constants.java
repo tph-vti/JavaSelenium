@@ -40,5 +40,6 @@ public final class Constants {
     public static final String ERROR_SIGNUP = "Email Address already exist!";
     public static final String ERROR_LOGIN = "Your email or password is incorrect!";
 
+    public static final String SEARCH_KEY = "Summer White Top";
 
 }

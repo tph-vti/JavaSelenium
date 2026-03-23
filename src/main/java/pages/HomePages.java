@@ -19,4 +19,6 @@ public class HomePages extends BasePage {
                 By.xpath(String.format(HomeLocator.MENU, menuName))
         ).isDisplayed();
     }
+
+
 }

@@ -11,6 +11,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 import utils.Helper;
 
+import java.util.List;
 import java.util.Set;
 
 
@@ -228,5 +229,16 @@ public class BasePage extends Helper {
     public void sendKeys(By locator, String text){
         driver.findElement(locator).sendKeys(text);
     }
+
+    public List<WebElement> getListElement(By locator) {
+        return driver.findElements(locator);
+    }
+
+    public List<String> getTextElements(By locator) {
+        List<WebElement> elements = getListElement(locator);
+        return elements.stream().map(WebElement::getText).toList();
+    }
+
+
 }
 

@@ -10,4 +10,5 @@ public class HomeLocator {
         return By.xpath(String.format(MENU, menuName));
     }
 
+
 }
