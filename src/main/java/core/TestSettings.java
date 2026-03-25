@@ -3,23 +3,23 @@ package core;
 import io.github.cdimascio.dotenv.Dotenv;
 import org.json.JSONObject;
 import utils.Helper;
-import static utils.Constants.*;
+import  utils.Constants.*;
 import java.util.Objects;
+
+import static utils.Constants.JSON_DATA_PATH;
 
 /**
  * TestSettings manages centralized configuration from .env file, system properties, and TestData.json.
  * Priority order: System Properties > .env file > Hardcoded defaults
  *
  * Usage:
- * - mvn clean test -Denv=GURU -Dbrowser=chrome -DhubType=NONE
  */
 public class TestSettings {
-
     private static final Dotenv DOTENV = Dotenv.configure().ignoreIfMissing().load();
 
     // ENVIRONMENT SETTINGS
-    /** Test environment (GURU, APPLITOOLS, etc.) - Usage: mvn clean test -Denv=GURU */
-    public static final String TEST_ENV = System.getProperty("env", DOTENV.get("TEST_ENV","GURU"));
+    /** Test environment (AUTOMATION EXERCISE, APPLITOOLS, etc.) - Usage: mvn clean test -Denv=AUTOMATION EXERCISE */
+    public static final String TEST_ENV = System.getProperty("env", DOTENV.get("TEST_ENV","AUTOMATION_EXERCISE"));
 
     /** Environment configuration loaded from TestData.json */
     public static final JSONObject ENV_CONFIG = Objects.requireNonNull(Helper.loadJsonFile(JSON_DATA_PATH)).getJSONObject(TEST_ENV);
@@ -42,10 +42,10 @@ public class TestSettings {
     public static final int WAIT_ELEMENT = 5;
 
     /** Implicit wait timeout in seconds */
-    public static final int IMPLICIT_WAIT = 2;
+    public  final int IMPLICIT_WAIT = 2;
 
     /** Page load timeout in seconds */
-    public static final int PAGE_LOAD_TIMEOUT = 15;
+    public  final int PAGE_LOAD_TIMEOUT = 15;
 
     // HUB SETTINGS
     /** Hub type (NONE, GRID) - Usage: mvn clean test -DhubType=GRID */
@@ -53,5 +53,4 @@ public class TestSettings {
 
     /** Selenium Grid hub URL */
     public static final String GRID_HUB_URL = "http://localhost:4444";
-
 }
