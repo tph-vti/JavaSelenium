@@ -32,9 +32,9 @@ public final class Constants {
     public static final String DOWNLOAD_FOLDER_PATH = "/"+Paths.get("","Users", CURRENT_USERNAME,"Downloads").toString();
 
     //LOGIN DATA:
-    public static final String VALID_EMAIL = "cong@gmail.com";
+    public static final String VALID_EMAIL = "cong_qa@gmail.com";
     public static final String VALID_PASSWORD = "12345";
-    public static final String VALID_NAME = "12345";
+    public static final String VALID_NAME = "Cong";
 
     public static final String INVALID_EMAIL = "invaliduser@gmail.com";
     public static final String INVALID_PASSWORD = "invalidacc";

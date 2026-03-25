@@ -6,6 +6,8 @@ import utils.Helper;
 import  utils.Constants.*;
 import java.util.Objects;
 
+import static utils.Constants.JSON_DATA_PATH;
+
 /**
  * TestSettings manages centralized configuration from .env file, system properties, and TestData.json.
  * Priority order: System Properties > .env file > Hardcoded defaults
@@ -13,15 +15,14 @@ import java.util.Objects;
  * Usage:
  */
 public class TestSettings {
-
-    private  final Dotenv DOTENV = Dotenv.configure().ignoreIfMissing().load();
+    private static final Dotenv DOTENV = Dotenv.configure().ignoreIfMissing().load();
 
     // ENVIRONMENT SETTINGS
     /** Test environment (AUTOMATION EXERCISE, APPLITOOLS, etc.) - Usage: mvn clean test -Denv=AUTOMATION EXERCISE */
     public static final String TEST_ENV = System.getProperty("env", DOTENV.get("TEST_ENV","AUTOMATION_EXERCISE"));
 
     /** Environment configuration loaded from TestData.json */
-    public  final JSONObject ENV_CONFIG = Objects.requireNonNull(Helper.loadJsonFile(JSON_DATA_PATH)).getJSONObject(TEST_ENV);
+    public static final JSONObject ENV_CONFIG = Objects.requireNonNull(Helper.loadJsonFile(JSON_DATA_PATH)).getJSONObject(TEST_ENV);
 
     /** Base URL for the test environment */
     public static final String BASE_URL = ENV_CONFIG.getString("base_url");
@@ -31,10 +32,10 @@ public class TestSettings {
     public static final String BROWSER_TYPE = System.getProperty("browser", DOTENV.get("BROWSER","chrome"));
 
     /** Screen resolution for browser window */
-    public  final String SCREEN_RESOLUTION = System.getProperty("resolution", DOTENV.get("SCREEN_RESOLUTION", "1920,1080"));
+    public static final String SCREEN_RESOLUTION = System.getProperty("resolution", DOTENV.get("SCREEN_RESOLUTION", "1920,1080"));
 
     /** Headless mode flag - Usage: mvn clean test -Dheadless=true */
-    public  final boolean HEADLESS = Boolean.parseBoolean(System.getProperty("headless", DOTENV.get("HEADLESS", "false")));
+    public static final boolean HEADLESS = Boolean.parseBoolean(System.getProperty("headless", DOTENV.get("HEADLESS", "false")));
 
     // WAIT SETTINGS
     /** Element visibility wait timeout in seconds */
@@ -51,6 +52,5 @@ public class TestSettings {
     public static final String HUB_TYPE = System.getProperty("hubType", DOTENV.get("HUB_TYPE","NONE"));
 
     /** Selenium Grid hub URL */
-    public  final String GRID_HUB_URL = "http://localhost:4444";
-
+    public static final String GRID_HUB_URL = "http://localhost:4444";
 }
