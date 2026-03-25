@@ -58,4 +58,19 @@ public class ProductPage extends BasePage {
         logger.info("Getting product category");
         return getElementText(ProductLocator.PRODUCT_CATEGORY);
     }
+
+    public void enterSearchProduct(String productName) {
+        logger.info("Entering product name");
+        enterText(ProductLocator.SEARCH_INPUT, productName);
+    }
+
+    public void clickSearchButton() {
+        logger.info("Clicking search button");
+        clickButton(ProductLocator.SEARCH_BUTTON);
+    }
+
+    public String getSearchedProductsTitle() {
+        logger.info("Getting 'Searched Products' title");
+        return getElementText(ProductLocator.SEARCHED_PRODUCTS_TITLE);
+    }
 }

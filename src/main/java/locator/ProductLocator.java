@@ -13,4 +13,7 @@ public class ProductLocator {
     public static final By PRODUCT_CONDITION = By.xpath("//div[@class='product-information']//b[contains(text(),'Condition')]");
     public static final By PRODUCT_BRAND = By.xpath("//div[@class='product-information']//b[contains(text(),'Brand')]");
     public static final By PRODUCT_CATEGORY = By.xpath("//div[@class='product-information']//p[contains(text(),'Category')]");
+    public static final By SEARCH_INPUT = By.xpath("//input[@id='search_product']");
+    public static final By SEARCH_BUTTON = By.xpath("//button[@id='submit_search']");
+    public static final By SEARCHED_PRODUCTS_TITLE = By.xpath("//h2[text()='Searched Products']");
 }

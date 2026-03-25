@@ -47,4 +47,33 @@ public class ProductTest extends BaseTest {
         Assert.assertFalse(productBrand.isEmpty());
         Assert.assertFalse(productCategory.isEmpty());
     }
+
+    @Test(description = "TC9: Search product")
+    public void testSearchProduct() {
+        logger.info("3. Verify that home page is visible successfully");
+        expectedResult = RECOMMENDED_ITEMS_TITLE;
+        actualResult = homePage.getRecommendedItemsTitle();
+        Assert.assertEquals(actualResult, expectedResult);
+
+        logger.info("4. Click on 'Products' button");
+        commonPage.clickMenu("Products");
+        
+        logger.info("5. Verify user is navigated to ALL PRODUCTS page successfully");
+        expectedResult = ALL_PRODUCTS_TITLE;
+        actualResult = productPage.getAllProductsTitle();
+        Assert.assertEquals(actualResult, expectedResult);
+
+        logger.info("6. Enter product name in search input and click search button");
+        productPage.enterSearchProduct(PRODUCT_NAME);
+        productPage.clickSearchButton();
+
+        logger.info("7.  Verify 'SEARCHED PRODUCTS' is visible");
+        expectedResult = SEARCHED_PRODUCTS_TITLE;
+        actualResult = productPage.getSearchedProductsTitle();
+        Assert.assertEquals(actualResult, expectedResult);
+
+        logger.info("8. Verify all the products related to search are visible");
+        Assert.assertTrue(productPage.isProductListVisible());
+
+    }
 }
