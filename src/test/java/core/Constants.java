@@ -19,4 +19,5 @@ public final class Constants {
     public static final String ALL_PRODUCTS_TITLE = "ALL PRODUCTS";
     public static final String SEARCHED_PRODUCTS_TITLE = "SEARCHED PRODUCTS";
     public static final String PRODUCT_NAME = "Blue Top";
+    public static final String SUBSCRIPTION_TITLE = "Subscription";
 }
