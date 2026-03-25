@@ -21,7 +21,7 @@ Generate robust, maintainable, and flaky-free test automation code strictly adhe
 
 ## Design Principles
 - **Inheritance Pattern**: Core classes extend `Helper` for logging and utilities
-- **Static WebDriver**: Accessed via `DriverManager.getDriver()` (ThreadLocal)
+- ** WebDriver**: Accessed via `DriverManager.getDriver()` (ThreadLocal)
 - **No Constructor Pattern**: Page Objects extend `BasePage` without constructors
 - **Explicit Waits**: All interactions use WebDriverWait - NO `Thread.sleep()` (except 1-second post-click stabilization)
 
@@ -43,7 +43,7 @@ import core.BasePage;
 
 // Optional: Locator holder class for organization
 class LoginPageSelector {
-    public static final By txtUsername = By.id("username");
+    public  final By txtUsername = By.id("username");
     public static final By txtPassword = By.id("password");
     public static final By btnSignIn = By.cssSelector("button[type='submit']");
 }

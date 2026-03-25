@@ -4,7 +4,7 @@ import org.openqa.selenium.WebDriver;
 
 import pages.CommonLocator;
 import pages.RegisterPageSelector;
-import pages.LoginPageSelector;
+import pages.LoginPage;
 
 public class RegisterUserTest {
 
@@ -19,14 +19,14 @@ public class RegisterUserTest {
     public void TC01_RegisterUser() {
 
         CommonLocator common = new CommonLocator(driver);
-        LoginPageSelector signupLoginPage = new LoginPageSelector(driver);
+        LoginPage signupLoginPage = new LoginPage(driver);
         RegisterPageSelector
 
         Assertions.assertTrue(CommonLocator.isHomePageVisible());
         CommonLocator.clickMenu("Signup / Login");
 
         // 🔥 FIX: tạo object signupPage
-        LoginPageSelector signupPage = new LoginPageSelector(driver);
+        LoginPage signupPage = new LoginPage(driver);
 
         RegisterPageSelector registerPage = signupPage.newUserSignup(
                 "John",

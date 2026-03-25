@@ -16,8 +16,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Objects;
 
-import static core.TestSettings.GRID_HUB_URL;
-
 /**
  * DriverManager handles WebDriver lifecycle management following POM best practices.
  * Uses ThreadLocal to ensure thread-safe WebDriver instances for parallel test execution.
