@@ -9,7 +9,7 @@ public class LoginPages extends BasePage {
         super();
     }
 
-    // ===== LOGIN SECTION =====
+    //  LOGIN
 
     public boolean verifyLoginTitle() {
         logger.info("Verify 'Login to your account' title is displayed");
@@ -39,7 +39,7 @@ public class LoginPages extends BasePage {
         return errorText;
     }
 
-    // ===== SIGNUP SECTION =====
+    // SIGNUP
 
     public boolean verifySignupTitle() {
         logger.info("Verify 'New User Signup!' title is displayed");

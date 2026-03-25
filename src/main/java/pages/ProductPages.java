@@ -8,10 +8,8 @@ import java.util.List;
 public class ProductPages extends BasePage {
 
     public ProductPages() {
-        super(); // lấy driver từ DriverManager
+        super();
     }
-
-    // ===== ALL PRODUCTS PAGE =====
 
     public boolean verifyAllProductsPage() {
         logger.info("Verify 'All Products' page is displayed by checking title element");
@@ -32,11 +30,9 @@ public class ProductPages extends BasePage {
     public void clickViewProduct(int index) {
         logger.info("Click 'View Product' button at index: {}", index);
 
-        // Dynamic locator để click đúng sản phẩm theo index
         click(ProductLocator.btnViewProduct(index));
     }
 
-    // ===== PRODUCT DETAIL PAGE =====
 
     public boolean verifyProductDetailPageByUrl() {
         logger.info("Get current URL to verify navigation to product detail page");
@@ -73,9 +69,6 @@ public class ProductPages extends BasePage {
 
         return true;
     }
-
-
-        // ===== SEARCH PRODUCT =====
 
     public void searchProduct(String productName) {
         logger.info("Enter product name: {}", productName);

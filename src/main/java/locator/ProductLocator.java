@@ -4,21 +4,14 @@ import org.openqa.selenium.By;
 
 public class ProductLocator {
 
-    // ===== PRODUCT =====;
 
-    // Title ALL PRODUCTS
     public static By txtAllProductsTitle = By.xpath( "//h2[text()='All Products']");
-
-    // URL check (nếu cần)
-    //public static By urlProducts = By.xpath("/products");
 
     public static  By listProducts = By.xpath("//div[@class='features_items']//div[@class='product-image-wrapper']");
 
     public static By btnViewProduct(int index) {
         return By.xpath("(//a[text()='View Product'])[" + index + "]");
     };
-
-    // ===== VIEW PRODUCT =====;
 
     public static By txtProductName = By.xpath("//div[@class='product-information']//h2");
 
@@ -31,8 +24,6 @@ public class ProductLocator {
     public static By txtCondition = By.xpath("//div[@class='product-information']//p[b[text()='Condition:']]");
 
     public static By txtBrand = By.xpath("//div[@class='product-information']//p[b[text()='Brand:']]");
-
-    // ===== SEARCH PRODUCT =====
 
     public static By txtSearchInput = By.xpath("//input[@id='search_product']");
 

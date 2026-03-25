@@ -11,14 +11,12 @@ public class RegisterPages extends BasePage {
         super();
     }
 
-    // ===== VERIFY REGISTER PAGE =====
     public boolean verifyRegisterTitle() {
         logger.info("Verify 'Enter Account Information' page is displayed");
         verifyElementVisible(RegisterLocator.lblRegisterTitle, "Register page title is not visible");
         return true;
     }
 
-    // ===== ACCOUNT INFORMATION =====
 
     public void selectTitleMr() {
         logger.info("Select title: Mr");
@@ -89,7 +87,6 @@ public class RegisterPages extends BasePage {
         }
     }
 
-    // ===== ADDRESS INFORMATION =====
 
     public void enterFirstName(String firstName) {
         logger.info("Enter First Name: {}", firstName);
@@ -176,8 +173,6 @@ public class RegisterPages extends BasePage {
             enterMobileNumber(data.get("mobile"));
         }
     }
-
-    // ===== ACTION BUTTONS =====
 
     public void clickCreateAccountButton() {
         logger.info("Click 'Create Account' button");

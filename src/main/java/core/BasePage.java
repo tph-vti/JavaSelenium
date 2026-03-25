@@ -126,6 +126,11 @@ public class BasePage extends Helper {
         js.executeScript("arguments[0].scrollIntoView(true);", element);
     }
 
+    public void waitForElementVisible(By locator, int timeout) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeout));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+    }
+
 //    protected void verifyTrue(boolean condition, String message) {
 //        logger.info("Verifying condition is true");
 //        assertTrue(condition, message);
