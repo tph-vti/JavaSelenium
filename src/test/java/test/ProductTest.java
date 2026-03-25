@@ -4,32 +4,24 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import core.BaseTest;
-import pages.CommonPage;
-import pages.HomePage;
-import pages.ProductPage;
 import static core.Constants.*;
 
 public class ProductTest extends BaseTest {
     @Test(description = "TC8: Verify All Products and product detail page")
     public void testVerifyProductDetails() {
-        ProductPage productPage = new ProductPage();
-        CommonPage commonPage = new CommonPage();
-        HomePage homePage = new HomePage();
-        String expectedTitle;
-        String actualTitle;
 
         logger.info("3. Verify that home page is visible successfully");
-        expectedTitle = RECOMMENDED_ITEMS_TITLE;
-        actualTitle = homePage.getRecommendedItemsTitle();
-        Assert.assertEquals(actualTitle, expectedTitle);
+        expectedResult = RECOMMENDED_ITEMS_TITLE;
+        actualResult = homePage.getRecommendedItemsTitle();
+        Assert.assertEquals(actualResult, expectedResult);
 
         logger.info("4. Click on 'Products' button");
         commonPage.clickMenu("Products");
         
         logger.info("5. Verify user is navigated to ALL PRODUCTS page successfully");
-        expectedTitle = ALL_PRODUCTS_TITLE;
-        actualTitle = productPage.getAllProductsTitle();
-        Assert.assertEquals(actualTitle, expectedTitle);
+        expectedResult = ALL_PRODUCTS_TITLE;
+        actualResult = productPage.getAllProductsTitle();
+        Assert.assertEquals(actualResult, expectedResult);
 
         logger.info("6. The products list is visible");
         Assert.assertTrue(productPage.isProductListVisible());

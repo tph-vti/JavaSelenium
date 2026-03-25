@@ -1,13 +1,12 @@
 package pages;
 
+import models.User;
 import core.BasePage;
 import locator.LoginLocator;
-import static common.Constants.*;
 
 public class LoginPage extends BasePage {
     public LoginPage() {
         super();
-        openSite(AUTOMATION_EXERCISE_BASE_URL);
     }
 
     public void fillLoginForm(String email, String password) {
@@ -27,7 +26,6 @@ public class LoginPage extends BasePage {
 
     public void login(String email, String password) {
         fillLoginForm(email, password);
-        clickLoginButton();
     }
 
     public String getLoginTitle() {
@@ -46,6 +44,10 @@ public class LoginPage extends BasePage {
     }
 
     // Signup Form
+    public void enterRegisterNameAndEmail(User user) {
+        enterRegisterNameAndEmail(user.getName(), user.getEmail());
+    }
+
     public void enterRegisterNameAndEmail(String name, String email) {
         logger.info("Entering name and email");
         if (name != null && !name.isEmpty()) {

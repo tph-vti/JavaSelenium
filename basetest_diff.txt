@@ -1,0 +1,62 @@
+diff --git a/src/test/java/core/BaseTest.java b/src/test/java/core/BaseTest.java
+index 00f5d6f..0a364de 100644
+--- a/src/test/java/core/BaseTest.java
++++ b/src/test/java/core/BaseTest.java
+@@ -5,11 +5,33 @@ import org.testng.annotations.BeforeMethod;
+ import org.testng.ITestResult;
+ import java.lang.reflect.Method;
+ import common.DataGenerator;
++import factory.UserFactory;
++import models.User;
++import pages.RegisterPage;
++import pages.TestcasePage;
++import pages.LoginPage;
++import pages.ProductPage;
++import pages.CommonPage;
++import pages.ContactPage;
++import pages.HomePage;
+ 
+ import java.net.MalformedURLException;
+ 
+ public class BaseTest extends DataGenerator {
+     protected DriverManager driverManager;
++    protected RegisterPage registerPage = new RegisterPage();
++    protected LoginPage loginPage = new LoginPage();
++    protected CommonPage commonPage = new CommonPage();
++    protected HomePage homePage = new HomePage();
++    protected ContactPage contactPage = new ContactPage();
++    protected ProductPage productPage = new ProductPage();
++    protected TestcasePage testcasePage = new TestcasePage();
++
++    // Factory
++    protected User user = UserFactory.registerValidUser();
++
++    protected String expectedResult;
++    protected String actualResult;
+ 
+     @BeforeMethod
+     public void setup(Method method) throws MalformedURLException {
+@@ -29,6 +51,23 @@ public class BaseTest extends DataGenerator {
+         }
+     }
+ 
++    public String[] registerAndGetCredentials() {
++        user = UserFactory.registerValidUser();
++        
++        commonPage.clickSignupLogin();
++        loginPage.enterRegisterNameAndEmail(user);
++        loginPage.clickSignupButton();
++        registerPage.fillAccountInformationForm(user);
++        registerPage.fillDateOfBirth(user);
++        registerPage.clickNewsletterCheckbox();
++        registerPage.clickSpecialOffersCheckbox();
++        registerPage.fillAddressInformation(user);
++        registerPage.clickCreateAccountButton();
++        commonPage.clickContinueButton();
++
++        return new String[] { user.getName(), user.getEmail(), user.getPassword() };
++    }
++
+     @AfterMethod
+     public void teardown(ITestResult result) {
+         try {

@@ -1,0 +1,47 @@
+diff --git a/src/main/java/core/BasePage.java b/src/main/java/core/BasePage.java
+index 9e7c2b3..1877700 100644
+--- a/src/main/java/core/BasePage.java
++++ b/src/main/java/core/BasePage.java
+@@ -1,11 +1,13 @@
+ package core;
+ 
++import static common.Constants.*;
+ import core.base.NetworkHelper;
+ 
+ public class BasePage extends NetworkHelper {
+ 
+     public BasePage() {
+-        // driver is initialized in ElementFinder via DriverManager.getDriver()
++        openSite(AUTOMATION_EXERCISE_BASE_URL);
++        removeAds();        
+     }
+ 
+     // ═══════════════════ NAVIGATION ═══════════════════
+@@ -88,12 +90,27 @@ public class BasePage extends NetworkHelper {
+         }
+     }
+ 
++    // ═══════════════════ CLICKS (OVERRIDDEN TO AUTO-REMOVE ADS) ═══════════════════
++
++    @Override
++    protected void clickButton(org.openqa.selenium.By selector) {
++        removeAds();
++        super.clickButton(selector);
++    }
++
++    @Override
++    protected void clickButton(org.openqa.selenium.By selector, long timeoutSeconds) {
++        removeAds();
++        super.clickButton(selector, timeoutSeconds);
++    }
++
+     /**
+      * Clicks an element using JavaScript to avoid 'ElementClickIntercepted' errors.
+      * Useful when ads or overlays are present.
+      */
+     public void clickButtonJS(org.openqa.selenium.By selector) {
+         logger.info("Clicking button via JS: {}", selector);
++        removeAds();
+         try {
+             org.openqa.selenium.WebElement element = findElementPresent(selector);
+             ((org.openqa.selenium.JavascriptExecutor) driver).executeScript("arguments[0].click();", element);

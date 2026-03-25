@@ -1,0 +1,33 @@
+On branch final_exam_quoc
+Your branch is up to date with 'origin/final_exam_quoc'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   .env.example
+	modified:   .gitignore
+	modified:   src/main/java/core/BasePage.java
+	modified:   src/main/java/core/TestSettings.java
+	modified:   src/main/java/pages/CommonPage.java
+	modified:   src/main/java/pages/ContactPage.java
+	modified:   src/main/java/pages/HomePage.java
+	modified:   src/main/java/pages/LoginPage.java
+	modified:   src/main/java/pages/ProductPage.java
+	modified:   src/main/java/pages/RegisterPage.java
+	modified:   src/main/java/pages/TestcasePage.java
+	modified:   src/test/java/core/BaseTest.java
+	modified:   src/test/java/test/ContactTest.java
+	modified:   src/test/java/test/LoginTest.java
+	modified:   src/test/java/test/LogoutTest.java
+	modified:   src/test/java/test/ProductTest.java
+	modified:   src/test/java/test/RegisterTest.java
+	modified:   src/test/java/test/TestcaseTest.java
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	diff.txt
+	git_status.txt
+	src/main/java/factory/
+	src/main/java/models/
+
+no changes added to commit (use "git add" and/or "git commit -a")

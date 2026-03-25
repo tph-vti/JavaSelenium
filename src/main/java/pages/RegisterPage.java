@@ -1,33 +1,31 @@
 package pages;
 
+import models.User;
 import core.BasePage;
 import locator.RegisterLocators;
-import static common.Constants.*;
 
 public class RegisterPage extends BasePage {
 
     public RegisterPage() {
         super();
-        openSite(AUTOMATION_EXERCISE_BASE_URL);
-        removeAds();
     }
 
     // ───────────────────── ACCOUNT INFORMATION ─────────────────────
-    public void fillAccountInformationForm(String title, String password) {
+    public void fillAccountInformationForm(User user) {
         logger.info("Filling account information form");
-        if (title.equalsIgnoreCase(GENDER_MALE)) {
+        if (user.getGender() != null && user.getGender().equalsIgnoreCase("Mr.")) {
             clickButton(RegisterLocators.GENDER_MR_RADIO);
-        } else if (title.equalsIgnoreCase(GENDER_FEMALE)) {
+        } else if (user.getGender() != null && user.getGender().equalsIgnoreCase("Mrs.")) {
             clickButton(RegisterLocators.GENDER_MRS_RADIO);
         }
-        enterText(RegisterLocators.PASSWORD_INPUT, password);
+        enterText(RegisterLocators.PASSWORD_INPUT, user.getPassword());
     }
 
-    public void fillDateOfBirth(String day, String month, String year) {
+    public void fillDateOfBirth(User user) {
         logger.info("Filling date of birth");
-        selectByVisibleText(RegisterLocators.DAY_DROPDOWN, day);
-        selectByVisibleText(RegisterLocators.MONTH_DROPDOWN, month);
-        selectByVisibleText(RegisterLocators.YEAR_DROPDOWN, year);
+        selectByVisibleText(RegisterLocators.DAY_DROPDOWN, user.getDay());
+        selectByVisibleText(RegisterLocators.MONTH_DROPDOWN, user.getMonth());
+        selectByVisibleText(RegisterLocators.YEAR_DROPDOWN, user.getYear());
     }
 
     public void clickNewsletterCheckbox() {
@@ -40,38 +38,37 @@ public class RegisterPage extends BasePage {
         clickButton(RegisterLocators.SPECIAL_OFFERS_CHECKBOX);
     }
 
-    public void fillAddressInformation(String firstName, String lastName, String company, String address1,
-            String address2, String country, String state, String city, String zipCode, String mobileNumber) {
+    public void fillAddressInformation(User user) {
         logger.info("Filling address information form");
-        if(firstName != null && !firstName.isEmpty()){
-            enterText(RegisterLocators.FIRST_NAME_INPUT, firstName);
+        if (user.getFirstName() != null && !user.getFirstName().isEmpty()) {
+            enterText(RegisterLocators.FIRST_NAME_INPUT, user.getFirstName());
         }
-        if(lastName != null && !lastName.isEmpty()){
-            enterText(RegisterLocators.LAST_NAME_INPUT, lastName);
+        if (user.getLastName() != null && !user.getLastName().isEmpty()) {
+            enterText(RegisterLocators.LAST_NAME_INPUT, user.getLastName());
         }
-        if(company != null && !company.isEmpty()){
-            enterText(RegisterLocators.COMPANY_INPUT, company);
+        if (user.getCompany() != null && !user.getCompany().isEmpty()) {
+            enterText(RegisterLocators.COMPANY_INPUT, user.getCompany());
         }
-        if(address1 != null && !address1.isEmpty()){
-            enterText(RegisterLocators.ADDRESS1_INPUT, address1);
+        if (user.getAddress1() != null && !user.getAddress1().isEmpty()) {
+            enterText(RegisterLocators.ADDRESS1_INPUT, user.getAddress1());
         }
-        if(address2 != null && !address2.isEmpty()){
-            enterText(RegisterLocators.ADDRESS2_INPUT, address2);
+        if (user.getAddress2() != null && !user.getAddress2().isEmpty()) {
+            enterText(RegisterLocators.ADDRESS2_INPUT, user.getAddress2());
         }
-        if(country != null && !country.isEmpty()){
-            selectByVisibleText(RegisterLocators.COUNTRY_DROPDOWN, country);
+        if (user.getCountry() != null && !user.getCountry().isEmpty()) {
+            selectByVisibleText(RegisterLocators.COUNTRY_DROPDOWN, user.getCountry());
         }
-        if(state != null && !state.isEmpty()){
-            enterText(RegisterLocators.STATE_INPUT, state);
+        if (user.getState() != null && !user.getState().isEmpty()) {
+            enterText(RegisterLocators.STATE_INPUT, user.getState());
         }
-        if(city != null && !city.isEmpty()){
-            enterText(RegisterLocators.CITY_INPUT, city);
+        if (user.getCity() != null && !user.getCity().isEmpty()) {
+            enterText(RegisterLocators.CITY_INPUT, user.getCity());
         }
-        if(zipCode != null && !zipCode.isEmpty()){
-            enterText(RegisterLocators.ZIP_CODE_INPUT, zipCode);
+        if (user.getZipCode() != null && !user.getZipCode().isEmpty()) {
+            enterText(RegisterLocators.ZIP_CODE_INPUT, user.getZipCode());
         }
-        if(mobileNumber != null && !mobileNumber.isEmpty()){
-            enterText(RegisterLocators.MOBILE_NUMBER_INPUT, mobileNumber);
+        if (user.getMobileNumber() != null && !user.getMobileNumber().isEmpty()) {
+            enterText(RegisterLocators.MOBILE_NUMBER_INPUT, user.getMobileNumber());
         }
     }
 

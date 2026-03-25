@@ -2,13 +2,10 @@ package pages;
 
 import core.BasePage;
 import locator.ContactLocator;
-import static common.Constants.*;
 
 public class ContactPage extends BasePage {
     public ContactPage() {
         super();
-        openSite(AUTOMATION_EXERCISE_BASE_URL);
-        removeAds();
     }
 
     public String getGetInTouchTitle() {

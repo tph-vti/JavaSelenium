@@ -11,7 +11,7 @@ import java.util.Objects;
  * Priority order: System Properties > .env file > Hardcoded defaults
  *
  * Usage:
- * - mvn clean test -Denv=GURU -Dbrowser=chrome -DhubType=NONE
+ * - mvn clean test -Denv=AUTOMATION_EXERCISE -Dbrowser=chrome -DhubType=NONE
  */
 public class TestSettings {
 

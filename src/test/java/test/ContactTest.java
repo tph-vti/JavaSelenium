@@ -4,20 +4,13 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import core.BaseTest;
-import pages.CommonPage;
-import pages.ContactPage;
-import pages.HomePage;
 
 import static core.Constants.*;
 
 public class ContactTest extends BaseTest {
 
     @Test(description = "TC6: Contact Us Form")
-    public void testContactUsForm() {
-        ContactPage contactPage = new ContactPage();
-        CommonPage commonPage = new CommonPage();
-        HomePage homePage = new HomePage();
-        
+    public void testContactUsForm() {        
 
         String name = getRandomUserName();
         String email = getRandomEmail();

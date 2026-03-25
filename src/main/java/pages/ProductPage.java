@@ -2,13 +2,10 @@ package pages;
 
 import core.BasePage;
 import locator.ProductLocator;
-import static common.Constants.*;
 
 public class ProductPage extends BasePage {
     public ProductPage() {
         super();
-        openSite(AUTOMATION_EXERCISE_BASE_URL);
-        removeAds();
     }
 
     public void clickViewProductButton() {
@@ -21,12 +18,10 @@ public class ProductPage extends BasePage {
         clickButtonJS(ProductLocator.VIEW_PRODUCT_BUTTON_RANDOM);
     }
 
-    public String getAllProductsTitle(){
+    public String getAllProductsTitle() {
         logger.info("Getting 'All Products' title");
-        if(isElementDisplayed(ProductLocator.ALL_PRODUCTS_TITLE)) {
-            return getElementText(ProductLocator.ALL_PRODUCTS_TITLE);
-        }
-        return "";
+        return getElementText(ProductLocator.ALL_PRODUCTS_TITLE);
+
     }
 
     public boolean isProductListVisible() {

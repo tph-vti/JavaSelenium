@@ -88,12 +88,27 @@ public class BasePage extends NetworkHelper {
         }
     }
 
+    // ═══════════════════ CLICKS (OVERRIDDEN TO AUTO-REMOVE ADS) ═══════════════════
+
+    @Override
+    protected void clickButton(org.openqa.selenium.By selector) {
+        removeAds();
+        super.clickButton(selector);
+    }
+
+    @Override
+    protected void clickButton(org.openqa.selenium.By selector, long timeoutSeconds) {
+        removeAds();
+        super.clickButton(selector, timeoutSeconds);
+    }
+
     /**
      * Clicks an element using JavaScript to avoid 'ElementClickIntercepted' errors.
      * Useful when ads or overlays are present.
      */
     public void clickButtonJS(org.openqa.selenium.By selector) {
         logger.info("Clicking button via JS: {}", selector);
+        removeAds();
         try {
             org.openqa.selenium.WebElement element = findElementPresent(selector);
             ((org.openqa.selenium.JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
