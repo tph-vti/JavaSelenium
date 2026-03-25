@@ -3,8 +3,6 @@ package pages;
 import core.BasePage;
 import org.openqa.selenium.By;
 
-import static pages.CommonLocator.driver;
-
 public class LoginPageSelector {
     //Login section
     public static final By lblLoginToYourAccountHeader = By.xpath("//h2[text()='Login to your account']");
@@ -20,27 +18,27 @@ public class LoginPageSelector {
     public static final By lblSignupError = By.xpath("//form[@action='/signup']//p");
 
     //===============ACTIONS=====================
-    public static class LoginPage extends BasePage {
+    public class LoginPage extends BasePage {
         public LoginPage() {
             super();
         }
 
         //LOGIN SECTION
-        public boolean verifyLoginHeader() {
+        public static boolean verifyLoginHeader() {
             logger.info("Verify 'Login to your account' title is displayed");
             verifyElementVisible(LoginPageSelector.lblLoginToYourAccountHeader, "Login to your account");
             return true;
         }
 
-        public void enterEmail(String email) {
+        public static void enterEmail(String email) {
             enterText(LoginPageSelector.txtLoginEmail, email);
         }
 
-        public void enterPassword(String password) {
+        public static void enterPassword(String password) {
             enterText(LoginPageSelector.txtLoginPassword, password);
         }
 
-        public void clickLogin() {
+        public static void clickLogin() {
             click(LoginPageSelector.btnLogin);
         }
 

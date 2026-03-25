@@ -30,4 +30,18 @@ public final class Constants {
     public static final String SAMPLE_FILE_PATH = Paths.get(RESOURCES_PATH, "sample.jpg").toString();
     public static final String CURRENT_USERNAME = System.getProperty("user.name");
     public static final String DOWNLOAD_FOLDER_PATH = "/"+Paths.get("","Users", CURRENT_USERNAME,"Downloads").toString();
+
+    //LOGIN DATA:
+    public static final String VALID_EMAIL = "cong@gmail.com";
+    public static final String VALID_PASSWORD = "12345";
+    public static final String VALID_NAME = "12345";
+
+    public static final String INVALID_EMAIL = "invaliduser@gmail.com";
+    public static final String INVALID_PASSWORD = "invalidacc";
+
+    public static final String ERROR_SIGNUP = "Email Address already exist!";
+    public static final String ERROR_LOGIN = "Your email or password is incorrect!";
+
+    public static final String SEARCH_KEY = "Summer White Top";
+
 }

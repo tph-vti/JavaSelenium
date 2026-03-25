@@ -36,7 +36,7 @@ public class BasePage extends Helper {
         driver = driverInstance;
     }
 
-    protected WebElement findVisibleElement(By selector) {
+    protected static WebElement findVisibleElement(By selector) {
         return getWait(TestSettings.WAIT_ELEMENT)
                 .until(ExpectedConditions.visibilityOfElementLocated(selector));
     }
@@ -58,7 +58,7 @@ public class BasePage extends Helper {
         return getWait(TestSettings.WAIT_ELEMENT).until(ExpectedConditions.elementToBeClickable(selector));
     }
 
-    public void enterText(By selector, String text) {
+    public static void enterText(By selector, String text) {
         logger.info("Entering text {}", text);
         findVisibleElement(selector).sendKeys(text);
     }
@@ -79,7 +79,7 @@ public class BasePage extends Helper {
        return element.getText().isEmpty() ? element.getDomProperty("value") : element.getText();
    }
 
-    protected void click(By selector) {
+    protected static void click(By selector) {
         logger.info("Clicking {}", selector);
         waitForElementClickable(selector).click();
     }
@@ -139,7 +139,7 @@ public class BasePage extends Helper {
         assertEquals(expected, actual, message);
     }
 
-    protected void verifyElementVisible(By selector, String errorMessage) {
+    protected static void verifyElementVisible(By selector, String errorMessage) {
         logger.info("Verifying visibility of element {}", selector);
         try {
             getWait(TestSettings.WAIT_ELEMENT).until(ExpectedConditions.visibilityOfElementLocated(selector));
