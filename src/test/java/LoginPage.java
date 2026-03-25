@@ -8,7 +8,7 @@ import org.openqa.selenium.WebDriver;
 import pages.AccountDeletedPage;
 import pages.CommonLocator;
 import pages.LoginSignUpPageSelector;
-import pages.SignupLoginPageSelector;
+import pages.LoginPageSelector;
 
 
 public class LoginPage {
@@ -27,7 +27,7 @@ public class LoginPage {
 
         @Test
         public void TC02_LoginUserWithCorrectEmailAndPassword() {
-            SignupLoginPageSelector.Login_SignUp loginPage = new SignupLoginPageSelector.Login_SignUp();
+            LoginPageSelector.LoginPage loginPage = new LoginPageSelector.LoginPage();
                 //2. Navigate to url
                 BasePage.openSite();
                 //3. Verify that home page is visible successfully
@@ -35,7 +35,7 @@ public class LoginPage {
                 //4. Click on 'Signup / Login' button
                 CommonLocator.clickMenu("Signup / Login");
                 //5. Verify 'Login to your account' is visible
-                Assertions.assertTrue(SignupLoginPageSelector.isLoginToYourAccountHeaderVisible());
+                Assertions.assertTrue(LoginPageSelector.isLoginToYourAccountHeaderVisible());
                 //6. Enter correct email address and password
                 loginPage.enterEmail("Cong+1@gmail.com");
                 loginPage.enterPassword("Cong123");

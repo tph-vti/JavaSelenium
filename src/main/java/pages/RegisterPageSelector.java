@@ -5,6 +5,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 
+import java.util.Map;
+
 public class RegisterPageSelector extends BasePage {
     WebDriver driver;
 
@@ -26,7 +28,7 @@ public class RegisterPageSelector extends BasePage {
     public static final By ckbNewsletter = By.id("newsletter");
     public static final By ckbOffers = By.id("option");
 
-    //Address Infor
+    //Address Information
     public static final By txtFirstName = By.id("first_name");
     public static final By txtLastName = By.id("last_name");
     public static final By txtCompany = By.id("company");
@@ -40,6 +42,11 @@ public class RegisterPageSelector extends BasePage {
 
     // Button
     private final By btnCreateAccount = By.xpath("//button[@data-qa='create-account']");
+
+    //Account Created Page
+    public static By lblAccountCreatedTitle  = By.xpath("//b[contains(text(),'Account Created!')]");
+    public static By btnContinue = By.xpath("//a[@data-qa='continue-button']");
+
 
     //========================ACTIONS=====================
     //Title
@@ -76,7 +83,6 @@ public class RegisterPageSelector extends BasePage {
     public void clickNewsletter() {
         driver.findElement(ckbNewsletter).click();
     }
-
     public void clickSpecialOffers() {
         driver.findElement(ckbOffers).click();
     }

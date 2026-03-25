@@ -1,11 +1,10 @@
 import core.BasePage;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.By;
 
 import pages.CommonLocator;
 import pages.RegisterPageSelector;
-import pages.SignupLoginPageSelector;
+import pages.LoginPageSelector;
 
 public class RegisterUserTest {
 
@@ -20,14 +19,14 @@ public class RegisterUserTest {
     public void TC01_RegisterUser() {
 
         CommonLocator common = new CommonLocator(driver);
-        SignupLoginPageSelector signupLoginPage = new SignupLoginPageSelector(driver);
+        LoginPageSelector signupLoginPage = new LoginPageSelector(driver);
         RegisterPageSelector
 
         Assertions.assertTrue(CommonLocator.isHomePageVisible());
         CommonLocator.clickMenu("Signup / Login");
 
         // 🔥 FIX: tạo object signupPage
-        SignupLoginPageSelector signupPage = new SignupLoginPageSelector(driver);
+        LoginPageSelector signupPage = new LoginPageSelector(driver);
 
         RegisterPageSelector registerPage = signupPage.newUserSignup(
                 "John",

@@ -1,36 +1,31 @@
 package pages;
 
+import core.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class CommonLocator {
-    static WebDriver driver;
 
-    public CommonLocator(WebDriver driver) {
-        CommonLocator.driver = driver;
+    public static final String MENU = "//div[contains(@class,'shop-menu')]//a[contains(text(),'%s')]";
+
+    public static By menu(String menuName) {
+        return By.xpath(String.format(MENU, menuName));
     }
 
-    private static final By homeLogo =
-            By.xpath("//img[@alt='Website for automation practice']");
+    public static class HomePage extends BasePage {
 
-    public static void setDriver(WebDriver driverInstance) {
-        driver = driverInstance;
-    }
+        public HomePage() {
+            super();
+        }
 
-    public static boolean isHomePageVisible() {
-        return !driver.findElements(homeLogo).isEmpty();
-    }
+        public void clickMenu(String menuName){
+            click(By.xpath(String.format(CommonLocator.MENU, menuName)));
+        }
 
-    public static By menuItem(String menuName) {
-        return By.xpath("//div[contains(@class,'shop-menu')]//a[contains(text(),'" + menuName + "')]");
-    }
-
-    public static void clickMenu(String menuName) {
-        CommonLocator.driver.findElement(menuItem(menuName)).click();
-
-    }
-
-    public static boolean isLoggedInAsVisible() {
-        return !driver.findElements(menuItem("Logged in as")).isEmpty();
+        public boolean verifyMenu(String menuName){
+            return findVisibleElement(
+                    By.xpath(String.format(CommonLocator.MENU, menuName))
+            ).isDisplayed();
+        }
     }
 }
