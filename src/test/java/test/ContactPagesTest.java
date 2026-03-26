@@ -6,6 +6,8 @@ import pages.ContactPages;
 import pages.HomePages;
 import data.TestData;
 
+import java.util.Map;
+
 public class ContactPagesTest extends BaseTest {
 
     @Test
@@ -23,8 +25,9 @@ public class ContactPagesTest extends BaseTest {
         logger.info("STEP 3: Verify 'GET IN TOUCH' is visible");
         contactPage.verifyGetInTouchVisible();
 
+        Map<String, String> contactData = TestData.getContactData();
         logger.info("STEP 4: Enter name, email, subject and message");
-        contactPage.fillContactForm(TestData.contactData);
+        contactPage.fillContactForm(contactData);
 
         logger.info("STEP 5: Upload file");
         contactPage.uploadFile("C:\\Users\\ADMIN\\OneDrive\\Desktop\\test.txt");

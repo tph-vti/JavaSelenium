@@ -8,6 +8,8 @@ import pages.HomePages;
 import pages.LoginPages;
 import pages.RegisterPages;
 
+import java.util.Map;
+
 public class RegisterPagesTest extends BaseTest {
 
     @Test
@@ -26,12 +28,10 @@ public class RegisterPagesTest extends BaseTest {
         logger.info("STEP 3: Verify 'New User Signup!' is visible");
         loginPage.verifySignupTitle();
 
+        Map<String, String> signupData = TestData.getSignupData();
         logger.info("STEP 4: Enter name and email address");
-        String randomName = "user" + System.currentTimeMillis() ;
-        String randomEmail = "user" + System.currentTimeMillis() + "@gmail.com";
-        loginPage.enterSignupName(randomName);
-        loginPage.enterSignupEmail(randomEmail);
-
+        loginPage.enterSignupName(signupData.get("name"));
+        loginPage.enterSignupEmail(signupData.get("email"));
 
         logger.info("STEP 5: Click 'Sign Up' button");
         loginPage.clickSignup();
@@ -40,7 +40,7 @@ public class RegisterPagesTest extends BaseTest {
         registerPages.verifyRegisterTitle();
 
         logger.info("STEP 7: Fill account information");
-        registerPages.fillAccountInformation(TestData.accountData);
+        registerPages.fillAccountInformation(TestData.getAccountData());
 
         logger.info("STEP 8: Select newsletter checkbox");
         registerPages.clickNewsletterCheckbox();
@@ -49,7 +49,7 @@ public class RegisterPagesTest extends BaseTest {
         registerPages.clickOffersCheckbox();
 
         logger.info("STEP 10: Fill address information");
-        registerPages.fillAddressInformation(TestData.addressData);
+        registerPages.fillAddressInformation(TestData.getAddressData());
 
         logger.info("STEP 11: Click Create Account button");
         registerPages.clickCreateAccountButton();

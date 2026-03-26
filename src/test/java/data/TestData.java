@@ -1,43 +1,64 @@
 package data;
 
+import core.DataGenerator;
+
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
 public class TestData {
 
-    // Dữ liệu account mẫu
-    public static Map<String, String> accountData = new HashMap<>();
+    // ================= ACCOUNT DATA =================
+    public static Map<String, String> getAccountData() {
+        Map<String, String> accountData = new HashMap<>();
 
-    static {
-        accountData.put("title", "Mr");
-        accountData.put("password", "123456");
-        accountData.put("day", "10");
-        accountData.put("month", "March");
-        accountData.put("year", "1990");
+        LocalDate dob = DataGenerator.getRandomBirthDate();
+
+        accountData.put("title", DataGenerator.getRandomTitle());
+        accountData.put("password", DataGenerator.getRandomPassword());
+        accountData.put("day", DataGenerator.getDayFromDate(dob));
+        accountData.put("month", DataGenerator.getMonthFromDate(dob));
+        accountData.put("year", DataGenerator.getYearFromDate(dob));
+
+        return accountData;
     }
 
+    public static Map<String, String> getSignupData() {
+        Map<String, String> data = new HashMap<>();
 
-    // Dữ liệu address mẫu
-    public static Map<String, String> addressData = new HashMap<>();
-    static {
-        addressData.put("firstName", "John");
-        addressData.put("lastName", "Doe");
-        addressData.put("company", "ABC Company");
-        addressData.put("address1", "123 Street");
-        addressData.put("address2", "Apartment 456");
-        addressData.put("country", "United States");
-        addressData.put("state", "California");
-        addressData.put("city", "Los Angeles");
-        addressData.put("zipcode", "90001");
-        addressData.put("mobile", "0123456789");
+        data.put("name", DataGenerator.getRandomFullName());
+        data.put("email", DataGenerator.getRandomEmail());
+
+        return data;
     }
 
-    public static Map<String, String> contactData = new HashMap<>();
+    // ================= ADDRESS DATA =================
+    public static Map<String, String> getAddressData() {
+        Map<String, String> addressData = new HashMap<>();
 
-    static {
-        contactData.put("name", "John Doe");
-        contactData.put("email", "john" + System.currentTimeMillis() + "@gmail.com");
-        contactData.put("subject", "Test Subject");
-        contactData.put("message", "This is a test message");
+        addressData.put("firstName", DataGenerator.getRandomFirstName());
+        addressData.put("lastName", DataGenerator.getRandomLastName());
+        addressData.put("company", DataGenerator.getRandomCompanyName());
+        addressData.put("address1", DataGenerator.getRandomAddress());
+        addressData.put("address2", "Apt " + DataGenerator.generateRandomNumber(3));
+        addressData.put("country", DataGenerator.getRandomCountry());
+        addressData.put("state", DataGenerator.getRandomState());
+        addressData.put("city", DataGenerator.getRandomCity());
+        addressData.put("zipcode", DataGenerator.getRandomZipCode());
+        addressData.put("mobile", DataGenerator.getRandomPhoneNumber());
+
+        return addressData;
+    }
+
+    // ================= CONTACT DATA =================
+    public static Map<String, String> getContactData() {
+        Map<String, String> contactData = new HashMap<>();
+
+        contactData.put("name", DataGenerator.getRandomFullName());
+        contactData.put("email", DataGenerator.getRandomEmail());
+        contactData.put("subject", "Test " + DataGenerator.generateRandomString(5));
+        contactData.put("message", "This is a test message " + DataGenerator.generateRandomString(10));
+
+        return contactData;
     }
 }
