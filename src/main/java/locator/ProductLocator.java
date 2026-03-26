@@ -4,13 +4,12 @@ import org.openqa.selenium.By;
 
 public class ProductLocator {
 
-
     public static By txtAllProductsTitle = By.xpath( "//h2[text()='All Products']");
 
     public static  By listProducts = By.xpath("//div[@class='features_items']//div[@class='product-image-wrapper']");
 
     public static By btnViewProduct(int index) {
-        return By.xpath("(//a[text()='View Product'])[" + index + "]");
+        return By.xpath("(//div[@class='product-image-wrapper'])[\" + index + \"]//a[contains(text(),'View Product')]");
     };
 
     public static By txtProductName = By.xpath("//div[@class='product-information']//h2");

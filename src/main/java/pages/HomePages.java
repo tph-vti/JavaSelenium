@@ -9,17 +9,23 @@ import org.openqa.selenium.WebElement;
 public class HomePages extends BasePage {
 
     public HomePages() {
-        super(); // lấy driver từ DriverManager
+        super();
     }
 
     public void clickMenu(String menuName){
         click(By.xpath(String.format(HomeLocator.MENU, menuName)));
     }
 
-    public boolean verifyMenu(String menuName){
-        return findVisibleElement(
-                By.xpath(String.format(HomeLocator.MENU, menuName))
-        ).isDisplayed();
+    public void verifyMenu(String menuName) {
+        logger.info("Verify menu '{}' is visible", menuName);
+
+        By locator = By.xpath(String.format(HomeLocator.MENU, menuName));
+
+        boolean isDisplayed = findVisibleElement(locator).isDisplayed();
+
+        if (!isDisplayed) {
+            throw new AssertionError("Menu '" + menuName + "' is NOT visible");
+        }
     }
 
     public void scrollToFooter() {
@@ -65,7 +71,19 @@ public class HomePages extends BasePage {
                     "Message incorrect\nExpected: " + expected + "\nActual: " + actual
             );
         }
-
         logger.info("Message is EXACTLY correct");
+    }
+
+    public void verifyHomePage() {
+        logger.info("Verify user is navigated back to Home page");
+
+        String currentUrl = driver.getCurrentUrl();
+        String expectedUrl = "https://automationexercise.com/";
+
+        if (!currentUrl.equals(expectedUrl)) {
+            throw new AssertionError(
+                    "Home page URL is incorrect\nExpected: " + expectedUrl + "\nActual: " + currentUrl
+            );
+        }
     }
 }

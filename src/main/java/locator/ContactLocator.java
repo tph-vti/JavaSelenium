@@ -18,17 +18,8 @@ public class ContactLocator {
 
     public static By btnSubmit = By.xpath("//input[@name='submit']");
 
-    // ===== SUCCESS MESSAGE =====
-
-    // Step 10: Success message
     public static By txtSuccessMessage =
             By.xpath("//div[contains(@class,'alert-success')]");
 
-
-    // ===== NAVIGATION =====
-
-    // Step 11: Home button
     public static By btnHome = By.xpath("//a[contains(text(),'Home')]");
-
-
 }

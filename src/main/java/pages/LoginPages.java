@@ -2,6 +2,7 @@ package pages;
 
 import core.BasePage;
 import locator.LoginLocator;
+import locator.RegisterLocator;
 
 public class LoginPages extends BasePage {
 
@@ -10,11 +11,9 @@ public class LoginPages extends BasePage {
     }
 
     //  LOGIN
-
-    public boolean verifyLoginTitle() {
+    public void verifyLoginTitle() {
         logger.info("Verify 'Login to your account' title is displayed");
         verifyElementVisible(LoginLocator.lblLoginTitle, "Login to your account");
-        return true;
     }
 
     public void enterEmail(String email) {
@@ -32,6 +31,7 @@ public class LoginPages extends BasePage {
         click(LoginLocator.btnLogin);
     }
 
+
     public String getLoginErrorText() {
         logger.info("Get error message displayed in Login section");
         String errorText = getElementText(LoginLocator.lblLoginError);
@@ -41,10 +41,9 @@ public class LoginPages extends BasePage {
 
     // SIGNUP
 
-    public boolean verifySignupTitle() {
+    public void verifySignupTitle() {
         logger.info("Verify 'New User Signup!' title is displayed");
         verifyElementVisible(LoginLocator.lblSignupTitle, "New User Signup!");
-        return true;
     }
 
     public void enterSignupName(String name) {

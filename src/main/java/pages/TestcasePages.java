@@ -33,7 +33,5 @@ public class TestcasePages extends BasePage {
                 TestcaseLocator.listTestCases,
                 "Test Cases list is NOT visible"
         );
-
-        logger.info("User is successfully navigated to Test Cases page");
     }
 }

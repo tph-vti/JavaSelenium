@@ -1,7 +1,6 @@
 package test;
 
 import core.BaseTest;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.ContactPages;
 import pages.HomePages;
@@ -22,7 +21,7 @@ public class ContactPagesTest extends BaseTest {
         homePage.clickMenu("Contact us");
 
         logger.info("STEP 3: Verify 'GET IN TOUCH' is visible");
-        Assert.assertTrue(contactPage.verifyGetInTouchVisible());
+        contactPage.verifyGetInTouchVisible();
 
         logger.info("STEP 4: Enter name, email, subject and message");
         contactPage.fillContactForm(TestData.contactData);
@@ -39,6 +38,6 @@ public class ContactPagesTest extends BaseTest {
         contactPage.clickHomeButton();
 
         logger.info("STEP 8: Verify user is navigated to Home page");
-        contactPage.verifyHomePage();
+        homePage.verifyHomePage();
     }
 }

@@ -27,19 +27,19 @@ public class ProductPagesTest extends BaseTest {
         ProductPages productPage = new ProductPages();
 
         logger.info("STEP 3: Verify user is navigated to ALL PRODUCTS page");
-        Assert.assertTrue(productPage.verifyAllProductsPage());
+        productPage.verifyAllProductsPage();
 
         logger.info("STEP 4: Verify product list is visible");
-        Assert.assertTrue(productPage.verifyProductListVisible());
+        productPage.verifyProductListVisible();
 
         logger.info("STEP 5: Click 'View Product' of first product");
         productPage.clickViewProduct(1);
 
         logger.info("STEP 6: Verify user is landed to product detail page");
-        Assert.assertTrue(productPage.verifyProductDetailPageByUrl());
+        productPage.verifyProductDetailPageByUrl();
 
         logger.info("STEP 7: Verify product detail info is visible");
-        Assert.assertTrue(productPage.verifyProductDetailInfo());
+        productPage.verifyProductDetailInfo();
     }
 
     @Test
@@ -48,19 +48,19 @@ public class ProductPagesTest extends BaseTest {
         ProductPages productPage = new ProductPages();
 
         logger.info("STEP 3: Verify ALL PRODUCTS page");
-        Assert.assertTrue(productPage.verifyAllProductsPage());
+        productPage.verifyAllProductsPage();
 
         logger.info("STEP 4: Enter product name and click search");
         String keyword = Constants.SEARCH_KEY;
         productPage.searchProduct(keyword);
 
         logger.info("STEP 5: Verify 'SEARCHED PRODUCTS' is visible");
-        Assert.assertTrue(productPage.verifySearchedProductsTitle());
+        productPage.verifySearchedProductsTitle();
 
         logger.info("STEP 6: Verify searched product list is visible");
-        Assert.assertTrue(productPage.verifySearchResultListVisible());
+        productPage.verifySearchResultListVisible();
 
         logger.info("STEP 7: Verify all results contain keyword");
-        Assert.assertTrue(productPage.verifyAllSearchResultsContainKeyword(keyword));
+        productPage.verifyAllSearchResultsContainKeyword(keyword);
     }
 }

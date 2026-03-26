@@ -24,7 +24,7 @@ public class RegisterPagesTest extends BaseTest {
         homePage.clickMenu("Signup / Login");
 
         logger.info("STEP 3: Verify 'New User Signup!' is visible");
-        Assert.assertTrue(loginPage.verifySignupTitle());
+        loginPage.verifySignupTitle();
 
         logger.info("STEP 4: Enter name and email address");
         String randomName = "user" + System.currentTimeMillis() ;
@@ -37,7 +37,7 @@ public class RegisterPagesTest extends BaseTest {
         loginPage.clickSignup();
 
         logger.info("STEP 6: Verify that 'ENTER ACCOUNT INFORMATION' is visible");
-        Assert.assertTrue(registerPages.verifyRegisterTitle());
+        registerPages.verifyRegisterTitle();
 
         logger.info("STEP 7: Fill account information");
         registerPages.fillAccountInformation(TestData.accountData);
@@ -55,12 +55,12 @@ public class RegisterPagesTest extends BaseTest {
         registerPages.clickCreateAccountButton();
 
         logger.info("STEP 12: Verify that 'ACCOUNT CREATED!' is visible");
-        Assert.assertTrue(registerPages.verifyAccountCreatedTitle());
+        registerPages.verifyAccountCreatedTitle();
 
         logger.info("STEP 13: Click Continue button");
         registerPages.clickContinue();
 
         logger.info("STEP 14: Verify 'Logged in as' appears on menu");
-        Assert.assertTrue(homePage.verifyMenu("Logged in as"));
+        homePage.verifyMenu("Logged in as");
     }
 }

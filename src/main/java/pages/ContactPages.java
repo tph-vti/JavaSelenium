@@ -7,15 +7,17 @@ import java.util.Map;
 public class ContactPages extends BasePage {
 
     public ContactPages() {
-        super(); // lấy driver từ DriverManager
+        super();
     }
 
-    public boolean verifyGetInTouchVisible() {
+    public void verifyGetInTouchVisible() {
         logger.info("Verify 'GET IN TOUCH' title is visible");
-        verifyElementVisible(ContactLocator.txtGetInTouch, "GET IN TOUCH is not visible");
-        return true;
-    }
 
+        verifyElementVisible(
+                ContactLocator.txtGetInTouch,
+                "GET IN TOUCH is not visible"
+        );
+    }
 
     public void enterName(String name) {
         logger.info("Enter Name: {}", name);
@@ -62,15 +64,12 @@ public class ContactPages extends BasePage {
         }
     }
 
-    // ===== UPLOAD FILE =====
-
     public void uploadFile(String filePath) {
         logger.info("Upload file: {}", filePath);
 
         // Upload file bằng sendKeys
         sendKeys(ContactLocator.btnUploadFile, filePath);
     }
-
 
     public void clickSubmit() {
         logger.info("Click 'Submit' button");
@@ -87,8 +86,5 @@ public class ContactPages extends BasePage {
         click(ContactLocator.btnHome);
     }
 
-    public boolean verifyHomePage() {
-        logger.info("Verify user is navigated back to Home page");
-        return driver.getCurrentUrl().equals("https://automationexercise.com/");
-    }
+
 }

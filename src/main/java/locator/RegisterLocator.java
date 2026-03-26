@@ -19,7 +19,6 @@ public class RegisterLocator {
     public static By chkNewsletter = By.id("newsletter");
     public static By chkOffers = By.id("optin");
 
-
     public static By txtFirstName = By.id("first_name");
     public static By txtLastName = By.id("last_name");
     public static By txtCompany  = By.id("company");
@@ -40,5 +39,4 @@ public class RegisterLocator {
     public static By lblAccountCreatedTitle  = By.xpath("//b[contains(text(),'Account Created!')]");
 
     public static By btnContinue = By.xpath("//a[@data-qa='continue-button']");
-
 }

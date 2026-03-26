@@ -14,7 +14,6 @@ import utils.Helper;
 import java.util.List;
 import java.util.Set;
 
-
 /**
  * BasePage provides common web interaction methods for all Page Objects.
  * All page classes should extend this class to inherit WebDriver access and utility methods.
@@ -86,6 +85,12 @@ public class BasePage extends Helper {
         waitForElementClickable(selector).click();
     }
 
+    public void clickByJS(By locator) {
+        WebElement element = findVisibleElement(locator);
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].click();", element);
+    }
+
     protected void clearText(By selector) {
         logger.info("Clearing text of element {}", selector);
         WebElement element = findVisibleElement(selector);
@@ -130,21 +135,6 @@ public class BasePage extends Helper {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeout));
         wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
-
-//    protected void verifyTrue(boolean condition, String message) {
-//        logger.info("Verifying condition is true");
-//        assertTrue(condition, message);
-//    }
-//
-//    protected void verifyFalse(boolean condition, String message) {
-//        logger.info("Verifying condition is false");
-//        assertFalse(condition, message);
-//    }
-//
-//    protected void verifyEquals(Object expected, Object actual, String message) {
-//        logger.info("Verifying equality of expected and actual values");
-//        assertEquals(expected, actual, message);
-//    }
 
     protected void verifyElementVisible(By selector, String errorMessage) {
         logger.info("Verifying visibility of element {}", selector);
@@ -208,12 +198,6 @@ public class BasePage extends Helper {
         return this.driver;
     }
 
-//    public void verifyTitle(String expectedTitle) {
-//        logger.info("Verifying page title is: {}", expectedTitle);
-//        String actualTitle = this.driver.getTitle();
-//        verifyEquals(expectedTitle, actualTitle, String.format("Expected title '%s' but found '%s'", expectedTitle, actualTitle));
-//    }
-
     public void switchBackToOriginalWindow() {
         logger.info("Switching back to original window: {}", this.crrWindow);
         Set<String> arrString = this.driver.getWindowHandles();
@@ -244,6 +228,26 @@ public class BasePage extends Helper {
         return elements.stream().map(WebElement::getText).toList();
     }
 
+    //    protected void verifyTrue(boolean condition, String message) {
+//        logger.info("Verifying condition is true");
+//        assertTrue(condition, message);
+//    }
+//
+//    protected void verifyFalse(boolean condition, String message) {
+//        logger.info("Verifying condition is false");
+//        assertFalse(condition, message);
+//    }
+//
+//    protected void verifyEquals(Object expected, Object actual, String message) {
+//        logger.info("Verifying equality of expected and actual values");
+//        assertEquals(expected, actual, message);
+//    }
+
+    //    public void verifyTitle(String expectedTitle) {
+//        logger.info("Verifying page title is: {}", expectedTitle);
+//        String actualTitle = this.driver.getTitle();
+//        verifyEquals(expectedTitle, actualTitle, String.format("Expected title '%s' but found '%s'", expectedTitle, actualTitle));
+//    }
 
 }
 

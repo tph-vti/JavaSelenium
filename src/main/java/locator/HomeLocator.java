@@ -6,11 +6,6 @@ public class HomeLocator {
 
     public static final String MENU = "//div[contains(@class,'shop-menu')]//a[contains(text(),'%s')]";
 
-    public static By menu(String menuName){
-        return By.xpath(String.format(MENU, menuName));
-    }
-
-
     public static final By txtSubscription = By.xpath("//h2[contains(text(),'Subscription')]");
 
     public static final By txtEmailInput = By.id("susbscribe_email");

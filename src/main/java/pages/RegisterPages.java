@@ -3,20 +3,18 @@ package pages;
 import core.BasePage;
 import locator.RegisterLocator;
 import org.openqa.selenium.support.ui.Select;
-//import org.testng.annotations.Test;
 import java.util.Map;
+
 public class RegisterPages extends BasePage {
 
     public RegisterPages() {
         super();
     }
 
-    public boolean verifyRegisterTitle() {
+    public void verifyRegisterTitle() {
         logger.info("Verify 'Enter Account Information' page is displayed");
         verifyElementVisible(RegisterLocator.lblRegisterTitle, "Register page title is not visible");
-        return true;
     }
-
 
     public void selectTitleMr() {
         logger.info("Select title: Mr");
@@ -50,12 +48,12 @@ public class RegisterPages extends BasePage {
 
     public void clickNewsletterCheckbox() {
         logger.info("Click 'Sign up for our newsletter'");
-        click(RegisterLocator.chkNewsletter);
+        clickByJS(RegisterLocator.chkNewsletter);
     }
 
     public void clickOffersCheckbox() {
         logger.info("Click 'Receive special offers'");
-        click(RegisterLocator.chkOffers);
+        clickByJS(RegisterLocator.chkOffers);
     }
 
     public void fillAccountInformation(Map<String, String> data) {
@@ -176,17 +174,16 @@ public class RegisterPages extends BasePage {
 
     public void clickCreateAccountButton() {
         logger.info("Click 'Create Account' button");
-        click(RegisterLocator.btnCreateAccount);
+        clickByJS(RegisterLocator.btnCreateAccount);
     }
 
-    public boolean verifyAccountCreatedTitle() {
-        logger.info("Verify 'ACCOUNT CREATED!' message is displayed");
-        verifyElementVisible(RegisterLocator.lblAccountCreatedTitle, "Account Created!");
-        return true;
+    public void verifyAccountCreatedTitle() {
+        logger.info("Verify 'Enter Account Information' page is displayed");
+        verifyElementVisible(RegisterLocator.lblAccountCreatedTitle, "Register page title is not visible");
     }
 
     public void clickContinue() {
         logger.info("Click 'Continue' button after account creation");
-        click(RegisterLocator.btnContinue);
+        clickByJS(RegisterLocator.btnContinue);
     }
 }

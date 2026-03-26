@@ -11,20 +11,19 @@ public class ProductPages extends BasePage {
         super();
     }
 
-    public boolean verifyAllProductsPage() {
-        logger.info("Verify 'All Products' page is displayed by checking title element");
+    public void verifyAllProductsPage() {
+        logger.info("Verify 'All Products' page is displayed");
         verifyElementVisible(ProductLocator.txtAllProductsTitle, "All Products");
-        return true;
     }
 
-    public boolean verifyProductListVisible() {
-        logger.info("Get list of all products displayed on page");
+    public void verifyProductListVisible() {
+        logger.info("Verify product list is displayed");
+
         int totalProduct = getListElement(ProductLocator.listProducts).size();
 
-        logger.info("Total products found: {}", totalProduct);
-        logger.info("Verify product list is NOT empty");
-
-        return totalProduct > 0;
+        if (totalProduct == 0) {
+            throw new AssertionError("Product list is EMPTY");
+        }
     }
 
     public void clickViewProduct(int index) {
@@ -33,41 +32,28 @@ public class ProductPages extends BasePage {
         click(ProductLocator.btnViewProduct(index));
     }
 
-
-    public boolean verifyProductDetailPageByUrl() {
-        logger.info("Get current URL to verify navigation to product detail page");
+    public void verifyProductDetailPageByUrl() {
+        logger.info("Verify navigation to product detail page");
 
         String currentUrl = driver.getCurrentUrl();
-        logger.info("Current URL: {}", currentUrl);
 
-        logger.info("Verify URL contains '/product_details/'");
-
-        return currentUrl.contains("/product_details/");
+        if (!currentUrl.contains("/product_details/")) {
+            throw new AssertionError("Not navigated to Product Detail Page. URL: " + currentUrl);
+        }
     }
 
-    public boolean verifyProductDetailInfo() {
+    public void verifyProductDetailInfo() {
 
-        logger.info("Verify product name is displayed");
+        logger.info("Verify product detail information");
+
         verifyElementVisible(ProductLocator.txtProductName, "Product Name");
-
-        logger.info("Verify product category is displayed");
         verifyElementVisible(ProductLocator.txtCategory, "Category");
-
-        logger.info("Verify product price is displayed");
         verifyElementVisible(ProductLocator.txtPrice, "Price");
-
-        logger.info("Verify product availability is displayed");
         verifyElementVisible(ProductLocator.txtAvailability, "Availability");
-
-        logger.info("Verify product condition is displayed");
         verifyElementVisible(ProductLocator.txtCondition, "Condition");
-
-        logger.info("Verify product brand is displayed");
         verifyElementVisible(ProductLocator.txtBrand, "Brand");
 
-        logger.info("All product detail information is displayed correctly");
-
-        return true;
+        logger.info("All product detail information displayed correctly");
     }
 
     public void searchProduct(String productName) {
@@ -78,28 +64,32 @@ public class ProductPages extends BasePage {
         click(ProductLocator.btnSearch);
     }
 
-    public boolean verifySearchedProductsTitle() {
+    public void verifySearchedProductsTitle() {
+        logger.info("Verify 'Searched Products' title");
         verifyElementVisible(ProductLocator.txtSearchedProductsTitle, "Searched Products");
-        return true;
     }
 
-    public boolean verifySearchResultListVisible() {
+    public void verifySearchResultListVisible() {
+        logger.info("Verify search result list");
+
         int size = getListElement(ProductLocator.listSearchedProducts).size();
-        return size > 0;
+
+        if (size == 0) {
+            throw new AssertionError("Search result list is EMPTY");
+        }
     }
 
-    public boolean verifyAllSearchResultsContainKeyword(String keyword) {
+    public void verifyAllSearchResultsContainKeyword(String keyword) {
         logger.info("Verify all products contain keyword: {}", keyword);
 
         List<String> productNames = getTextElements(ProductLocator.txtProductNames);
 
         for (String name : productNames) {
             if (!name.toLowerCase().contains(keyword.toLowerCase())) {
-                logger.error("Product '{}' does NOT contain keyword '{}'", name, keyword);
-                return false;
+                throw new AssertionError(
+                        "Product '" + name + "' does NOT contain keyword '" + keyword + "'"
+                );
             }
         }
-        return true;
     }
-
 }
