@@ -18,7 +18,7 @@ public class RegisterPageLocator {
 
     //Checkbox
     public static final By ckbNewsletter = By.id("newsletter");
-    public static final By ckbOffers = By.id("option");
+    public static final By ckbOffers = By.id("optin");
 
     //Address Information
     public static final By txtFirstName = By.id("first_name");

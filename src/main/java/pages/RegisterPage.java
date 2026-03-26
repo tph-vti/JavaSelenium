@@ -11,7 +11,7 @@ public class RegisterPage extends BasePage {
     }
 
     // ===== VERIFY REGISTER PAGE =====
-    public boolean verifyRegisterTitle() {
+    public boolean verifyRegisterHeader() {
         logger.info("Verify 'Enter Account Information' page is displayed");
         verifyElementVisible(RegisterPageLocator.lblRegisterHeader, "Register page title is not visible");
         return true;
