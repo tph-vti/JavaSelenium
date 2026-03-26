@@ -11,7 +11,7 @@ public class ContactUsPage extends BasePage {
         super();
     }
     //=====ACTIONS=====
-    public boolean verifyGetInTouchHeader (){
+    public boolean verifyGetInTouchHeaderVisible (){
         logger.info("Verify 'GET IN TOUCH' is visible");
         verifyElementVisible(ContactUsLocator.lblGetInTouchHeader,"Contact Us page is not visible");
         return true;

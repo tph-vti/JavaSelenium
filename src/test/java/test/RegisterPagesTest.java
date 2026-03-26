@@ -39,7 +39,7 @@ public class RegisterPagesTest extends BaseTest {
         homePage.clickMenu("Signup / Login");
 
         logger.info("STEP 3: Verify 'New User Signup!' is visible");
-        Assert.assertTrue(loginPage.verifySignupHeader());
+        Assert.assertTrue(loginPage.verifySignupHeaderVisible());
 
         logger.info("STEP 4: Enter name and email address");
         String randomName = "user" + System.currentTimeMillis() ;

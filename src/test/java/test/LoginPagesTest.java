@@ -121,7 +121,7 @@ public class LoginPagesTest extends BaseTest {
         homePage.clickMenu("Signup / Login");
 
         logger.info("STEP 2: Verify 'New User Signup!' is visible");
-        Assert.assertTrue(loginPage.verifySignupTitle());
+        Assert.assertTrue(loginPage.verifySignupHeaderVisible());
 
         logger.info("STEP 3: Enter name and email address");
         loginPage.enterSignupName(Constants.VALID_NAME);

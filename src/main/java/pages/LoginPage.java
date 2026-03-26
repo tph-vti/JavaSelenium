@@ -40,7 +40,7 @@ public class LoginPage extends BasePage {
 
      // ===== SIGNUP SECTION =====
 
-     public boolean verifySignupHeader() {
+     public boolean verifySignupHeaderVisible() {
          logger.info("Verify 'New User Signup!' title is displayed");
          verifyElementVisible(LoginPageLocator.lblSignupHeader, "New User Signup!");
          return true;
