@@ -2,6 +2,8 @@ package locator;
 
 import org.openqa.selenium.By;
 
+import java.nio.file.Paths;
+
 public class ContactUsLocator {
     public static By lblGetInTouchHeader = By.xpath("//h2[contains(text(),'Get In Touch')]");
     public static By txtName = By.xpath("//input[@data-qa='name']");
@@ -12,4 +14,6 @@ public class ContactUsLocator {
     public static By btnSubmit = By.xpath("//input[@type='submit']");
 
     public static By successMessage = By.xpath("//div[contains(text(),'Success!')]");
+
+    public static By btnHome = By.xpath("//a[contains(text(),'Home')]");
 }
