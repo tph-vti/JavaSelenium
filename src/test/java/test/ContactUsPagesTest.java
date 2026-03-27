@@ -11,6 +11,8 @@ import pages.ContactUsPage;
 import pages.HomePage;
 import testdata.TestData;
 
+import java.util.Map;
+
 public class ContactUsPagesTest extends BaseTest {
     @BeforeMethod
     public void setup() throws Exception {
@@ -28,6 +30,7 @@ public class ContactUsPagesTest extends BaseTest {
 
             HomePage homePage = new HomePage();
             ContactUsPage contactPage = new ContactUsPage();
+            Map<String, String> data = TestData.getContactUsData();
 
             logger.info("STEP 1: Open Home Page");
             BasePage.openSite();
@@ -39,7 +42,7 @@ public class ContactUsPagesTest extends BaseTest {
             Assert.assertTrue(contactPage.verifyGetInTouchHeaderVisible());
 
             logger.info("STEP 4: Enter name, email, subject and message");
-            contactPage.fillContactUsForm(TestData.contactData);
+            contactPage.fillContactUsForm(data);
 
             logger.info("STEP 5: Upload file");
             contactPage.uploadFile();

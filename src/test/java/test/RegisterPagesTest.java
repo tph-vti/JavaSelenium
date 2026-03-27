@@ -12,6 +12,8 @@ import pages.LoginPage;
 import pages.RegisterPage;
 import testdata.TestData;
 
+import java.util.Map;
+
 public class RegisterPagesTest extends BaseTest {
     DriverManager driverManager;
 
@@ -31,6 +33,8 @@ public class RegisterPagesTest extends BaseTest {
         HomePage homePage = new HomePage();
         LoginPage loginPage = new LoginPage();
         RegisterPage registerPages = new RegisterPage();
+        Map<String, String> accInfo = TestData.getAccountInformation();
+        Map<String, String> addressInfo = TestData.getAddressInformation();
 
         logger.info("STEP 1: Open site");
         homePage.openSite();
@@ -55,7 +59,7 @@ public class RegisterPagesTest extends BaseTest {
         Assert.assertTrue(registerPages.verifyRegisterHeader());
 
         logger.info("STEP 7: Fill account information");
-        registerPages.fillAccountInformation(TestData.accountData);
+        registerPages.fillAccountInformation(accInfo);
 
         logger.info("STEP 8: Select newsletter checkbox");
         registerPages.clickNewsletterCheckbox();
@@ -64,7 +68,7 @@ public class RegisterPagesTest extends BaseTest {
         registerPages.clickOffersCheckbox();
 
         logger.info("STEP 10: Fill address information");
-        registerPages.fillAddressInformation(TestData.addressData);
+        registerPages.fillAccountInformation(addressInfo);
 
         logger.info("STEP 11: Click Create Account button");
         registerPages.clickCreateAccountButton();
