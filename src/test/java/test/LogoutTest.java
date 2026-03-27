@@ -4,6 +4,7 @@ import core.BaseTest;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import static core.Constants.*;
 
 public class LogoutTest extends BaseTest {
 
@@ -12,11 +13,17 @@ public class LogoutTest extends BaseTest {
         // ---Preconditions---
         registerAndGetCredentials();
         String username = user.getName();
-        String email = user.getEmail();
-        String password = user.getPassword();
         commonPage.clickLogout();
 
         // ---Test Steps---
+        logStep("3. Verify that home page is visible successfully");
+        commonPage.clickHomeButton();
+        expectedResult = HOME_PAGE_LINK;
+        actualResult = commonPage.getCurrentUrl();
+        Assert.assertEquals(actualResult, expectedResult);
+
+        logStep("4. Click on 'Signup / Login' button");
+        commonPage.clickSignupLogin();
 
         logStep("5. Verify 'Login to your account' is visible");
         expectedResult = "Login to your account";
@@ -24,7 +31,7 @@ public class LogoutTest extends BaseTest {
         Assert.assertEquals(actualResult, expectedResult);
 
         logStep("6. Enter correct email address and password");
-        loginPage.fillLoginForm(email, password);
+        loginPage.fillLoginForm(user);
 
         logStep("7. Click 'Login' button");
         loginPage.clickLoginButton();

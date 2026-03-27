@@ -10,14 +10,15 @@ public final class Constants {
     public static final String GENDER_FEMALE = "Mrs.";
     public static final String ERROR_INCORRECT_LOGIN_MESSAGE = "Your email or password is incorrect!";
     public static final String ERROR_EXIST_EMAIL_SIGNUP_MESSAGE = "Email Address already exist!";
-    public static final String FILE_PATH = "D:\\JavaSelenium\\src\\test\\resources\\sampleFile.jpeg";
+    public static final String FILE_PATH = "/src/test/resources/sampleFile.jpeg";
     public static final String RECOMMENDED_ITEMS_TITLE = "RECOMMENDED ITEMS";
-    public static final String SUCCESS_MESSAGE = "Success! Your details have been submitted successfully.";
+    public static final String SUCCESS_SUBSCRIBE_MESSAGE = "You have been successfully subscribed!";
+    public static final String SUCCESS_CONTACT_MESSAGE = "Success! Your details have been submitted successfully.";
     public static final String GET_IN_TOUCH_TITLE = "GET IN TOUCH";
     public static final String HOME_PAGE_LINK = "https://automationexercise.com/";
     public static final String TEST_CASE_TITLE = "TEST CASES";
     public static final String ALL_PRODUCTS_TITLE = "ALL PRODUCTS";
     public static final String SEARCHED_PRODUCTS_TITLE = "SEARCHED PRODUCTS";
     public static final String PRODUCT_NAME = "Blue Top";
-    public static final String SUBSCRIPTION_TITLE = "Subscription";
+    public static final String SUBSCRIPTION_TITLE = "SUBSCRIPTION";
 }

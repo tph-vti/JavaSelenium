@@ -21,8 +21,8 @@ public class LoginTest extends BaseTest {
     public void testLoginUserWithCorrectEmailAndPassword() {
 
         // ---Test Steps---
-
         logStep("3. Verify that home page is visible successfully");
+        commonPage.clickHomeButton();
         expectedResult = HOME_PAGE_LINK;
         actualResult = commonPage.getCurrentUrl();
         Assert.assertEquals(actualResult, expectedResult);
@@ -36,22 +36,25 @@ public class LoginTest extends BaseTest {
         Assert.assertEquals(actualResult, expectedResult);
 
         logStep("6. Enter correct email address and password");
-        loginPage.login(email, password);
+        loginPage.fillLoginForm(user);
 
-        logStep("7. Verify that 'Logged in as username' is visible");
-        expectedResult = "Logged in as " + username;
-        actualResult = commonPage.getLoggedInAsTitle(username);
+        logStep("7. Click 'Login' button");
+        loginPage.clickLoginButton();
+
+        logStep("8. Verify that 'Logged in as username' is visible");
+        expectedResult = "Logged in as " + user.getName();
+        actualResult = commonPage.getLoggedInAsTitle(user.getName());
         Assert.assertEquals(actualResult, expectedResult);
 
-        logStep("8. Click 'Delete Account' button");
+        logStep("9. Click 'Delete Account' button");
         commonPage.clickDeleteAccount();
 
-        logStep("9. Verify that 'ACCOUNT DELETED!' is visible");
-        expectedResult = "ACCOUNT DELETED!";
+        logStep("10. Verify that 'ACCOUNT DELETED!' is visible");
+        expectedResult = ACCOUNT_DELETED_TITLE;
         actualResult = commonPage.getAccountDeletedTitle();
         Assert.assertEquals(actualResult, expectedResult);
 
-        logStep("10. Click 'Continue' button");
+        logStep("11. Click 'Continue' button");
         commonPage.clickContinueButton();
     }
 
@@ -60,6 +63,11 @@ public class LoginTest extends BaseTest {
         password = user.getPassword() + generateRandomString(5); //Incorrect password
 
         // ---Test Steps---
+        logStep("3. Verify that home page is visible successfully");
+        commonPage.clickHomeButton();
+        expectedResult = HOME_PAGE_LINK;
+        actualResult = commonPage.getCurrentUrl();
+        Assert.assertEquals(actualResult, expectedResult);
 
         logStep("4. Click on 'Signup / Login' button");
         commonPage.clickSignupLogin();
@@ -70,7 +78,7 @@ public class LoginTest extends BaseTest {
         Assert.assertEquals(actualResult, expectedResult);
 
         logStep("6. Enter correct email address and password");
-        loginPage.login(email, password);
+        loginPage.fillLoginForm(user.getEmail(), password);
 
         logStep("7. Click 'login' button");
         loginPage.clickLoginButton();

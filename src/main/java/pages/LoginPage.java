@@ -9,6 +9,16 @@ public class LoginPage extends BasePage {
         super();
     }
 
+    public void fillLoginForm(User user) {
+        logger.info("Filling login form");
+        if (user.getEmail() != null && !user.getEmail().isEmpty()) {
+            enterText(LoginLocator.LOGIN_EMAIL_INPUT, user.getEmail());
+        }
+        if (user.getPassword() != null && !user.getPassword().isEmpty()) {
+            enterText(LoginLocator.LOGIN_PASSWORD_INPUT, user.getPassword());
+        }
+    }
+
     public void fillLoginForm(String email, String password) {
         logger.info("Filling login form");
         if (email != null && !email.isEmpty()) {
@@ -22,10 +32,6 @@ public class LoginPage extends BasePage {
     public void clickLoginButton() {
         logger.info("Clicking login button");
         clickButton(LoginLocator.LOGIN_BUTTON);
-    }
-
-    public void login(String email, String password) {
-        fillLoginForm(email, password);
     }
 
     public String getLoginTitle() {

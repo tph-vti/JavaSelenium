@@ -12,6 +12,7 @@ public class RegisterTest extends BaseTest {
     public void testRegisterUser() {
 
         logStep("3. Verify that home page is visible successfully");
+        commonPage.clickHomeButton();
         expectedResult = HOME_PAGE_LINK;
         actualResult = commonPage.getCurrentUrl();
         Assert.assertEquals(actualResult, expectedResult);
