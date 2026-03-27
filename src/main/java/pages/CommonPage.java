@@ -82,4 +82,9 @@ public class CommonPage extends BasePage {
             handleVignette();
         }
     }
+
+    public String getCurrentUrl() {
+        logger.info("Getting current URL");
+        return driver.getCurrentUrl();
+    }
 }

@@ -14,7 +14,7 @@ public final class Constants {
     public static final String RECOMMENDED_ITEMS_TITLE = "RECOMMENDED ITEMS";
     public static final String SUCCESS_MESSAGE = "Success! Your details have been submitted successfully.";
     public static final String GET_IN_TOUCH_TITLE = "GET IN TOUCH";
-    public static final String HOME_TITLE = "Full-Fledged practice website for Automation Engineers";
+    public static final String HOME_PAGE_LINK = "https://automationexercise.com/";
     public static final String TEST_CASE_TITLE = "TEST CASES";
     public static final String ALL_PRODUCTS_TITLE = "ALL PRODUCTS";
     public static final String SEARCHED_PRODUCTS_TITLE = "SEARCHED PRODUCTS";

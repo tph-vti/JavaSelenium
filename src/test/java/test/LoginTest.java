@@ -1,25 +1,31 @@
 package test;
 
 import core.BaseTest;
-
+import static core.Constants.*;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class LoginTest extends BaseTest {
+    String username;
+    String email;
+    String password;
+
+    @BeforeMethod
+    public void registerAndLogout() {
+        registerAndGetCredentials();
+        commonPage.clickLogout();
+    }
 
     @Test(description = "TC2: Login User with correct email and password")
     public void testLoginUserWithCorrectEmailAndPassword() {
-        // ---Preconditions---
-        registerAndGetCredentials();
-        String username = user.getName();
-        String email = user.getEmail();
-        String password = user.getPassword();
-        commonPage.clickLogout();
 
         // ---Test Steps---
 
         logStep("3. Verify that home page is visible successfully");
-        // commonPage.waitForHomePageVisible();
+        expectedResult = HOME_PAGE_LINK;
+        actualResult = commonPage.getCurrentUrl();
+        Assert.assertEquals(actualResult, expectedResult);
 
         logStep("4. Click on 'Signup / Login' button");
         commonPage.clickSignupLogin();
@@ -51,10 +57,7 @@ public class LoginTest extends BaseTest {
 
     @Test(description = "TC3: Login User with incorrect email and password")
     public void testLoginUserWithIncorrectEmailAndPassword() {
-        registerAndGetCredentials();
-        String email = user.getEmail();
-        String password = "@" + user.getPassword(); //Incorrect password
-        commonPage.clickLogout();
+        password = user.getPassword() + generateRandomString(5); //Incorrect password
 
         // ---Test Steps---
 

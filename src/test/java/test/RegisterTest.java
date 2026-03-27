@@ -12,6 +12,9 @@ public class RegisterTest extends BaseTest {
     public void testRegisterUser() {
 
         logStep("3. Verify that home page is visible successfully");
+        expectedResult = HOME_PAGE_LINK;
+        actualResult = commonPage.getCurrentUrl();
+        Assert.assertEquals(actualResult, expectedResult);
 
         logStep("4. Click on 'Signup / Login' button");
         commonPage.clickSignupLogin();
@@ -79,11 +82,8 @@ public class RegisterTest extends BaseTest {
         registerAndGetCredentials();
         commonPage.clickLogout();
 
-        // ---Data---
         String username = user.getName();
         String email = user.getEmail();
-
-        // ---Test Steps---
 
         logStep("4. Click on 'Signup / Login' button");
         commonPage.clickSignupLogin();

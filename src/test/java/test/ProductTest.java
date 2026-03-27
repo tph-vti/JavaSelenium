@@ -11,8 +11,8 @@ public class ProductTest extends BaseTest {
     public void testVerifyProductDetails() {
 
         logger.info("3. Verify that home page is visible successfully");
-        expectedResult = RECOMMENDED_ITEMS_TITLE;
-        actualResult = homePage.getRecommendedItemsTitle();
+        expectedResult = HOME_PAGE_LINK;
+        actualResult = commonPage.getCurrentUrl();
         Assert.assertEquals(actualResult, expectedResult);
 
         logger.info("4. Click on 'Products' button");
@@ -40,19 +40,19 @@ public class ProductTest extends BaseTest {
         String productBrand = productPage.getProductBrand();
         String productCategory = productPage.getProductCategory();
 
-        Assert.assertFalse(productName.isEmpty());
-        Assert.assertFalse(productPrice.isEmpty());
-        Assert.assertFalse(productAvailability.isEmpty());
-        Assert.assertFalse(productCondition.isEmpty());
-        Assert.assertFalse(productBrand.isEmpty());
-        Assert.assertFalse(productCategory.isEmpty());
+        Assert.assertTrue(!productName.isEmpty());
+        Assert.assertTrue(!productPrice.isEmpty());
+        Assert.assertTrue(!productAvailability.isEmpty());
+        Assert.assertTrue(!productCondition.isEmpty());
+        Assert.assertTrue(!productBrand.isEmpty());
+        Assert.assertTrue(!productCategory.isEmpty());
     }
 
     @Test(description = "TC9: Search product")
     public void testSearchProduct() {
         logger.info("3. Verify that home page is visible successfully");
-        expectedResult = RECOMMENDED_ITEMS_TITLE;
-        actualResult = homePage.getRecommendedItemsTitle();
+        expectedResult = HOME_PAGE_LINK;
+        actualResult = commonPage.getCurrentUrl();
         Assert.assertEquals(actualResult, expectedResult);
 
         logger.info("4. Click on 'Products' button");
@@ -74,6 +74,5 @@ public class ProductTest extends BaseTest {
 
         logger.info("8. Verify all the products related to search are visible");
         Assert.assertTrue(productPage.isProductListVisible());
-
     }
 }

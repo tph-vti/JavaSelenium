@@ -10,8 +10,8 @@ public class HomeTest extends BaseTest {
     @Test(description = "TC10: Verify Subscription in home page")
     public void testVerifySubscriptionInHomePage() {
         logger.info("3. Verify that home page is visible successfully");
-        expectedResult = HOME_TITLE;
-        actualResult = homePage.getHomeTitle();
+        expectedResult = HOME_PAGE_LINK;
+        actualResult = commonPage.getCurrentUrl();
         Assert.assertEquals(actualResult, expectedResult);
 
         logger.info("4. Scroll down to footer");

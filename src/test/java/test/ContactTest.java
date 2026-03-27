@@ -46,8 +46,8 @@ public class ContactTest extends BaseTest {
         contactPage.clickHomeButton();
 
         logger.info("11.2 Verify that landed to home page successfully");
-        expectedTitle = HOME_TITLE;
-        actualTitle = homePage.getHomeTitle();
+        expectedTitle = HOME_PAGE_LINK;
+        actualTitle = commonPage.getCurrentUrl();
         Assert.assertEquals(actualTitle, expectedTitle);
     }
 }

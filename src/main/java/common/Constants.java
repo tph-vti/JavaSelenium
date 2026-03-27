@@ -1,6 +1,7 @@
 package common;
 
 import java.nio.file.Paths;
+import java.util.Random;
 
 public final class Constants {
     // Project Path Constants
@@ -32,4 +33,8 @@ public final class Constants {
     //Login Page Constants
     public static final String GENDER_MALE = "Mr.";
     public static final String GENDER_FEMALE = "Mrs.";
+
+    public static String getGender() {
+        return new Random().nextBoolean() ? GENDER_MALE : GENDER_FEMALE;
+    }
 }

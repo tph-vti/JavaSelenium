@@ -11,8 +11,8 @@ public class TestcaseTest extends BaseTest {
     public void testVerifyTestCasesPage() {
 
         logger.info("3. Verify that home page is visible successfully");
-        expectedResult = HOME_TITLE;
-        actualResult = homePage.getHomeTitle();
+        expectedResult = HOME_PAGE_LINK;
+        actualResult = commonPage.getCurrentUrl();
         Assert.assertEquals(actualResult, expectedResult);
 
         logger.info("4. Click on 'Test Cases' button");
