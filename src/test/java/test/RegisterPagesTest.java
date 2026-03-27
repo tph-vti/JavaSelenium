@@ -12,12 +12,8 @@ import java.util.Map;
 
 public class RegisterPagesTest extends BaseTest {
 
-    @Test
+    @Test (description = "TC01: Register User")
     public void TC01_RegisterUser() {
-
-        HomePages homePage = new HomePages();
-        LoginPages loginPage = new LoginPages();
-        RegisterPages registerPages = new RegisterPages();
 
         logger.info("STEP 1: Open site");
         homePage.openSite();
@@ -26,15 +22,15 @@ public class RegisterPagesTest extends BaseTest {
         homePage.clickMenu("Signup / Login");
 
         logger.info("STEP 3: Verify 'New User Signup!' is visible");
-        loginPage.verifySignupTitle();
+        loginPages.verifySignupTitle();
 
         Map<String, String> signupData = TestData.getSignupData();
         logger.info("STEP 4: Enter name and email address");
-        loginPage.enterSignupName(signupData.get("name"));
-        loginPage.enterSignupEmail(signupData.get("email"));
+        loginPages.enterSignupName(signupData.get("name"));
+        loginPages.enterSignupEmail(signupData.get("email"));
 
         logger.info("STEP 5: Click 'Sign Up' button");
-        loginPage.clickSignup();
+        loginPages.clickSignup();
 
         logger.info("STEP 6: Verify that 'ENTER ACCOUNT INFORMATION' is visible");
         registerPages.verifyRegisterTitle();

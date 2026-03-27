@@ -12,7 +12,6 @@ public class ProductPagesTest extends BaseTest {
 
     @BeforeMethod
     public void preCondition() {
-        HomePages homePage = new HomePages();
 
         logger.info("STEP 1: Open Home Page");
         homePage.openSite();
@@ -21,46 +20,42 @@ public class ProductPagesTest extends BaseTest {
         homePage.clickMenu("Products");
     }
 
-    @Test
+    @Test (description = "TC08: View Product Detail")
     public void TC08_ViewProductDetail() {
 
-        ProductPages productPage = new ProductPages();
-
         logger.info("STEP 3: Verify user is navigated to ALL PRODUCTS page");
-        productPage.verifyAllProductsPage();
+        productPages.verifyAllProductsPage();
 
         logger.info("STEP 4: Verify product list is visible");
-        productPage.verifyProductListVisible();
+        productPages.verifyProductListVisible();
 
         logger.info("STEP 5: Click 'View Product' of first product");
-        productPage.clickViewProduct(1);
+        productPages.clickViewProduct(1);
 
         logger.info("STEP 6: Verify user is landed to product detail page");
-        productPage.verifyProductDetailPageByUrl();
+        productPages.verifyProductDetailPageByUrl();
 
         logger.info("STEP 7: Verify product detail info is visible");
-        productPage.verifyProductDetailInfo();
+        productPages.verifyProductDetailInfo();
     }
 
-    @Test
+    @Test (description = "TC09: Search Product")
     public void TC09_SearchProduct() {
 
-        ProductPages productPage = new ProductPages();
-
         logger.info("STEP 3: Verify ALL PRODUCTS page");
-        productPage.verifyAllProductsPage();
+        productPages.verifyAllProductsPage();
 
         logger.info("STEP 4: Enter product name and click search");
         String keyword = Constants.SEARCH_KEY;
-        productPage.searchProduct(keyword);
+        productPages.searchProduct(keyword);
 
         logger.info("STEP 5: Verify 'SEARCHED PRODUCTS' is visible");
-        productPage.verifySearchedProductsTitle();
+        productPages.verifySearchedProductsTitle();
 
         logger.info("STEP 6: Verify searched product list is visible");
-        productPage.verifySearchResultListVisible();
+        productPages.verifySearchResultListVisible();
 
         logger.info("STEP 7: Verify all results contain keyword");
-        productPage.verifyAllSearchResultsContainKeyword(keyword);
+        productPages.verifyAllSearchResultsContainKeyword(keyword);
     }
 }

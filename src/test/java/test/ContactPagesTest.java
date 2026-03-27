@@ -10,11 +10,8 @@ import java.util.Map;
 
 public class ContactPagesTest extends BaseTest {
 
-    @Test
+    @Test (description = "TC6: Contact Us Form")
     public void TC06_ContactUsForm() {
-
-        HomePages homePage = new HomePages();
-        ContactPages contactPage = new ContactPages();
 
         logger.info("STEP 1: Open Home Page");
         homePage.openSite();
@@ -30,11 +27,12 @@ public class ContactPagesTest extends BaseTest {
         contactPage.fillContactForm(contactData);
 
         logger.info("STEP 5: Upload file");
-        contactPage.uploadFile("C:\\Users\\ADMIN\\OneDrive\\Desktop\\test.txt");
+        String filePath = System.getProperty("user.dir")
+                + "/src/test/resources/upload.jpg";
+        contactPage.uploadFile(filePath);
 
         logger.info("STEP 6: Click 'Submit' button");
         contactPage.clickSubmit();
-
         contactPage.acceptAlert();
 
         logger.info("STEP 7: Click 'Home' button");

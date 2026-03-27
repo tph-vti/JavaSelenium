@@ -1,9 +1,11 @@
 package core;
 
+import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.ITestResult;
 
+import pages.*;
 import utils.Helper;
 
 import java.lang.reflect.Method;
@@ -11,6 +13,13 @@ import java.net.MalformedURLException;
 
 public class BaseTest extends Helper {
     protected DriverManager driverManager;
+
+    protected HomePages homePage;
+    protected ContactPages contactPage;
+    protected LoginPages loginPages;
+    protected ProductPages productPages;
+    protected RegisterPages registerPages;
+    protected TestcasePages testcasePages;
 
 
     @BeforeMethod
@@ -25,11 +34,26 @@ public class BaseTest extends Helper {
         try {
             driverManager = new DriverManager();
             logger.info("WebDriver initialized successfully");
+
+            // 🔥 THÊM ĐOẠN NÀY
+            WebDriver driver = driverManager.getDriver();
+
+            homePage = new HomePages();
+            loginPages = new LoginPages();
+            registerPages = new RegisterPages();
+            contactPage = new ContactPages();
+            productPages = new ProductPages();
+            testcasePages = new TestcasePages();
+
+            logger.info("All pages initialized");
+
         } catch (Exception e) {
             logger.error("Failed to initialize WebDriver", e);
             throw e;
         }
     }
+
+
 
     @AfterMethod
     public void teardown(ITestResult result) {

@@ -7,19 +7,9 @@ import pages.HomePages;
 
 public class HomePagesTest extends BaseTest {
 
-//    @Test
-//    public void HomeTest(){
-//
-//        HomePages homePage = new HomePages();
-//        homePage.openSite();
-//        homePage.clickMenu("Login");
-//        homePage.clickMenu("Signup / Login");
-//    }
 
-    @Test
+    @Test (description = "TC10: Subscribe From Footer")
     public void TC10_SubscribeFromFooter() {
-
-        HomePages homePage = new HomePages();
 
         logger.info("STEP 1: Launch browser");
         homePage.openSite();

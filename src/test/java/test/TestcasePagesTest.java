@@ -7,11 +7,8 @@ import pages.TestcasePages;
 
 public class TestcasePagesTest extends BaseTest {
 
-    @Test
+    @Test (description = "TC07: Verify TestCases Page")
     public void TC07_VerifyTestCasesPage() {
-
-        HomePages homePage = new HomePages();
-        TestcasePages testCasesPage = new TestcasePages();
 
         logger.info("STEP 1: Launch browser and open Home Page");
         homePage.openSite();
@@ -20,7 +17,7 @@ public class TestcasePagesTest extends BaseTest {
         homePage.clickMenu("Test Cases");
 
         logger.info("STEP 3: Verify user is navigated to Test Cases page successfully");
-        testCasesPage.verifyTestCasesPageByUrl();
-        testCasesPage.verifyTestCasesPage();
+        testcasePages.verifyTestCasesPageByUrl();
+        testcasePages.verifyTestCasesPage();
     }
 }
