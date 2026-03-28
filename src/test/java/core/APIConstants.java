@@ -1,4 +1,4 @@
-package common;
+package core;
 
 public class APIConstants {
     public static final String BASE_URL = "https://automationexercise.com/api";

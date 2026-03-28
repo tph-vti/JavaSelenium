@@ -80,11 +80,11 @@ public class RegisterTest extends BaseTest {
 
     @Test(description = "TC_5: Register User With Existing Email")
     public void testRegisterUserWithExistingEmail() {
-        registerAndGetCredentials();
+        String[] user = registerAndGetCredentials();
         commonPage.clickLogout();
 
-        String username = user.getName();
-        String email = user.getEmail();
+        String username = user[0];
+        String email = user[1];
 
         logStep("4. Click on 'Signup / Login' button");
         commonPage.clickSignupLogin();

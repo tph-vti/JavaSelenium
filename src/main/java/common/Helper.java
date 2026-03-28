@@ -13,7 +13,7 @@ import java.time.temporal.ChronoField;
 import java.util.Locale;
 
 public class Helper {
-    protected final static Logger logger = LogManager.getLogger("demoQA");
+    protected final static Logger logger = LogManager.getLogger("automationExercise");
 
     public Helper() {
         try {
