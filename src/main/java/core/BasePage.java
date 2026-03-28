@@ -242,6 +242,13 @@ public class BasePage extends Helper {
 
         return texts;
     }
-
+    public void scrollToElement(By locator) {
+        WebElement element = driver.findElement(locator);
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript(
+                "arguments[0].scrollIntoView({behavior: 'smooth', block: 'center'});",
+                element
+        );
+    }
 }
 
