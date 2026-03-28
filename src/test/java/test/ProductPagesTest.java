@@ -46,8 +46,7 @@ public class ProductPagesTest extends BaseTest {
         productPages.verifyAllProductsPage();
 
         logger.info("STEP 4: Enter product name and click search");
-        String keyword = Constants.SEARCH_KEY;
-        productPages.searchProduct(keyword);
+        productPages.searchProduct(Constants.SEARCH_KEY);
 
         logger.info("STEP 5: Verify 'SEARCHED PRODUCTS' is visible");
         productPages.verifySearchedProductsTitle();
@@ -56,6 +55,6 @@ public class ProductPagesTest extends BaseTest {
         productPages.verifySearchResultListVisible();
 
         logger.info("STEP 7: Verify all results contain keyword");
-        productPages.verifyAllSearchResultsContainKeyword(keyword);
+        productPages.verifyAllSearchResultsContainKeyword(Constants.SEARCH_KEY);
     }
 }

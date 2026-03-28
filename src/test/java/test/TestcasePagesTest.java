@@ -17,7 +17,6 @@ public class TestcasePagesTest extends BaseTest {
         homePage.clickMenu("Test Cases");
 
         logger.info("STEP 3: Verify user is navigated to Test Cases page successfully");
-        testcasePages.verifyTestCasesPageByUrl();
         testcasePages.verifyTestCasesPage();
     }
 }

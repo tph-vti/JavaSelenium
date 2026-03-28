@@ -37,36 +37,6 @@ public class Helper {
             return null;
         }
     }
-    public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("MM/dd/yyyy", Locale.US);
-
-    public static LocalDate convertStringToDate(String dateStr) {
-        try {
-            return LocalDate.parse(dateStr, DATE_FORMATTER);
-        } catch (Exception e) {
-            logger.error("Failed to parse date string: {}", dateStr, e);
-            throw new IllegalArgumentException("Invalid date format: " + dateStr, e);
-        }
-    }
-
-    public int convertMonthNameToNumber(String monthName) {
-        try {
-            DateTimeFormatter monthFormatter = DateTimeFormatter.ofPattern("MMMM", Locale.ENGLISH);
-            return monthFormatter.parse(monthName).get(java.time.temporal.ChronoField.MONTH_OF_YEAR);
-        } catch (Exception e) {
-            logger.error("Failed to convert month name '{}' to number", monthName, e);
-            throw new IllegalArgumentException("Invalid month name: " + monthName, e);
-        }
-    }
-
-    public String readFileContent(String filePath) {
-        try {
-            return Files.readString(Paths.get(filePath), StandardCharsets.UTF_8);
-        } catch (Exception e) {
-            logger.error("Failed to read file content from: {}", filePath, e);
-            return null;
-        }
-    }
-
     private void waitForFileExists(String filePath, int timeoutInSeconds) {
         logger.info("Waiting for file to exist: {} with timeout: {} seconds", filePath, timeoutInSeconds);
         int waited = 0;
@@ -87,9 +57,42 @@ public class Helper {
         throw new RuntimeException("File not found within timeout: " + filePath);
     }
 
-    public void waitForFileDownload(String fileName, int timeoutInSeconds) {
-        logger.info("Waiting for file download: {} with timeout: {} seconds", fileName, timeoutInSeconds);
-        String downloadedFilePath = Paths.get(DOWNLOAD_FOLDER_PATH, fileName).toString();
-        waitForFileExists(downloadedFilePath, timeoutInSeconds);
-    }
+
+//    public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("MM/dd/yyyy", Locale.US);
+
+//    public static LocalDate convertStringToDate(String dateStr) {
+//        try {
+//            return LocalDate.parse(dateStr, DATE_FORMATTER);
+//        } catch (Exception e) {
+//            logger.error("Failed to parse date string: {}", dateStr, e);
+//            throw new IllegalArgumentException("Invalid date format: " + dateStr, e);
+//        }
+//    }
+//
+//    public int convertMonthNameToNumber(String monthName) {
+//        try {
+//            DateTimeFormatter monthFormatter = DateTimeFormatter.ofPattern("MMMM", Locale.ENGLISH);
+//            return monthFormatter.parse(monthName).get(java.time.temporal.ChronoField.MONTH_OF_YEAR);
+//        } catch (Exception e) {
+//            logger.error("Failed to convert month name '{}' to number", monthName, e);
+//            throw new IllegalArgumentException("Invalid month name: " + monthName, e);
+//        }
+//    }
+//
+//    public String readFileContent(String filePath) {
+//        try {
+//            return Files.readString(Paths.get(filePath), StandardCharsets.UTF_8);
+//        } catch (Exception e) {
+//            logger.error("Failed to read file content from: {}", filePath, e);
+//            return null;
+//        }
+//    }
+
+
+
+//    public void waitForFileDownload(String fileName, int timeoutInSeconds) {
+//        logger.info("Waiting for file download: {} with timeout: {} seconds", fileName, timeoutInSeconds);
+//        String downloadedFilePath = Paths.get(DOWNLOAD_FOLDER_PATH, fileName).toString();
+//        waitForFileExists(downloadedFilePath, timeoutInSeconds);
+//    }
 }

@@ -27,9 +27,7 @@ public class ContactPagesTest extends BaseTest {
         contactPage.fillContactForm(contactData);
 
         logger.info("STEP 5: Upload file");
-        String filePath = System.getProperty("user.dir")
-                + "/src/test/resources/upload.jpg";
-        contactPage.uploadFile(filePath);
+        contactPage.uploadFile(contactData.get("file"));
 
         logger.info("STEP 6: Click 'Submit' button");
         contactPage.clickSubmit();

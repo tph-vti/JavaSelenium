@@ -33,8 +33,6 @@ public class DriverManager extends Helper {
     private static final ThreadLocal<WebDriver> webDriver = new ThreadLocal<>();
 
 
-
-
     /**
      * Parameterized constructor - allows custom browser type
      * @param browserType Browser to initialize (chrome, firefox, edge)

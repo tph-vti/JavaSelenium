@@ -4,12 +4,12 @@ import core.BaseTest;
 import org.testng.annotations.Test;
 import pages.HomePages;
 
-
 public class HomePagesTest extends BaseTest {
-
 
     @Test (description = "TC10: Subscribe From Footer")
     public void TC10_SubscribeFromFooter() {
+
+        String email = "test" + System.currentTimeMillis() + "@gmail.com";
 
         logger.info("STEP 1: Launch browser");
         homePage.openSite();
@@ -21,7 +21,6 @@ public class HomePagesTest extends BaseTest {
         homePage.verifySubscriptionText();
 
         logger.info("STEP 4: Enter email address");
-        String email = "test" + System.currentTimeMillis() + "@gmail.com";
         homePage.enterEmail(email);
 
         logger.info("STEP 5: Click subscribe button");

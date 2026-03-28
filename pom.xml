@@ -17,10 +17,10 @@
         <version.dotenv>3.2.0</version.dotenv>
         <version.csv>5.12.0</version.csv>
         <version.selenium>4.27.0</version.selenium>
-        <version.junit>5.10.1</version.junit>
+<!--        <version.junit>5.10.1</version.junit>-->
         <version.surefire>3.5.4</version.surefire>
         <version.log4j>2.24.3</version.log4j>
-        <junit.platform.version>1.10.1</junit.platform.version>
+<!--        <junit.platform.version>1.10.1</junit.platform.version>-->
     </properties>
 
     <dependencies>
@@ -44,41 +44,12 @@
             <version>${version.csv}</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
             <version>${version.selenium}</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <version>${version.junit}</version>
-            <scope>compile</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-            <version>${version.junit}</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.junit.platform</groupId>
-            <artifactId>junit-platform-launcher</artifactId>
-            <version>${junit.platform.version}</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.junit.platform</groupId>
-            <artifactId>junit-platform-commons</artifactId>
-            <version>${junit.platform.version}</version>
-            <scope>test</scope>
-        </dependency>
 
         <dependency>
             <groupId>org.testng</groupId>
@@ -86,7 +57,6 @@
             <version>7.9.0</version>
             <scope>test</scope>
         </dependency>
-
 
             <!-- Log4j2 Core -->
         <dependency>
@@ -113,36 +83,29 @@
     <!-- Add (or merge) this <build> section near the end of pom.xml -->
     <build>
         <plugins>
-            <!-- Surefire Plugin for Test Execution -->
+
+            <!-- CHẠY TESTNG -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${version.surefire}</version>
+
                 <configuration>
-                    <useSystemClassLoader>false</useSystemClassLoader>
-                    <failIfNoTests>false</failIfNoTests>
-                    <argLine>-Djdk.module.illegalAccess.silent=true</argLine>
-                    <forkCount>3</forkCount>
-                    <reuseForks>true</reuseForks>
+                    <!-- Ép chạy TestNG -->
+                    <suiteXmlFiles>
+                        <suiteXmlFile>testng.xml</suiteXmlFile>
+                    </suiteXmlFiles>
+
                 </configuration>
             </plugin>
 
-            <!-- Surefire Report Plugin for HTML Reports -->
+            <!-- GENERATE REPORT HTML -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-report-plugin</artifactId>
                 <version>${version.surefire}</version>
-                <executions>
-                    <execution>
-                        <phase>test</phase>
-                        <goals>
-                            <goal>report</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
+
         </plugins>
     </build>
-
-
 </project>

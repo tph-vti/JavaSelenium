@@ -57,9 +57,7 @@ public class RegisterPages extends BasePage {
     }
 
     public void fillAccountInformation(Map<String, String> data) {
-
         logger.info("========== FILL ACCOUNT INFORMATION ==========");
-
         if (data.containsKey("title") && !data.get("title").isBlank()) {
             logger.info("Processing title: {}", data.get("title"));
             switch (data.get("title")) {
@@ -67,19 +65,15 @@ public class RegisterPages extends BasePage {
                 case "Mrs" -> selectTitleMrs();
             }
         }
-
         if (data.containsKey("password") && !data.get("password").isBlank()) {
             enterPassword(data.get("password"));
         }
-
         if (data.containsKey("day") && !data.get("day").isBlank()) {
             selectDay(data.get("day"));
         }
-
         if (data.containsKey("month") && !data.get("month").isBlank()) {
             selectMonth(data.get("month"));
         }
-
         if (data.containsKey("year") && !data.get("year").isBlank()) {
             selectYear(data.get("year"));
         }
@@ -137,9 +131,7 @@ public class RegisterPages extends BasePage {
     }
 
     public void fillAddressInformation(Map<String, String> data) {
-
         logger.info("========== FILL ADDRESS INFORMATION ==========");
-
         if (data.containsKey("firstName") && !data.get("firstName").isBlank()) {
             enterFirstName(data.get("firstName"));
         }

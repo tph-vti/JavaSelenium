@@ -5,14 +5,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 import utils.Helper;
 
 import java.util.List;
-import java.util.Set;
 
 /**
  * BasePage provides common web interaction methods for all Page Objects.
@@ -31,12 +29,6 @@ public class BasePage extends Helper {
         logger.info("Navigation to URL: {} completed", TestSettings.BASE_URL);
     }
 
-    public void openSite(String url) {
-        logger.info("Navigating to URL: {}", url);
-        this.driver.get(url);
-        logger.info("Navigation to URL: {} completed", url);
-    }
-
     protected WebElement findVisibleElement(By selector) {
         return getWait(TestSettings.WAIT_ELEMENT)
                 .until(ExpectedConditions.visibilityOfElementLocated(selector));
@@ -51,9 +43,6 @@ public class BasePage extends Helper {
         return new WebDriverWait(this.driver, Duration.ofSeconds(waitTime));
     }
 
-    protected void waitForElementInvisible(By selector) {
-        getWait(TestSettings.WAIT_ELEMENT).until(ExpectedConditions.invisibilityOfElementLocated(selector));
-    }
 
     private WebElement waitForElementClickable(By selector) {
         return getWait(TestSettings.WAIT_ELEMENT).until(ExpectedConditions.elementToBeClickable(selector));
@@ -64,21 +53,18 @@ public class BasePage extends Helper {
         findVisibleElement(selector).sendKeys(text);
     }
 
-    protected void enterTextWithoutWait(By selector, String text) {
-        logger.info("Entering text {}", text);
-        this.driver.findElement(selector).sendKeys(text);
+    public void sendKeys(By locator, String text){
+        driver.findElement(locator).sendKeys(text);
     }
 
-    protected String getElementAttribute(By selector, String attributeName) {
-        logger.info("Getting attribute {} from element {}", attributeName, selector);
-        return findPresentElement(selector).getDomAttribute(attributeName);
+    public List<WebElement> getListElement(By locator) {
+        return driver.findElements(locator);
     }
 
-   protected String getElementValue(By selector) {
-       logger.info("Getting value from element {}", selector);
-       WebElement element = findPresentElement(selector);
-       return element.getText().isEmpty() ? element.getDomProperty("value") : element.getText();
-   }
+    public List<String> getTextElements(By locator) {
+        List<WebElement> elements = getListElement(locator);
+        return elements.stream().map(WebElement::getText).toList();
+    }
 
     protected void click(By selector) {
         logger.info("Clicking {}", selector);
@@ -91,39 +77,10 @@ public class BasePage extends Helper {
         js.executeScript("arguments[0].click();", element);
     }
 
-    protected void clearText(By selector) {
-        logger.info("Clearing text of element {}", selector);
-        WebElement element = findVisibleElement(selector);
-        element.clear();
-    }
-
-    protected void pressEnter(By selector) {
-        logger.info("Pressing ENTER on element {}", selector);
-        WebElement element = findVisibleElement(selector);
-        element.sendKeys(org.openqa.selenium.Keys.ENTER);
-    }
-
-    protected void clearAndEnterText(By selector, String text) {
-        logger.info("Clearing and entering text {} into {}", text, selector);
-        WebElement element = findVisibleElement(selector);
-        element.clear();
-        element.sendKeys(text);
-    }
-
-    protected void executeJavaScript(String script) {
-        logger.info("Executing JavaScript: {}", script);
-        JavascriptExecutor js = (JavascriptExecutor) this.driver;
-        js.executeScript(script);
-    }
-
     protected String getElementText(By selector) {
         String text = findPresentElement(selector).getText();
         logger.info("Retrieved text '{}' from element {}", text, selector);
         return text;
-    }
-
-    protected boolean isElementSelected(By selector) {
-        return findPresentElement(selector).isSelected();
     }
 
     public void scrollToElement(WebDriver driver, WebElement element) {
@@ -147,28 +104,6 @@ public class BasePage extends Helper {
         }
     }
 
-    protected void hoverElement(By selector) {
-        logger.info("Hovering over element {}", selector);
-        WebElement element = findPresentElement(selector);
-        // Init action object
-        Actions actions = new Actions(this.driver);
-
-        // Perform hover action
-        actions.moveToElement(element).perform();
-    }
-
-    protected void dragAndDrop(By sourceEleBy, By targetEleBy) {
-        logger.info("Dragging element from {} to {}", sourceEleBy, targetEleBy);
-        WebElement sourceElement = findVisibleElement(sourceEleBy);
-        WebElement targetElement = findVisibleElement(targetEleBy);
-
-        // Init action object
-        Actions actions = new Actions(this.driver);
-
-        // Perform drag and drop action
-        actions.dragAndDrop(sourceElement, targetElement).perform();
-    }
-
     protected Alert switchToAlert() {
         logger.info("Switching to alert");
         return this.driver.switchTo().alert();
@@ -178,55 +113,123 @@ public class BasePage extends Helper {
         logger.info("Accepting alert");
         alert.accept();
     }
-    protected void dismissAlertAction(Alert alert) {
-        logger.info("Dismissing alert");
-        alert.dismiss();
-    }
 
-    protected WebDriver swithToNewWindow(){
-        logger.info("Switching to new window");
-        this.crrWindow = this.driver.getWindowHandle();
-        logger.info("Current window: {}", this.crrWindow);
-        for (String windowHandle : this.driver.getWindowHandles()) {
-            if (!windowHandle.equals(this.crrWindow)) {
-                this.driver.switchTo().window(windowHandle);
-                logger.info("Switched to new window: {}", windowHandle);
-                return this.driver;
-            }
-        }
-        logger.warn("No new window found to switch to");
-        return this.driver;
-    }
+//    protected void enterTextWithoutWait(By selector, String text) {
+//        logger.info("Entering text {}", text);
+//        this.driver.findElement(selector).sendKeys(text);
+//    }
+//public void openSite(String url) {
+//        logger.info("Navigating to URL: {}", url);
+//        this.driver.get(url);
+//        logger.info("Navigation to URL: {} completed", url);
+//    }
+//
+//    protected String getElementAttribute(By selector, String attributeName) {
+//        logger.info("Getting attribute {} from element {}", attributeName, selector);
+//        return findPresentElement(selector).getDomAttribute(attributeName);
+//    }
+//
+//   protected String getElementValue(By selector) {
+//       logger.info("Getting value from element {}", selector);
+//       WebElement element = findPresentElement(selector);
+//       return element.getText().isEmpty() ? element.getDomProperty("value") : element.getText();
+//   }
+//
+//    protected void waitForElementInvisible(By selector) {
+//        getWait(TestSettings.WAIT_ELEMENT).until(ExpectedConditions.invisibilityOfElementLocated(selector));
+//    }
 
-    public void switchBackToOriginalWindow() {
-        logger.info("Switching back to original window: {}", this.crrWindow);
-        Set<String> arrString = this.driver.getWindowHandles();
-        for (String windowHandle : arrString) {
-            if (!windowHandle.equals(this.crrWindow)) {
-                this.driver.switchTo().window(windowHandle);
-                logger.info("Switched to new window: {}", windowHandle);
-                this.driver.close();
-            }
-        }
-        this.driver.switchTo().window(this.crrWindow);
-    }
+//    protected void clearText(By selector) {
+//        logger.info("Clearing text of element {}", selector);
+//        WebElement element = findVisibleElement(selector);
+//        element.clear();
+//    }
+//
+//    protected void pressEnter(By selector) {
+//        logger.info("Pressing ENTER on element {}", selector);
+//        WebElement element = findVisibleElement(selector);
+//        element.sendKeys(org.openqa.selenium.Keys.ENTER);
+//    }
+//
+//    protected void clearAndEnterText(By selector, String text) {
+//        logger.info("Clearing and entering text {} into {}", text, selector);
+//        WebElement element = findVisibleElement(selector);
+//        element.clear();
+//        element.sendKeys(text);
+//    }
+//
+//    protected void executeJavaScript(String script) {
+//        logger.info("Executing JavaScript: {}", script);
+//        JavascriptExecutor js = (JavascriptExecutor) this.driver;
+//        js.executeScript(script);
+//    }
 
-    public boolean isElementDisplayed(By locator){
-        return driver.findElement(locator).isDisplayed();
-    }
+//    protected boolean isElementSelected(By selector) {
+//        return findPresentElement(selector).isSelected();
+//    }
 
-    public void sendKeys(By locator, String text){
-        driver.findElement(locator).sendKeys(text);
-    }
 
-    public List<WebElement> getListElement(By locator) {
-        return driver.findElements(locator);
-    }
+//    protected void hoverElement(By selector) {
+//        logger.info("Hovering over element {}", selector);
+//        WebElement element = findPresentElement(selector);
+//        // Init action object
+//        Actions actions = new Actions(this.driver);
+//
+//        // Perform hover action
+//        actions.moveToElement(element).perform();
+//    }
+//
+//    protected void dragAndDrop(By sourceEleBy, By targetEleBy) {
+//        logger.info("Dragging element from {} to {}", sourceEleBy, targetEleBy);
+//        WebElement sourceElement = findVisibleElement(sourceEleBy);
+//        WebElement targetElement = findVisibleElement(targetEleBy);
+//
+//        // Init action object
+//        Actions actions = new Actions(this.driver);
+//
+//        // Perform drag and drop action
+//        actions.dragAndDrop(sourceElement, targetElement).perform();
+//    }
 
-    public List<String> getTextElements(By locator) {
-        List<WebElement> elements = getListElement(locator);
-        return elements.stream().map(WebElement::getText).toList();
-    }
+
+//    protected void dismissAlertAction(Alert alert) {
+//        logger.info("Dismissing alert");
+//        alert.dismiss();
+//    }
+
+//    protected WebDriver swithToNewWindow(){
+//        logger.info("Switching to new window");
+//        this.crrWindow = this.driver.getWindowHandle();
+//        logger.info("Current window: {}", this.crrWindow);
+//        for (String windowHandle : this.driver.getWindowHandles()) {
+//            if (!windowHandle.equals(this.crrWindow)) {
+//                this.driver.switchTo().window(windowHandle);
+//                logger.info("Switched to new window: {}", windowHandle);
+//                return this.driver;
+//            }
+//        }
+//        logger.warn("No new window found to switch to");
+//        return this.driver;
+//    }
+//
+//    public void switchBackToOriginalWindow() {
+//        logger.info("Switching back to original window: {}", this.crrWindow);
+//        Set<String> arrString = this.driver.getWindowHandles();
+//        for (String windowHandle : arrString) {
+//            if (!windowHandle.equals(this.crrWindow)) {
+//                this.driver.switchTo().window(windowHandle);
+//                logger.info("Switched to new window: {}", windowHandle);
+//                this.driver.close();
+//            }
+//        }
+//        this.driver.switchTo().window(this.crrWindow);
+//    }
+//
+//    public boolean isElementDisplayed(By locator){
+//        return driver.findElement(locator).isDisplayed();
+//    }
+
+
 
     //    protected void verifyTrue(boolean condition, String message) {
 //        logger.info("Verifying condition is true");
