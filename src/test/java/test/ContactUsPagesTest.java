@@ -33,7 +33,7 @@ public class ContactUsPagesTest extends BaseTest {
             Map<String, String> data = TestData.getContactUsData();
 
             logger.info("STEP 1: Open Home Page");
-            BasePage.openSite();
+            homePage.openSite();
 
             logger.info("STEP 2: Click 'Contact Us' menu");
             homePage.clickMenu("Contact us");

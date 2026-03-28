@@ -31,7 +31,7 @@ public class LoginPagesTest extends BaseTest {
         HomePage homePage = new HomePage();
         LoginPage loginPage = new LoginPage();
 
-        BasePage.openSite();
+        homePage.openSite();
 
         logger.info("STEP 1: Click 'Signup / Login' menu");
         homePage.clickMenu("Signup / Login");

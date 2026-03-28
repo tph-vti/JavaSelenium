@@ -25,9 +25,17 @@ public class TestCasesPageTest extends BaseTest {
 
     @Test(description = "TC07: Verify Test Cases Page")
     public void TC07_VerifyTestCasesPage() {
+
+        HomePage homePage = new HomePage();
         TestCasesPage testCasesPage = new TestCasesPage();
-        BasePage.openSite();
-        testCasesPage.click(TestCasesPageLocator.btnTestCases);
-        testCasesPage.verifyTestCasesTitleVisible();
+
+        logger.info("STEP 1: Launch browser and open Home Page");
+        homePage.openSite();
+
+        logger.info("STEP 2: Click on 'Test Cases' button");
+        homePage.clickMenu("Test Cases");
+
+        logger.info("STEP 3: Verify user is navigated to Test Cases page successfully");
+        testCasesPage.verifyTestCasesPage();
     }
 }

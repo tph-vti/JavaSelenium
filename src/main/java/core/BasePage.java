@@ -11,6 +11,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 import utils.Helper;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -21,12 +23,12 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public class BasePage extends Helper {
     private String crrWindow;
-    protected static WebDriver driver;
+    protected WebDriver driver;
     public BasePage(){
         driver = DriverManager.getDriver();
     }
 
-    public static void openSite() {
+    public void openSite() {
         logger.info("Navigating to URL: {}", TestSettings.BASE_URL);
         driver.get(TestSettings.BASE_URL);
         logger.info("Navigation to URL: {} completed", TestSettings.BASE_URL);
@@ -219,5 +221,27 @@ public class BasePage extends Helper {
         }
         this.driver.switchTo().window(this.crrWindow);
     }
+
+    public void waitForElementVisible(By locator) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+    }
+    public List<WebElement> getListElement(By locator) {
+        waitForElementVisible(locator);
+        return driver.findElements(locator);
+    }
+    public List<String> getTextElements(By locator) {
+        waitForElementVisible(locator);
+
+        List<WebElement> elements = driver.findElements(locator);
+        List<String> texts = new ArrayList<>();
+
+        for (WebElement e : elements) {
+            texts.add(e.getText().trim());
+        }
+
+        return texts;
+    }
+
 }
 
