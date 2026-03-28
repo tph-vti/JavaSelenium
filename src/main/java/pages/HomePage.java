@@ -8,21 +8,6 @@ public class HomePage extends BasePage {
         super();
     }
 
-    public String getHomeTitle() {
-        logger.info("Getting 'Home' title");
-        return getElementText(HomeLocator.HOME_TITLE);
-    }
-
-    public String getCategoryTitle() {
-        logger.info("Getting 'Category' title");
-        return getElementText(HomeLocator.CATEGORY_TITLE);
-    }
-
-    public String getRecommendedItemsTitle() {
-        logger.info("Getting 'Recommended Items' title");
-        return getElementText(HomeLocator.RECOMMENDED_ITEMS_TITLE);
-    }
-
     public String getSubscriptionTitle() {
         logger.info("Getting 'Subscription' title");
         return getElementText(HomeLocator.SUBSCRIPTION_TITLE);

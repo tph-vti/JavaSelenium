@@ -13,6 +13,7 @@ public class ProductPage extends BasePage {
         clickButtonJS(ProductLocator.VIEW_PRODUCT_BUTTON);
     }
 
+    //Random view Product
     public void clickViewProductButtonRandom() {
         logger.info("Clicking random 'View Product' button");
         clickButtonJS(ProductLocator.VIEW_PRODUCT_BUTTON_RANDOM);

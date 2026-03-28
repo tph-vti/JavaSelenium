@@ -12,10 +12,6 @@ public class DataGenerator extends Helper {
         return "Last" + generateRandomString(5);
     }
 
-    public static String getRandomFullName() {
-        return getRandomFirstName() + " " + getRandomLastName();
-    }
-
     public static String getRandomUserName() {
         return "User" + generateRandomString(5) + generateRandomNumber(3);
     }

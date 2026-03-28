@@ -34,11 +34,6 @@ public class LoginPage extends BasePage {
         clickButton(LoginLocator.LOGIN_BUTTON);
     }
 
-    public String getLoginTitle() {
-        logger.info("Getting Login Title");
-        return getElementText(LoginLocator.LOGIN_TITLE);
-    }
-
     public String getErrorLoginMessage() {
         logger.info("Getting Error Login Message"); 
         return getElementText(LoginLocator.ERROR_LOGIN_MESSAGE);
@@ -74,10 +69,6 @@ public class LoginPage extends BasePage {
         return getElementText(LoginLocator.SIGNUP_TITLE);
     }
 
-    public String getErrorSignupMessage() {
-        logger.info("Getting Error Signup Message");
-        return getElementText(LoginLocator.ERROR_SIGNUP_MESSAGE);
-    }
 
     public String getErrorExistEmailMessage() {
         logger.info("Getting Error Exist Email Message");

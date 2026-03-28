@@ -1,5 +1,6 @@
 package api;
 
+import core.Constants;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -7,7 +8,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import core.APIBaseTest;
-import core.APIConstants;
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
@@ -21,13 +21,13 @@ public class ProductAPITest{
 
     @BeforeMethod
     public void setup() {
-        RestAssured.baseURI = APIConstants.BASE_URL;
+        RestAssured.baseURI = Constants.BASE_URL;
     }
 
     @Test(description = "API 1: Get All Products List")
     public void testGetAllProducts() {
         logger.info("API 1: Get All Products List");
-        Response response = api.get(APIConstants.PRODUCT_LIST_LINK);
+        Response response = api.get(Constants.PRODUCT_LIST_LINK);
         Assert.assertEquals(response.statusCode(), 200);
         logger.info("Response Status Code: " + response.statusCode());
         JsonPath json = response.jsonPath();
@@ -47,7 +47,7 @@ public class ProductAPITest{
         body.put("price", "Rs. 50");
         body.put("category", "Tops");
         
-        Response response = api.post(APIConstants.PRODUCT_LIST_LINK, body);
+        Response response = api.post(Constants.PRODUCT_LIST_LINK, body);
         Assert.assertEquals(response.statusCode(), 200);
         logger.info("Response Status Code: " + response.statusCode()); 
         JsonPath json = response.jsonPath();
@@ -62,7 +62,7 @@ public class ProductAPITest{
     @Test(description = "API 3: Get All Brands List")
     public void testGetAllBrands() {
         logger.info("API 3: Get All Brands List");
-        Response response = api.get(APIConstants.BRAND_LIST_LINK);
+        Response response = api.get(Constants.BRAND_LIST_LINK);
         Assert.assertEquals(response.statusCode(), 200);
         logger.info("Response Status Code: " + response.statusCode());
         JsonPath json = response.jsonPath();
@@ -80,7 +80,7 @@ public class ProductAPITest{
         Map<String, Object> body = new HashMap<>();
         body.put("brand", "Polo");
         
-        Response response = api.put(APIConstants.BRAND_LIST_LINK, body);
+        Response response = api.put(Constants.BRAND_LIST_LINK, body);
         Assert.assertEquals(response.statusCode(), 200); 
         logger.info("Response Status Code: " + response.statusCode());
         JsonPath json = response.jsonPath();

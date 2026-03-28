@@ -20,10 +20,6 @@ public class ContactLocator {
     public static final By SUCCESS_MESSAGE = By.xpath("//div[@class='status alert alert-success']");
     // UPLOAD FILE
     public static final By UPLOAD_FILE_INPUT = By.xpath("//input[@type='file']");
-    // DOWNLOAD
-    public static final By DOWNLOAD_LINK = By.xpath("//a[normalize-space()='Download']");
-    // OK BUTTON
-    public static final By OK_BUTTON = By.xpath("//button[normalize-space()='OK']");
     // HOME BUTTON
     public static final By HOME_BUTTON = By.xpath("//a[@class='btn btn-success']"); 
 }

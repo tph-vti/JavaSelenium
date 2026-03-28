@@ -20,11 +20,6 @@ public class CommonPage extends BasePage {
         removeAds();
     }
 
-    public boolean isMenuVisible(String menuText) {
-        logger.info("Checking if menu item '{}' is visible", menuText);
-        return isElementDisplayed(getDynamicXpath(CommonLocator.MENU_ITEM_FORMAT, menuText));
-    }
-
 
     public void clickHomeButton() {
         logger.info("Clicking Home button");

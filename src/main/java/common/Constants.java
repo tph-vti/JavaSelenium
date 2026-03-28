@@ -24,11 +24,9 @@ public final class Constants {
     public static final String ERROR_LOG = Paths.get(LOG_DIR, "errors.log").toString();
     public static final String TEST_LOG = Paths.get(LOG_DIR, "test-execution.log").toString();
     public static final String DOWNLOAD_FOLDER_PATH = Paths.get(PROJECT_ROOT_PATH, "target", "downloads").toString();
+
     // Automation Exercise Constants
     public static final String AUTOMATION_EXERCISE_BASE_URL = "https://automationexercise.com";
-    public static final String AUTOMATION_EXERCISE_LOGIN_URL = AUTOMATION_EXERCISE_BASE_URL + "/login";
-    public static final String AUTOMATION_EXERCISE_REGISTER_URL = AUTOMATION_EXERCISE_BASE_URL + "/signup";
-    public static final String AUTOMATION_EXERCISE_CONTACT_URL = AUTOMATION_EXERCISE_BASE_URL + "/contact";
 
     //Login Page Constants
     public static final String GENDER_MALE = "Mr.";
