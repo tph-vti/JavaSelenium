@@ -2,6 +2,7 @@ package test;
 
 import core.BaseTest;
 import core.DriverManager;
+import data.TestData;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;

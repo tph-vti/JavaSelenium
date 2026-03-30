@@ -3,6 +3,7 @@ package test;
 
 import core.BaseTest;
 import core.DriverManager;
+import data.TestData;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -10,6 +11,7 @@ import org.testng.annotations.Test;
 import pages.HomePage;
 import pages.LoginPage;
 import pages.RegisterPage;
+import utils.DataGenerator;
 
 import java.util.Map;
 
@@ -32,8 +34,8 @@ public class RegisterPagesTest extends BaseTest {
         HomePage homePage = new HomePage();
         LoginPage loginPage = new LoginPage();
         RegisterPage registerPages = new RegisterPage();
-        Map<String, String> accInfo = TestData.getAccountInformation();
-        Map<String, String> addressInfo = TestData.getAddressInformation();
+        Map<String, String> accInfo = TestData.getAccountData();
+        Map<String, String> addressInfo = TestData.getAddressData();
 
         logger.info("STEP 1: Open site");
         homePage.openSite();
