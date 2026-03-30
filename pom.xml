@@ -91,10 +91,15 @@
                 <version>${version.surefire}</version>
 
                 <configuration>
-                    <!-- Ép chạy TestNG -->
+
                     <suiteXmlFiles>
                         <suiteXmlFile>testng.xml</suiteXmlFile>
                     </suiteXmlFiles>
+
+                    <rerunFailingTestsCount>2</rerunFailingTestsCount>
+
+                    <forkCount>2</forkCount>
+                    <reuseForks>true</reuseForks>
 
                 </configuration>
             </plugin>
