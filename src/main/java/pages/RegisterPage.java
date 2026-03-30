@@ -4,6 +4,9 @@ import core.BasePage;
 import locator.RegisterPageLocator;
 import org.openqa.selenium.support.ui.Select;
 import java.util.Map;
+
+import static locator.RegisterPageLocator.txtFirstName;
+
 public class RegisterPage extends BasePage {
 
     public RegisterPage() {
@@ -92,7 +95,7 @@ public class RegisterPage extends BasePage {
 
     public void enterFirstName(String firstName) {
         logger.info("Enter First Name: {}", firstName);
-        enterText(RegisterPageLocator.txtFirstName, firstName);
+        enterText(txtFirstName, firstName);
     }
 
     public void enterLastName(String lastName) {
@@ -193,4 +196,5 @@ public class RegisterPage extends BasePage {
         logger.info("Click 'Continue' button after account creation");
         click(RegisterPageLocator.btnContinue);
     }
+
 }

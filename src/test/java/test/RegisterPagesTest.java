@@ -69,7 +69,7 @@ public class RegisterPagesTest extends BaseTest {
         registerPages.clickOffersCheckbox();
 
         logger.info("STEP 10: Fill address information");
-        registerPages.fillAccountInformation(addressInfo);
+        registerPages.fillAddressInformation(addressInfo);
 
         logger.info("STEP 11: Click Create Account button");
         registerPages.clickCreateAccountButton();
