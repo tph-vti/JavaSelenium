@@ -4,6 +4,10 @@ import core.BasePage;
 import locator.HomeLocator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class HomePages extends BasePage {
 
@@ -12,7 +16,7 @@ public class HomePages extends BasePage {
     }
 
     public void clickMenu(String menuName){
-        click(By.xpath(String.format(HomeLocator.MENU, menuName)));
+        clickByJS(By.xpath(String.format(HomeLocator.MENU, menuName)));
     }
 
     public void verifyMenu(String menuName) {
@@ -64,7 +68,15 @@ public class HomePages extends BasePage {
 
     public void verifyHomePage() {
         logger.info("Verify user is navigated back to Home page");
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.or(
+                ExpectedConditions.urlToBe("https://automationexercise.com/"),
+                ExpectedConditions.urlToBe("https://automationexercise.com")
+        ));
         String currentUrl = driver.getCurrentUrl();
+        if (currentUrl.contains("#google_vignette")) {
+            currentUrl = currentUrl.replace("#google_vignette", "");
+        }
         String expectedUrl = "https://automationexercise.com/";
         if (!currentUrl.equals(expectedUrl)) {
             throw new AssertionError(

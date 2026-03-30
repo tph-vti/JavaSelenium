@@ -26,10 +26,12 @@ public class BasePage extends Helper {
     public void openSite() {
         logger.info("Navigating to URL: {}", TestSettings.BASE_URL);
         this.driver.get(TestSettings.BASE_URL);
+        removeAds();
         logger.info("Navigation to URL: {} completed", TestSettings.BASE_URL);
     }
 
     protected WebElement findVisibleElement(By selector) {
+        removeAds();
         return getWait(TestSettings.WAIT_ELEMENT)
                 .until(ExpectedConditions.visibilityOfElementLocated(selector));
     }
@@ -54,6 +56,7 @@ public class BasePage extends Helper {
     }
 
     public void sendKeys(By locator, String text){
+        removeAds();
         driver.findElement(locator).sendKeys(text);
     }
 
@@ -67,6 +70,7 @@ public class BasePage extends Helper {
     }
 
     protected void click(By selector) {
+        removeAds();
         logger.info("Clicking {}", selector);
         waitForElementClickable(selector).click();
     }
@@ -113,6 +117,39 @@ public class BasePage extends Helper {
         logger.info("Accepting alert");
         alert.accept();
     }
+
+    public void removeAds() {
+        logger.info("Removing ads safely");
+
+        String script =
+                "try {" +
+
+                        // Fix google vignette
+                        "if(window.location.href.includes('#google_vignette')) {" +
+                        "   window.location.href = window.location.href.replace('#google_vignette','');" +
+                        "}" +
+
+                        // Chỉ remove ads cụ thể
+                        "document.querySelectorAll('.adsbygoogle, ins.adsbygoogle').forEach(el => el.remove());" +
+
+                        // Google ads iframe (có pattern rõ)
+                        "document.querySelectorAll('iframe[id^=\"aswift_\"]').forEach(el => el.remove());" +
+
+                        // Close button nếu có
+                        "let btn = document.querySelector('#dismiss-button');" +
+                        "if(btn) btn.click();" +
+
+                        "} catch(e) {}";
+
+        try {
+            ((JavascriptExecutor) driver).executeScript(script);
+        } catch (Exception e) {
+            logger.warn("Failed to remove ads: {}", e.getMessage());
+        }
+    }
+
+
+
 
 //    protected void enterTextWithoutWait(By selector, String text) {
 //        logger.info("Entering text {}", text);

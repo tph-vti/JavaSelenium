@@ -26,6 +26,7 @@ public class ProductPages extends BasePage {
 
     public void clickViewProduct(int index) {
         logger.info("Click 'View Product' button at index: {}", index);
+        removeAds();
         click(ProductLocator.btnViewProduct(index));
     }
 
