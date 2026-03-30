@@ -1,6 +1,5 @@
 package test;
 
-import core.BasePage;
 import core.BaseTest;
 import core.DriverManager;
 import org.testng.Assert;
@@ -9,7 +8,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.ContactUsPage;
 import pages.HomePage;
-import testdata.TestData;
 
 import java.util.Map;
 

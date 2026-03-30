@@ -10,7 +10,6 @@ import org.testng.annotations.Test;
 import pages.HomePage;
 import pages.LoginPage;
 import pages.RegisterPage;
-import testdata.TestData;
 
 import java.util.Map;
 

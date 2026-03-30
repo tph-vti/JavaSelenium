@@ -2,10 +2,8 @@ package test;
 
 import core.BaseTest;
 import core.DriverManager;
-import org.junit.Assert;
 import org.testng.annotations.Test;
 import pages.HomePage;
-import testdata.TestData;
 
 import java.net.MalformedURLException;
 import java.util.Map;
