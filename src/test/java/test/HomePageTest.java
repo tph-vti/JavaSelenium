@@ -9,7 +9,7 @@ import pages.HomePage;
 import java.net.MalformedURLException;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.testng.Assert.assertTrue;
 
 public class HomePageTest extends BaseTest {
 
