@@ -74,6 +74,7 @@ public class RegisterPagesTest extends BaseTest {
         registerPages.clickCreateAccountButton();
 
         logger.info("STEP 12: Verify that 'ACCOUNT CREATED!' is visible");
+        registerPages.waitForPageStable();
         Assert.assertTrue(registerPages.verifyAccountCreatedTitle());
 
         logger.info("STEP 13: Click Continue button");

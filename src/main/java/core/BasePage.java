@@ -24,7 +24,8 @@ import static org.junit.jupiter.api.Assertions.*;
 public class BasePage extends Helper {
     private String crrWindow;
     protected WebDriver driver;
-    public BasePage(){
+
+    public BasePage() {
         driver = DriverManager.getDriver();
     }
 
@@ -75,11 +76,11 @@ public class BasePage extends Helper {
         return findPresentElement(selector).getDomAttribute(attributeName);
     }
 
-   protected String getElementValue(By selector) {
-       logger.info("Getting value from element {}", selector);
-       WebElement element = findPresentElement(selector);
-       return element.getText().isEmpty() ? element.getDomProperty("value") : element.getText();
-   }
+    protected String getElementValue(By selector) {
+        logger.info("Getting value from element {}", selector);
+        WebElement element = findPresentElement(selector);
+        return element.getText().isEmpty() ? element.getDomProperty("value") : element.getText();
+    }
 
     public void click(By selector) {
         logger.info("Clicking {}", selector);
@@ -119,6 +120,16 @@ public class BasePage extends Helper {
 
     protected boolean isElementSelected(By selector) {
         return findPresentElement(selector).isSelected();
+    }
+
+    public boolean isElementVisible(By locator) {
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     public void scrollToElement(WebDriver driver, WebElement element) {
@@ -183,12 +194,13 @@ public class BasePage extends Helper {
         logger.info("Accepting alert");
         alert.accept();
     }
+
     protected void dismissAlertAction(Alert alert) {
         logger.info("Dismissing alert");
         alert.dismiss();
     }
 
-    protected WebDriver swithToNewWindow(){
+    protected WebDriver swithToNewWindow() {
         logger.info("Switching to new window");
         this.crrWindow = this.driver.getWindowHandle();
         logger.info("Current window: {}", this.crrWindow);
@@ -226,10 +238,12 @@ public class BasePage extends Helper {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
+
     public List<WebElement> getListElement(By locator) {
         waitForElementVisible(locator);
         return driver.findElements(locator);
     }
+
     public List<String> getTextElements(By locator) {
         waitForElementVisible(locator);
 
@@ -242,6 +256,7 @@ public class BasePage extends Helper {
 
         return texts;
     }
+
     public void scrollToElement(By locator) {
         WebElement element = driver.findElement(locator);
         JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -250,5 +265,21 @@ public class BasePage extends Helper {
                 element
         );
     }
-}
 
+    public void waitForPageStable() {
+        logger.info("Waiting for page to be stable");
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        // Wait cho document ready
+        wait.until(webDriver -> ((JavascriptExecutor) webDriver)
+                .executeScript("return document.readyState").equals("complete"));
+
+        // Optional: wait thêm 1 chút cho animation/ads
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+    }
+}

@@ -36,7 +36,7 @@ public class RegisterPageLocator {
     public static final By btnCreateAccount = By.xpath("//button[@data-qa='create-account']");
 
     //Account Created Page
-    public static By lblAccountCreatedTitle  = By.xpath("//b[contains(text(),'Account Created!')]");
+    public static By lblAccountCreatedTitle  = By.xpath("//h2[@data-qa='account-created']");
     public static By btnContinue = By.xpath("//a[@data-qa='continue-button']");
 
 
