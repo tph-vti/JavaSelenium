@@ -1,0 +1,62 @@
+package test;
+
+import core.BaseTest;
+import data.TestData;
+import org.testng.Assert;
+import org.testng.annotations.Test;
+import pages.HomePages;
+import pages.LoginPages;
+import pages.RegisterPages;
+
+import java.util.Map;
+
+public class RegisterPagesTest extends BaseTest {
+
+    @Test (description = "TC01: Register User")
+    public void TC01_RegisterUser() {
+
+        logger.info("STEP 1: Open site");
+        homePage.openSite();
+
+        logger.info("STEP 2: Click 'Signup / Login' menu");
+        homePage.clickMenu("Signup / Login");
+
+        logger.info("STEP 3: Verify 'New User Signup!' is visible");
+        loginPages.verifySignupTitle();
+
+        Map<String, String> signupData = TestData.getSignupData();
+        logger.info("STEP 4: Enter name and email address");
+        loginPages.enterSignupName(signupData.get("name"));
+        loginPages.enterSignupEmail(signupData.get("email"));
+
+        logger.info("STEP 5: Click 'Sign Up' button");
+        loginPages.clickSignup();
+
+        logger.info("STEP 6: Verify that 'ENTER ACCOUNT INFORMATION' is visible");
+        registerPages.verifyRegisterTitle();
+
+        logger.info("STEP 7: Fill account information");
+        registerPages.fillAccountInformation(TestData.getAccountData());
+
+        logger.info("STEP 8: Select newsletter checkbox");
+        registerPages.clickNewsletterCheckbox();
+
+        logger.info("STEP 9: Select offers checkbox");
+        registerPages.clickOffersCheckbox();
+
+        logger.info("STEP 10: Fill address information");
+        registerPages.fillAddressInformation(TestData.getAddressData());
+
+        logger.info("STEP 11: Click Create Account button");
+        registerPages.clickCreateAccountButton();
+
+        logger.info("STEP 12: Verify that 'ACCOUNT CREATED!' is visible");
+        registerPages.verifyAccountCreatedTitle();
+
+        logger.info("STEP 13: Click Continue button");
+        registerPages.clickContinue();
+
+        logger.info("STEP 14: Verify 'Logged in as' appears on menu");
+        homePage.verifyMenu("Logged in as");
+    }
+}

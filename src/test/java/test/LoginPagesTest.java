@@ -1,33 +1,103 @@
 package test;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import core.BaseTest;
+import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
 import pages.HomePages;
 import pages.LoginPages;
+import utils.Constants;
 
-public class LoginPagessTest {
-    @Test
-    public void LoginPagessTest(){
+public class LoginPagesTest extends BaseTest {
 
-        System.out.println("TEST CASE 2: Login with correct email and password");
+    @BeforeMethod
+    public void preCondition() {
 
-        HomePages.clickMenu("Signup / Login");
-        LoginPages.enterEmail("correct@gmail.com");
-        LoginPages.enterPassword("123456");
-        LoginPages.clickLogin();
+        homePage.openSite();
 
-        Assert.assertTrue(LoginPages.verifyLoggedInUser());
+        logger.info("STEP 1: Click 'Signup / Login' menu");
+        homePage.clickMenu("Signup / Login");
+    }
 
-        System.out.println("TEST CASE 3: Login with incorrect email and password");
+    @Test (description = "TC02: Login With Correct Email Password")
+    public void TC02_LoginWithCorrectEmailPassword() {
 
-        HomePages.clickMenu("Logout");
-        HomePages.clickMenu("Signup / Login");
+        logger.info("STEP 2: Verify 'Login to your account' is visible");
+        loginPages.verifyLoginTitle();
 
-        LoginPages.enterEmail("wrong@gmail.com");
-        LoginPages.enterPassword("wrongpass");
-        LoginPages.clickLogin();
+        logger.info("STEP 3: Enter correct email address");
+        loginPages.enterEmail(Constants.VALID_EMAIL);
 
+        logger.info("STEP 4: Enter correct password");
+        loginPages.enterPassword(Constants.VALID_PASSWORD);
+
+        logger.info("STEP 5: Click 'Login' button");
+        loginPages.clickLogin();
+
+        logger.info("STEP 6: Verify 'Logged in as' appears on menu");
+        homePage.verifyMenu("Logged in as");
+    }
+
+    @Test (description = "TC03: Login With Incorrect Email Password")
+    public void TC03_LoginWithIncorrectEmailPassword() {
+
+        logger.info("STEP 2: Verify 'Login to your account' is visible");
+        loginPages.verifyLoginTitle();
+
+        logger.info("STEP 3: Enter incorrect email address and password");
+        loginPages.enterEmail(Constants.INVALID_EMAIL);
+        loginPages.enterPassword(Constants.INVALID_PASSWORD);
+
+        logger.info("STEP 4: Click 'Login' button");
+        loginPages.clickLogin();
+
+        logger.info("STEP 5: Verify error message 'Your email or password is incorrect!' is visible");
+        String actualError = loginPages.getLoginErrorText();
+        String expectedError = Constants.ERROR_LOGIN;
+        Assert.assertEquals(actualError, expectedError);
+    }
+
+    @Test (description = "TC04: Logout User")
+    public void TC04_LogoutUser() {
+
+        logger.info("STEP 2: Verify 'Login to your account' is visible");
+        loginPages.verifyLoginTitle();
+
+        logger.info("STEP 3: Enter correct email address");
+        loginPages.enterEmail(Constants.VALID_EMAIL);
+
+        logger.info("STEP 4: Enter correct password");
+        loginPages.enterPassword(Constants.VALID_PASSWORD);
+
+        logger.info("STEP 5: Click 'Login' button");
+        loginPages.clickLogin();
+
+        logger.info("STEP 6: Verify 'Logged in as' appears on menu");
+        homePage.verifyMenu("Logged in as");
+
+        logger.info("STEP 7: Click 'Logout' button");
+        homePage.clickMenu("Logout");
+
+        logger.info("STEP 8:  Verify that user is navigated to login page");
+        loginPages.verifyLoginTitle();
+    }
+
+    @Test (description = "TC05: Register User With Existing Email")
+    public void TC05_RegisterUserWithExistingEmail() {
+
+        logger.info("STEP 2: Verify 'New User Signup!' is visible");
+        loginPages.verifySignupTitle();
+
+        logger.info("STEP 3: Enter name and email address");
+        loginPages.enterSignupName(Constants.VALID_NAME);
+        loginPages.enterSignupEmail(Constants.VALID_EMAIL);
+
+        logger.info("STEP 4: Click 'Sign Up' button");
+        loginPages.clickSignup();
+
+        logger.info("STEP 5: Verify error message 'Email Address already exist!' is visible");
+        String actualError = loginPages.getSignupErrorText();
+        String expectedError = Constants.ERROR_SIGNUP;
+        Assert.assertEquals(actualError, expectedError);
     }
 }

@@ -1,25 +1,33 @@
 package test;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import core.BaseTest;
 import org.testng.annotations.Test;
-
 import pages.HomePages;
 
+public class HomePagesTest extends BaseTest {
 
-public class HomePagesTest {
+    @Test (description = "TC10: Subscribe From Footer")
+    public void TC10_SubscribeFromFooter() {
 
-    @Test
-    public void HomeTest(){
+        String email = "test" + System.currentTimeMillis() + "@gmail.com";
 
-        WebDriver driver = new ChromeDriver();
+        logger.info("STEP 1: Launch browser");
+        homePage.openSite();
 
-        driver.get("https://automationexercise.com/");
+        logger.info("STEP 2: Scroll down to footer");
+        homePage.scrollToFooter();
 
-        // tạo object page
-        HomePages homePage = new HomePages(driver);
+        logger.info("STEP 3: Verify text 'SUBSCRIPTION'");
+        homePage.verifySubscriptionText();
 
-        // click menu login
-        homePage.clickMenu("Signup / Login");
+        logger.info("STEP 4: Enter email address");
+        homePage.enterEmail(email);
+
+        logger.info("STEP 5: Click subscribe button");
+        homePage.clickSubscribe();
+
+        logger.info("STEP 6: Verify success message 'You have been successfully subscribed!'");
+        homePage.verifySubscriptionSuccessMessage();
     }
 }
+
