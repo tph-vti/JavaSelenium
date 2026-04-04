@@ -54,6 +54,14 @@
             <AppenderRef ref="FileAppender"/>
         </Logger>
 
+        <!-- Main automation framework logger - used by Helper and all classes -->
+        <Logger name="automationExercise" level="DEBUG" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="FileAppender"/>
+            <AppenderRef ref="TestAppender"/>
+            <AppenderRef ref="ErrorAppender"/>
+        </Logger>
+
         <!-- Your test framework logging -->
         <Logger name="core" level="DEBUG" additivity="false">
             <AppenderRef ref="Console"/>

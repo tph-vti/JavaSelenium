@@ -1,7 +1,10 @@
 package test;
 
 import core.BaseTest;
+import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import static core.Constants.*;
 
 public class ContactTest extends BaseTest {
 
@@ -15,7 +18,7 @@ public class ContactTest extends BaseTest {
 
         logStep("3. Verify that home page is visible successfully");
         commonPage.clickHomeButton();
-        expectedResult = constants.HOME_PAGE_LINK;
+        expectedResult = HOME_PAGE_LINK;
         actualResult = commonPage.getCurrentUrl();
         Assert.assertEquals(actualResult, expectedResult);
 
@@ -23,7 +26,7 @@ public class ContactTest extends BaseTest {
         commonPage.clickContactUs();
 
         logStep("5. Verify 'GET IN TOUCH' is visible");
-        String expectedTitle = constants.GET_IN_TOUCH_TITLE;
+        String expectedTitle = GET_IN_TOUCH_TITLE;
         String actualTitle = contactPage.getGetInTouchTitle();
         Assert.assertEquals(actualTitle, expectedTitle);
 
@@ -31,7 +34,7 @@ public class ContactTest extends BaseTest {
         contactPage.enterContactForm(name, email, subject, message);
 
         logStep("7. Upload file");
-        String fileName = System.getProperty("user.dir") + constants.FILE_PATH;
+        String fileName = System.getProperty("user.dir") + FILE_PATH;
         contactPage.uploadFile(fileName);
 
         logStep("8. Click 'Submit' button");
@@ -41,7 +44,7 @@ public class ContactTest extends BaseTest {
         contactPage.clickOkButton();
 
         logStep("10. Verify success message 'Success! Your details have been submitted successfully.' is visible");
-        expectedTitle = constants.SUCCESS_CONTACT_MESSAGE;
+        expectedTitle = SUCCESS_CONTACT_MESSAGE;
         actualTitle = contactPage.getSuccessMessage();
         Assert.assertEquals(actualTitle, expectedTitle);
 
@@ -49,7 +52,7 @@ public class ContactTest extends BaseTest {
         contactPage.clickHomeButton();
 
         logStep("11.2 Verify that landed to home page successfully");
-        expectedTitle = constants.HOME_PAGE_LINK;
+        expectedTitle = HOME_PAGE_LINK;
         actualTitle = commonPage.getCurrentUrl();
         Assert.assertEquals(actualTitle, expectedTitle);
     }

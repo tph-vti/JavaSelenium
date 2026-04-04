@@ -1,7 +1,10 @@
 package test;
 
 import core.BaseTest;
+import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import static core.Constants.*;
 
 public class LogoutTest extends BaseTest {
 
@@ -15,7 +18,7 @@ public class LogoutTest extends BaseTest {
         // ---Test Steps---
         logStep("3. Verify that home page is visible successfully");
         commonPage.clickHomeButton();
-        expectedResult = constants.HOME_PAGE_LINK;
+        expectedResult = HOME_PAGE_LINK;
         actualResult = commonPage.getCurrentUrl();
         Assert.assertEquals(actualResult, expectedResult);
 
@@ -23,7 +26,7 @@ public class LogoutTest extends BaseTest {
         commonPage.clickSignupLogin();
 
         logStep("5. Verify 'Login to your account' is visible");
-        expectedResult = "Login to your account";
+        expectedResult = LOGIN_TITLE;
         actualResult = loginPage.getLoginToYourAccountTitle();
         Assert.assertEquals(actualResult, expectedResult);
 
@@ -34,7 +37,7 @@ public class LogoutTest extends BaseTest {
         loginPage.clickLoginButton();
 
         logStep("8. Verify that 'Logged in as username' is visible");
-        expectedResult = "Logged in as " + username;
+        expectedResult = username;
         actualResult = commonPage.getLoggedInAsTitle(username);
         Assert.assertEquals(actualResult, expectedResult);
 
@@ -42,7 +45,7 @@ public class LogoutTest extends BaseTest {
         commonPage.clickLogout();
 
         logStep("10. Verify that user is navigated to login page");
-        expectedResult = "Login to your account";
+        expectedResult = LOGIN_TITLE;
         actualResult = loginPage.getLoginToYourAccountTitle();
         Assert.assertEquals(actualResult, expectedResult);
     }

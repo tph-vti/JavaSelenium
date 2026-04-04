@@ -62,7 +62,7 @@ public class CommonPage extends BasePage {
 
     public String getLoggedInAsTitle(String username) {
         logger.info("Getting Logged in as '{}' title", username);
-        return "Logged in as " + getElementText(getDynamicXpath(LOGGED_IN_USER_FORMAT, username));
+        return getElementText(getDynamicXpath(LOGGED_IN_USER_FORMAT, username));
     }
 
 

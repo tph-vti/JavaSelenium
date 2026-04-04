@@ -3,7 +3,7 @@ package locator;
 import org.openqa.selenium.By;
 
 public class RegisterLocators {
-    public static final By ENTER_ACCOUNT_INFORMATION_TITLE = By.xpath("//h2[contains(@class, 'title text-center')]//b");
+    public static final By ENTER_ACCOUNT_INFORMATION_TITLE = By.cssSelector(".title.text-center b");
     public static final By GENDER_MR_RADIO = By.id("id_gender1");
     public static final By GENDER_MRS_RADIO = By.id("id_gender2");
 
@@ -23,5 +23,5 @@ public class RegisterLocators {
     public static final By CITY_INPUT = By.id("city");
     public static final By ZIP_CODE_INPUT = By.id("zipcode");
     public static final By MOBILE_NUMBER_INPUT = By.id("mobile_number");
-    public static final By CREATE_ACCOUNT_BUTTON = By.xpath("//button[@data-qa='create-account']");
+    public static final By CREATE_ACCOUNT_BUTTON = By.cssSelector("[data-qa='create-account']");
 }

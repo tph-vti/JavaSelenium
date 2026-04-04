@@ -1,14 +1,17 @@
 package test;
 
 import core.BaseTest;
+import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import static core.Constants.*;
 
 public class CartTest extends BaseTest {
     @Test(description = "TC11: Verify Subscription in Cart page")
     public void testVerifySubcriptioninCartpage(){
         logStep("3. Verify that home page is visible successfully");
         commonPage.clickHomeButton();
-        expectedResult = constants.HOME_PAGE_LINK;
+        expectedResult = HOME_PAGE_LINK;
         actualResult = commonPage.getCurrentUrl();
         Assert.assertEquals(actualResult, expectedResult);
 
@@ -19,7 +22,7 @@ public class CartTest extends BaseTest {
         commonPage.scrollToFooter();
 
         logStep("6. Verify text 'SUBSCRIPTION'");
-        expectedResult = constants.SUBSCRIPTION_TITLE;
+        expectedResult = SUBSCRIPTION_TITLE;
         actualResult = commonPage.getSubscriptionTitle();
         Assert.assertEquals(actualResult, expectedResult);
 
@@ -28,16 +31,16 @@ public class CartTest extends BaseTest {
         commonPage.clickSubscribeButton();
 
         logStep("8. Verify success message 'You have been successfully subscribed!' is visible");
-        expectedResult = constants.SUCCESS_SUBSCRIBE_MESSAGE;
+        expectedResult = SUCCESS_SUBSCRIBE_MESSAGE;
         actualResult = commonPage.getSuccessMessage();
         Assert.assertEquals(actualResult, expectedResult);
     }
 
-    @Test(description = "")
+    @Test(description = "TC12: Add Products in Cart")
     public void testAddProductinCart(){
         logStep("3. Verify that home page is visible successfully");
         commonPage.clickHomeButton();
-        expectedResult = constants.HOME_PAGE_LINK;
+        expectedResult = HOME_PAGE_LINK;
         actualResult = commonPage.getCurrentUrl();
         Assert.assertEquals(actualResult, expectedResult);
 

@@ -1,6 +1,7 @@
 {
   "AUTOMATION_EXERCISE": {
     "base_url": "https://automationexercise.com",
-    "register_url": "https://automationexercise.com/signup"
+    "register_url": "https://automationexercise.com/signup",
+    "api_base_url": "https://automationexercise.com/api"
   }
 }

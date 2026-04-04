@@ -1,16 +1,14 @@
 package core;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
-import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import common.Helper;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -22,8 +20,12 @@ import static core.TestSettings.GRID_HUB_URL;
  * DriverManager handles WebDriver lifecycle management following POM best practices.
  * Uses ThreadLocal to ensure thread-safe WebDriver instances for parallel test execution.
  * Implements browser factory pattern for Chrome, Firefox, and Edge browsers.
+ *
+ * Changed: No longer extends Helper (composition over inheritance - SRP).
+ * Changed: Uses BrowserOptionsFactory for browser option configuration.
  */
-public class DriverManager extends Helper {
+public class DriverManager {
+    private static final Logger logger = LogManager.getLogger("automationExercise");
     private boolean isRemote = false;
     private URL hubUrl;
     private static final ThreadLocal<WebDriver> webDriver = new ThreadLocal<>();
@@ -34,17 +36,14 @@ public class DriverManager extends Helper {
      * @param browserType Browser to initialize (chrome, firefox, edge)
      */
     public DriverManager(String browserType) {
-        super();
         initializeDriver(browserType);
     }
 
     public DriverManager() throws MalformedURLException {
-        super();
-        if(Objects.equals(TestSettings.HUB_TYPE, "NONE")) {
+        if (Objects.equals(TestSettings.HUB_TYPE, "NONE")) {
             initializeDriver(TestSettings.BROWSER_TYPE);
-
-        }else{
-            if(Objects.equals(TestSettings.HUB_TYPE, "GRID")) {
+        } else {
+            if (Objects.equals(TestSettings.HUB_TYPE, "GRID")) {
                 isRemote = true;
                 this.hubUrl = java.net.URI.create(GRID_HUB_URL).toURL();
                 initializeDriver(TestSettings.BROWSER_TYPE);
@@ -70,9 +69,6 @@ public class DriverManager extends Helper {
 
         try {
             WebDriver driver = createDriver(browserType.toLowerCase());
-            
-            // driver.manage().timeouts().implicitlyWait(java.time.Duration.ofSeconds(TestSettings.IMPLICIT_WAIT));
-
             webDriver.set(driver);
             logger.info("WebDriver initialized successfully for browser: {}", browserType);
         } catch (Exception e) {
@@ -83,7 +79,8 @@ public class DriverManager extends Helper {
 
 
     /**
-     * Factory method to create WebDriver instance based on browser type
+     * Factory method to create WebDriver instance based on browser type.
+     * Uses BrowserOptionsFactory for consistent options across all browsers.
      * @param browserType Browser type (chrome, firefox, edge)
      * @return WebDriver instance
      * @throws MalformedURLException if remote hub URL is malformed
@@ -102,37 +99,13 @@ public class DriverManager extends Helper {
     }
 
     /**
-     * Creates and configures Chrome WebDriver
-     * @return Configured ChromeDriver instance
-     * @throws MalformedURLException if remote hub URL is malformed (for RemoteWebDriver)
+     * Creates and configures Chrome WebDriver using BrowserOptionsFactory.
      */
     private WebDriver createChromeDriver() throws MalformedURLException {
         if (!isRemote) {
-            ChromeOptions options = new ChromeOptions();
-            options.addArguments("--start-maximized");
-            options.addArguments(String.format("--window-size=%s", TestSettings.SCREEN_RESOLUTION));
-            options.addArguments("--disable-notifications");
-            options.addArguments("--disable-popup-blocking");
-            options.addArguments("--disable-extensions");
-            options.addArguments("--disable-infobars");
-            options.addArguments("--disable-autofill");
-
-            // Disable Save Password, Address, and Autofill popups
-            java.util.Map<String, Object> prefs = new java.util.HashMap<>();
-            prefs.put("credentials_enable_service", false);
-            prefs.put("profile.password_manager_enabled", false);
-            prefs.put("autofill.profile_enabled", false);
-            prefs.put("autofill.address_enabled", false);
-            prefs.put("autofill.credit_card_enabled", false);
-            options.setExperimentalOption("prefs", prefs);
-
-            if (TestSettings.HEADLESS) {
-                options.addArguments("--headless=new");
-                logger.debug("Chrome browser initialized in headless mode");
-            }
-
             logger.debug("Chrome browser initialized with options and preferences");
-            return new ChromeDriver(options);
+            return new ChromeDriver(
+                    BrowserOptionsFactory.createChromeOptions(TestSettings.HEADLESS, TestSettings.SCREEN_RESOLUTION));
         } else {
             DesiredCapabilities capabilities = new DesiredCapabilities();
             capabilities.setPlatform(Platform.WINDOWS);
@@ -142,36 +115,21 @@ public class DriverManager extends Helper {
     }
 
     /**
-     * Creates and configures Firefox WebDriver
-     * @return Configured FirefoxDriver instance
+     * Creates and configures Firefox WebDriver using BrowserOptionsFactory.
      */
     private WebDriver createFirefoxDriver() {
-        FirefoxOptions options = new FirefoxOptions();
-        
-        if (TestSettings.HEADLESS) {
-            options.addArguments("--headless");
-            logger.debug("Firefox browser initialized in headless mode");
-        }
-        
         logger.debug("Firefox browser initialized");
-        return new FirefoxDriver(options);
+        return new FirefoxDriver(
+                BrowserOptionsFactory.createFirefoxOptions(TestSettings.HEADLESS, TestSettings.SCREEN_RESOLUTION));
     }
 
     /**
-     * Creates and configures Edge WebDriver
-     * @return Configured EdgeDriver instance
+     * Creates and configures Edge WebDriver using BrowserOptionsFactory.
      */
     private WebDriver createEdgeDriver() {
-        EdgeOptions options = new EdgeOptions();
-        options.addArguments("--start-maximized");
-        
-        if (TestSettings.HEADLESS) {
-            options.addArguments("--headless");
-            logger.debug("Edge browser initialized in headless mode");
-        }
-        
         logger.debug("Edge browser initialized");
-        return new EdgeDriver(options);
+        return new EdgeDriver(
+                BrowserOptionsFactory.createEdgeOptions(TestSettings.HEADLESS, TestSettings.SCREEN_RESOLUTION));
     }
 
     /**
@@ -239,6 +197,17 @@ public class DriverManager extends Helper {
     }
 
     /**
+     * Restarts the WebDriver by quitting and re-initializing.
+     * Useful when driver becomes unresponsive.
+     */
+    public void restartDriver() {
+        logger.info("Restarting WebDriver...");
+        quit();
+        initializeDriver(TestSettings.BROWSER_TYPE);
+        logger.info("WebDriver restarted successfully");
+    }
+
+    /**
      * Quits the WebDriver instance and closes all associated windows
      * Also removes WebDriver from ThreadLocal to prevent memory leaks
      */
@@ -261,4 +230,3 @@ public class DriverManager extends Helper {
         }
     }
 }
-
