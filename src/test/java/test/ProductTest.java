@@ -1,10 +1,7 @@
 package test;
 
-import org.testng.Assert;
-import org.testng.annotations.Test;
-
 import core.BaseTest;
-import static core.Constants.*;
+import org.testng.annotations.Test;
 
 public class ProductTest extends BaseTest {
     @Test(description = "TC8: Verify All Products and product detail page")
@@ -12,15 +9,15 @@ public class ProductTest extends BaseTest {
 
         logStep("3. Verify that home page is visible successfully");
         commonPage.clickHomeButton();
-        expectedResult = HOME_PAGE_LINK;
+        expectedResult = constants.HOME_PAGE_LINK;
         actualResult = commonPage.getCurrentUrl();
         Assert.assertEquals(actualResult, expectedResult);
 
         logStep("4. Click on 'Products' button");
-        commonPage.clickMenu("Products");
+        commonPage.clickProduct();
         
         logStep("5. Verify user is navigated to ALL PRODUCTS page successfully");
-        expectedResult = ALL_PRODUCTS_TITLE;
+        expectedResult = constants.ALL_PRODUCTS_TITLE;
         actualResult = productPage.getAllProductsTitle();
         Assert.assertEquals(actualResult, expectedResult);
 
@@ -53,7 +50,7 @@ public class ProductTest extends BaseTest {
     public void testSearchProduct() {
         logStep("3. Verify that home page is visible successfully");
         commonPage.clickHomeButton();
-        expectedResult = HOME_PAGE_LINK;
+        expectedResult = constants.HOME_PAGE_LINK;
         actualResult = commonPage.getCurrentUrl();
         Assert.assertEquals(actualResult, expectedResult);
 
@@ -61,16 +58,16 @@ public class ProductTest extends BaseTest {
         commonPage.clickMenu("Products");
         
         logStep("5. Verify user is navigated to ALL PRODUCTS page successfully");
-        expectedResult = ALL_PRODUCTS_TITLE;
+        expectedResult = constants.ALL_PRODUCTS_TITLE;
         actualResult = productPage.getAllProductsTitle();
         Assert.assertEquals(actualResult, expectedResult);
 
         logStep("6. Enter product name in search input and click search button");
-        productPage.enterSearchProduct(PRODUCT_NAME);
+        productPage.enterSearchProduct(constants.PRODUCT_NAME);
         productPage.clickSearchButton();
 
         logStep("7.  Verify 'SEARCHED PRODUCTS' is visible");
-        expectedResult = SEARCHED_PRODUCTS_TITLE;
+        expectedResult = constants.SEARCHED_PRODUCTS_TITLE;
         actualResult = productPage.getSearchedProductsTitle();
         Assert.assertEquals(actualResult, expectedResult);
 

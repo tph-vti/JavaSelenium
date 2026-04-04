@@ -1,10 +1,7 @@
 package test;
 
 import core.BaseTest;
-
-import org.testng.Assert;
 import org.testng.annotations.Test;
-import static core.Constants.*;
 
 public class LogoutTest extends BaseTest {
 
@@ -18,7 +15,7 @@ public class LogoutTest extends BaseTest {
         // ---Test Steps---
         logStep("3. Verify that home page is visible successfully");
         commonPage.clickHomeButton();
-        expectedResult = HOME_PAGE_LINK;
+        expectedResult = constants.HOME_PAGE_LINK;
         actualResult = commonPage.getCurrentUrl();
         Assert.assertEquals(actualResult, expectedResult);
 

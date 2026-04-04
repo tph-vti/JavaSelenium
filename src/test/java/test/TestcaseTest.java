@@ -1,10 +1,7 @@
 package test;
 
-import org.testng.Assert;
-import org.testng.annotations.Test;
-
 import core.BaseTest;
-import static core.Constants.*;
+import org.testng.annotations.Test;
 
 public class TestcaseTest extends BaseTest {
     @Test(description = "TC7: Verify Test Cases page")
@@ -12,7 +9,7 @@ public class TestcaseTest extends BaseTest {
 
         logStep("3. Verify that home page is visible successfully");
         commonPage.clickHomeButton();
-        expectedResult = HOME_PAGE_LINK;
+        expectedResult = constants.HOME_PAGE_LINK;
         actualResult = commonPage.getCurrentUrl();
         Assert.assertEquals(actualResult, expectedResult);
 
@@ -20,7 +17,7 @@ public class TestcaseTest extends BaseTest {
         commonPage.clickMenu("Test Cases");
 
         logStep("5. Verify user is navigated to test cases page successfully");
-        expectedResult = TEST_CASE_TITLE;
+        expectedResult = constants.TEST_CASE_TITLE;
         actualResult = testcasePage.getTestCaseTitle();
         Assert.assertEquals(actualResult, expectedResult);
     }

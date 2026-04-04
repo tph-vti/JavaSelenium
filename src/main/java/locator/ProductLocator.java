@@ -16,4 +16,15 @@ public class ProductLocator {
     public static final By SEARCH_INPUT = By.xpath("//input[@id='search_product']");
     public static final By SEARCH_BUTTON = By.xpath("//button[@id='submit_search']");
     public static final By SEARCHED_PRODUCTS_TITLE = By.xpath("//h2[text()='Searched Products']");
+    public static final By VIEW_CART_BUTTON = By.xpath("//a//u[text()='View Cart']");
+    public static final By CONTINUE_SHOPPING_BUTTON = By.xpath("//button[text()='Continue Shopping']");
+
+    public static By getAddToCartProductOverlay(int index){
+        return By.xpath("//div[@class='overlay-content']//a[@data-product-id='" + index + "']");
+    }
+
+    public static By getAddToCartProductInfo(int index){
+        return By.xpath("//div[@class='productinfo text-center']//a[@data-product-id='" + index + "']");
+    }
+
 }

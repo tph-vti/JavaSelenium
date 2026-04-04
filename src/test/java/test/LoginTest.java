@@ -1,8 +1,6 @@
 package test;
 
 import core.BaseTest;
-import static core.Constants.*;
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -23,7 +21,7 @@ public class LoginTest extends BaseTest {
         // ---Test Steps---
         logStep("3. Verify that home page is visible successfully");
         commonPage.clickHomeButton();
-        expectedResult = HOME_PAGE_LINK;
+        expectedResult = constants.HOME_PAGE_LINK;
         actualResult = commonPage.getCurrentUrl();
         Assert.assertEquals(actualResult, expectedResult);
 
@@ -50,7 +48,7 @@ public class LoginTest extends BaseTest {
         commonPage.clickDeleteAccount();
 
         logStep("10. Verify that 'ACCOUNT DELETED!' is visible");
-        expectedResult = ACCOUNT_DELETED_TITLE;
+        expectedResult = constants.ACCOUNT_DELETED_TITLE;
         actualResult = commonPage.getAccountDeletedTitle();
         Assert.assertEquals(actualResult, expectedResult);
 
@@ -65,7 +63,7 @@ public class LoginTest extends BaseTest {
         // ---Test Steps---
         logStep("3. Verify that home page is visible successfully");
         commonPage.clickHomeButton();
-        expectedResult = HOME_PAGE_LINK;
+        expectedResult = constants.HOME_PAGE_LINK;
         actualResult = commonPage.getCurrentUrl();
         Assert.assertEquals(actualResult, expectedResult);
 

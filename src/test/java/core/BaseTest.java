@@ -14,6 +14,7 @@ import pages.ProductPage;
 import pages.CommonPage;
 import pages.ContactPage;
 import pages.HomePage;
+import org.testng.Assert;
 
 import java.net.MalformedURLException;
 
@@ -26,6 +27,8 @@ public class BaseTest extends DataGenerator {
     protected ContactPage contactPage;
     protected ProductPage productPage;
     protected TestcasePage testcasePage;
+    protected Assert Assert;
+    protected Constants constants;
 
     // Factory
     protected User user = UserFactory.registerValidUser();

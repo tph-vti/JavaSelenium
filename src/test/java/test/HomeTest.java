@@ -1,6 +1,5 @@
 package test;
 
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import core.BaseTest;
@@ -16,20 +15,20 @@ public class HomeTest extends BaseTest {
         Assert.assertEquals(actualResult, expectedResult);
 
         logStep("4. Scroll down to footer");
-        homePage.scrollToFooter();
+        commonPage.scrollToFooter();
 
         logStep("5. Verify text 'SUBSCRIPTION'");
         expectedResult = SUBSCRIPTION_TITLE;
-        actualResult = homePage.getSubscriptionTitle();
+        actualResult = commonPage.getSubscriptionTitle();
         Assert.assertEquals(actualResult, expectedResult);
 
         logStep("6. Enter email address in input and click arrow button");
-        homePage.enterEmail(getRandomEmail());
-        homePage.clickSubscribeButton();
+        commonPage.enterEmail(getRandomEmail());
+        commonPage.clickSubscribeButton();
 
         logStep("7. Verify success message 'You have been successfully subscribed!' is visible");
         expectedResult = SUCCESS_SUBSCRIBE_MESSAGE;
-        actualResult = homePage.getSuccessMessage();
+        actualResult = commonPage.getSuccessMessage();
         Assert.assertEquals(actualResult, expectedResult);
     }
 }

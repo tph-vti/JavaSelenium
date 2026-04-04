@@ -1,0 +1,60 @@
+1. Điểm mạnh- Framework tiếp tục được tổ chức theo Page Object Model (POM), giúp tách biệt giữa test logic và UI
+interaction. Đây là hướng thiết kế đúng trong automation framework.- Cấu trúc project Maven rõ ràng, các package được chia tương đối hợp lý- Điều này giúp project dễ đọc và dễ mở rộng hơn.- Có sử dụng BasePage và BaseTest để tái sử dụng các function chung như:
++ tìm element
++ thao tác với element
++ khởi tạo driver
+→ giúp giảm duplication trong test.- Test case có sử dụng TestNG annotation (@Test, @BeforeMethod, …) và có assertion để verify kết quả, đảm
+bảo test có bước kiểm tra kết quả cuối cùng.- Naming của test method và class tương đối dễ hiểu, giúp người đọc có thể hiểu được test đang kiểm tra chức
+năng gì.
+> Nhìn chung, PR này cho thấy học viên đã nắm được cách tổ chức cơ bản của một automation project sử dụng
+Selenium + TestNG.
+2. Điểm yếu
+1. Page Object vẫn còn chứa logic chưa thực sự đúng chuẩn- Một số method trong Page Object có xu hướng chứa nhiều logic hơn mức cần thiết.- Theo nguyên tắc của Page Object Model:- Page Object nên chỉ chứa:
++ locator
++ action (click, input, select…)- Test class nên chứa:
++ flow test
++ assertion- Nếu Page Object chứa quá nhiều logic test thì sẽ:
++  khó tái sử dụng
++ khó maintain khi test case thay đổi
+2. Locator chưa thực sự tối ưu- Một số locator vẫn phụ thuộc vào:
++ XPath dài
++ hoặc locator dễ thay đổi theo UI
+Trong automation thực tế nên ưu tiên:
+id
+1
+️
+⃣
+2
+️
+⃣
+name
+3
+️
+⃣
+css selector
+4
+️
+⃣
+xpath (chỉ dùng khi cần)
+Locator càng đơn giản và ổn định thì test càng ít bị fail khi UI thay đổi.
+9
+3. Test data đang bị hardcode trong test
+Một số dữ liệu test như:- username- password- text input- expected value
+đang được hardcode trực tiếp trong test class.
+Điều này sẽ gây khó khăn khi:- cần chạy test với nhiều data- cần thay đổi data- chạy test trên môi trường khác
+(QLL cập nhật)
+(GV nhận xét)
+(GV nhận xét)
+Đạt
+Framework nên quản lý test data thông qua:- config.properties- dotenv- hoặc test data file
+4. Thiếu abstraction cho WebDriver management- Driver hiện tại vẫn được khởi tạo trực tiếp trong BaseTest.- Trong framework automation tốt hơn nên có:- DriverFactory / DriverManager
+để hỗ trợ:- chạy nhiều browser (Chrome / Firefox)- chạy parallel test- quản lý lifecycle của WebDriver tốt hơn
+5. Logging chưa được sử dụng nhiều- Mặc dù project đã thêm Log4j2, nhưng việc log các step test chưa nhiều.- Logging rất quan trọng vì giúp:
++ debug test nhanh hơn
++ đọc log khi CI/CD chạy test
++ xác định bước test fail
+Để framework tốt hơn, nên cải thiện các điểm sau:- Giữ Page Object đơn giản, chỉ chứa locator và action.- Tối ưu lại locator để tăng độ ổn định của test.- Quản lý test data tốt hơn thay vì hardcode trong test.- Xây dựng DriverFactory / DriverManager để quản lý WebDriver.- Tăng cường logging cho các bước test quan trọng.- Xây dựng thêm utility cho wait/synchronization để test ổn định hơn.
+Tổng kết
+PR này cho thấy học viên đã hiểu được cách xây dựng automation framework cơ bản với Selenium và TestNG,
+đặc biệt là việc áp dụng Page Object Model và tổ chức project theo Maven.
+Tuy nhiên, để framework tiến gần hơn với automation framework chuẩn trong thực tế, cần cải thiện thêm về:- design pattern- locator strategy- driver management- test data management- logging

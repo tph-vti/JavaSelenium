@@ -13,7 +13,7 @@ public class ProductPage extends BasePage {
         clickButtonJS(ProductLocator.VIEW_PRODUCT_BUTTON);
     }
 
-    //Random view Product
+    // Random view Product
     public void clickViewProductButtonRandom() {
         logger.info("Clicking random 'View Product' button");
         clickButtonJS(ProductLocator.VIEW_PRODUCT_BUTTON_RANDOM);
@@ -73,5 +73,26 @@ public class ProductPage extends BasePage {
     public String getSearchedProductsTitle() {
         logger.info("Getting 'Searched Products' title");
         return getElementText(ProductLocator.SEARCHED_PRODUCTS_TITLE);
+    }
+
+    public void hoverProduct(int index) {
+        logger.info("Hovering over product at index {}", index);
+        hoverElement(ProductLocator.getAddToCartProductInfo(index));
+    }
+
+    public void clickAddToCartButton(int index) {
+        hoverProduct(index);
+        logger.info("Clicking 'Add to cart' button for product at index {}", index);
+        clickButton(ProductLocator.getAddToCartProductOverlay(index));
+    }
+
+    public void clickViewCartButton() {
+        logger.info("Clicking 'View Cart' button");
+        clickButton(ProductLocator.VIEW_CART_BUTTON);
+    }
+
+    public void clickContinueShoppingButton() {
+        logger.info("Clicking 'Continue Shopping' button");
+        clickButton(ProductLocator.CONTINUE_SHOPPING_BUTTON);
     }
 }

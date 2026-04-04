@@ -1,10 +1,7 @@
 package test;
 
 import core.BaseTest;
-
-import org.testng.Assert;
 import org.testng.annotations.Test;
-import static core.Constants.*;
 
 public class RegisterTest extends BaseTest {
 
@@ -13,18 +10,17 @@ public class RegisterTest extends BaseTest {
 
         logStep("3. Verify that home page is visible successfully");
         commonPage.clickHomeButton();
-        expectedResult = HOME_PAGE_LINK;
+        expectedResult = constants.HOME_PAGE_LINK;
         actualResult = commonPage.getCurrentUrl();
-        Assert.assertEquals(actualResult, expectedResult);
+        org.testng.Assert.assertEquals(actualResult, expectedResult);
 
         logStep("4. Click on 'Signup / Login' button");
         commonPage.clickSignupLogin();
 
         logStep("5. Verify 'New User Signup!' is visible");
-
         expectedResult = "New User Signup!";
         actualResult = loginPage.getNewUserSignupTitle();
-        Assert.assertEquals(actualResult, expectedResult);
+        org.testng.Assert.assertEquals(actualResult, expectedResult);
 
         logStep("6. Enter name and email address");
         loginPage.enterRegisterNameAndEmail(user);
@@ -33,9 +29,9 @@ public class RegisterTest extends BaseTest {
         loginPage.clickSignupButton();
 
         logStep("8. Verify that 'ENTER ACCOUNT INFORMATION' is visible");
-        expectedResult = ENTER_ACCOUNT_INFORMATION_TITLE;
+        expectedResult = constants.ENTER_ACCOUNT_INFORMATION_TITLE;
         actualResult = registerPage.getEnterAccountInformationTitle();
-        Assert.assertEquals(actualResult, expectedResult);
+        org.testng.Assert.assertEquals(actualResult, expectedResult);
 
         logStep("9. Fill details: Title, Name, Email, Password, Date of birth");
         registerPage.fillAccountInformationForm(user);
@@ -54,9 +50,9 @@ public class RegisterTest extends BaseTest {
         registerPage.clickCreateAccountButton();
 
         logStep("14. Verify that 'ACCOUNT CREATED!' is visible");
-        expectedResult = ACCOUNT_CREATED_TITLE;
+        expectedResult = constants.ACCOUNT_CREATED_TITLE;
         actualResult = commonPage.getAccountCreatedTitle();
-        Assert.assertEquals(actualResult, expectedResult);
+        org.testng.Assert.assertEquals(actualResult, expectedResult);
 
         logStep("15. Click 'Continue' button");
         commonPage.clickContinueButton();
@@ -64,15 +60,15 @@ public class RegisterTest extends BaseTest {
         logStep("16. Verify that 'Logged in as username' is visible");
         expectedResult = "Logged in as " + user.getName();
         actualResult = commonPage.getLoggedInAsTitle(user.getName());
-        Assert.assertEquals(actualResult, expectedResult);
+        org.testng.Assert.assertEquals(actualResult, expectedResult);
 
         logStep("17. Click 'Delete Account' button");
         commonPage.clickDeleteAccount();
 
         logStep("18. Verify that 'ACCOUNT DELETED!' is visible");
-        expectedResult = ACCOUNT_DELETED_TITLE;
+        expectedResult = constants.ACCOUNT_DELETED_TITLE;
         actualResult = commonPage.getAccountDeletedTitle();
-        Assert.assertEquals(actualResult, expectedResult);
+        org.testng.Assert.assertEquals(actualResult, expectedResult);
 
         logStep("19. Click 'Continue' button");
         commonPage.clickContinueButton();
@@ -90,9 +86,9 @@ public class RegisterTest extends BaseTest {
         commonPage.clickSignupLogin();
 
         logStep("5. Verify 'New User Signup!' is visible");
-        expectedResult = NEW_USER_SIGNUP_TITLE;
+        expectedResult = constants.NEW_USER_SIGNUP_TITLE;
         actualResult = loginPage.getNewUserSignupTitle();
-        Assert.assertEquals(actualResult, expectedResult);
+        org.testng.Assert.assertEquals(actualResult, expectedResult);
 
         logStep("6. Enter name and already registered email address");
         loginPage.enterRegisterNameAndEmail(username, email);
@@ -101,8 +97,8 @@ public class RegisterTest extends BaseTest {
         loginPage.clickSignupButton();
 
         logStep("8. Verify that 'Email Address already exist!' is visible");
-        expectedResult = ERROR_EXIST_EMAIL_SIGNUP_MESSAGE;
+        expectedResult = constants.ERROR_EXIST_EMAIL_SIGNUP_MESSAGE;
         actualResult = loginPage.getErrorExistEmailMessage();
-        Assert.assertEquals(actualResult, expectedResult);
+        org.testng.Assert.assertEquals(actualResult, expectedResult);
     }
 }
